@@ -1,0 +1,106 @@
+{
+    "episodes":100,
+    "time_slots":100,
+    "time_weight":5,
+    "energy_weight":1,
+    "device_configs":[
+        {
+            
+            "priority":3,
+            "max_process_delay":0.7,
+            "max_process_load_per_time_slot" :1500,
+            "energy_consume_per_time_slot":1,
+            "cpu_frequency":1.5,
+            "max_load_capacity":6000,
+            "transmission_power":2,
+            "channel_gain":8,      
+            "cnt":1,
+            "instance_name":"2-10-0.6-0.7-0.5"
+        },
+        {
+            
+            "priority":2,
+            "max_process_delay":0.7,
+            "max_process_load_per_time_slot" :1000,
+            "energy_consume_per_time_slot":1,
+            "cpu_frequency":1.5,
+            "max_load_capacity":6000,
+            "transmission_power":2,
+            "channel_gain":8,      
+            "cnt":2,
+            "instance_name":"2-10-0.6-0.7-0.5"
+        },
+        {
+            "priority":1,
+            "max_process_delay":0.7,
+            "max_process_load_per_time_slot" :1000,
+            "energy_consume_per_time_slot":1,
+            "cpu_frequency":1.5,
+            "max_load_capacity":6000,
+            "transmission_power":2,
+            "channel_gain":8,      
+            "cnt":3,
+            "instance_name":"2-10-0.6-0.7-0.5"
+        }
+    ],
+    "server_configs":[
+        {
+            "bandwidth":6,
+            "max_cpu_frequency":4,
+            "cnt" :1
+        }
+    ],
+    "algorithm_configs":[
+        {
+            "id":1,
+            "name":"random",
+            "is_compare":1
+        },
+        {
+            "id":2,
+            "name":"rl_dqn",
+            "is_compare":1
+        },
+        {
+            "id":3,
+            "name":"rl_double",
+            "is_compare":1
+        },
+        {
+            "id":4,
+            "name":"rl_dueling",
+            "is_compare":0
+        }
+    ],
+    "constants":{
+    	"avg_load_per_time_slot":1000,
+        "task_load_gaussian_scale":50,
+        "avg_result_load_per_time_slot":150,
+        "result_load_gaussian_scale":50,
+    	"avg_cpu_cycle_per_bit":737.5,
+    	"gaussian_channel_noise":1,
+    	"effective_capacitance_coefficient":1e-27	
+    },
+    "pic_configs":[
+        {
+            "id":1,
+            "comment":"环境cost曲线对比图,type=2时采用subplot方式，sharey=1时且type=2时共享y轴",
+            "unit":1,
+            "type":1,
+            "sharey":0,
+            "pic_size":[12,4]
+        },
+        {
+            "id":2,
+            "comment":"环境reward曲线图",
+            "unit":1
+        },
+        {
+            "id":3,
+            "comment":"不同算法之间的cost,reward对比曲线图",
+            "unit":1
+        }
+
+    ]
+
+}

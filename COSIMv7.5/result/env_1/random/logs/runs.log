@@ -1,0 +1,1305 @@
+2023-08-12 19:30:33,320 - INFO - init environment start
+2023-08-12 19:30:33,320 - INFO - init [Device-1] with priority-3 fininsh
+2023-08-12 19:30:33,320 - INFO - init [Server-1] bandwidth:1.000000 MHZ,maxCpuFrequency: 0.150000 GHZ
+2023-08-12 19:30:33,320 - INFO - init environment end
+2023-08-12 19:30:33,321 - INFO - random algorithm run
+2023-08-12 19:30:33,321 - INFO - episode:0 - start
+2023-08-12 19:30:33,321 - INFO - episode:0 - Time:1 - [Device-1] totally need process 1089 bits data
+2023-08-12 19:30:33,321 - INFO - episode:0 - Time:1 - [Device-1] locally process 871.545139 bits data taking 0.428510 ms,1.446220 mj
+2023-08-12 19:30:33,321 - INFO - episode:0 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,321 - INFO - episode:0 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,321 - INFO - episode:0 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,321 - INFO - episode:0 - Time:1 - [Device-1] upload to [Server-1] take 0.053306 ms, and 0.053306 mj energy
+2023-08-12 19:30:33,321 - INFO - episode:0 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.071274 ms
+2023-08-12 19:30:33,321 - INFO - episode:0 - Time:1 - [Device-1] total processing consume 1.124580 ms, 1.499526 mj
+2023-08-12 19:30:33,321 - INFO - if process on device completely it will need 0.535637 ms, 1.807775 mj
+2023-08-12 19:30:33,322 - WARNING - device[1] time error:0.535637 < 1.124580
+2023-08-12 19:30:33,322 - INFO - episode:0 - Time:1- [Device-1] request task {1021} bits
+2023-08-12 19:30:33,322 - INFO - episode:0 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,322 - INFO - episode:1 - start
+2023-08-12 19:30:33,322 - INFO - episode:1 - Time:1 - [Device-1] totally need process 1004 bits data
+2023-08-12 19:30:33,322 - INFO - episode:1 - Time:1 - [Device-1] locally process 803.859899 bits data taking 0.395231 ms,1.333905 mj
+2023-08-12 19:30:33,322 - INFO - episode:1 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,322 - INFO - episode:1 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,322 - INFO - episode:1 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,322 - INFO - episode:1 - Time:1 - [Device-1] upload to [Server-1] take 0.049166 ms, and 0.049166 mj energy
+2023-08-12 19:30:33,322 - INFO - episode:1 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.988078 ms
+2023-08-12 19:30:33,322 - INFO - episode:1 - Time:1 - [Device-1] total processing consume 1.037244 ms, 1.383071 mj
+2023-08-12 19:30:33,322 - INFO - if process on device completely it will need 0.494039 ms, 1.667381 mj
+2023-08-12 19:30:33,322 - WARNING - device[1] time error:0.494039 < 1.037244
+2023-08-12 19:30:33,322 - INFO - episode:1 - Time:1- [Device-1] request task {906} bits
+2023-08-12 19:30:33,322 - INFO - episode:1 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,322 - INFO - episode:2 - start
+2023-08-12 19:30:33,322 - INFO - episode:2 - Time:1 - [Device-1] totally need process 986 bits data
+2023-08-12 19:30:33,323 - INFO - episode:2 - Time:1 - [Device-1] locally process 788.904472 bits data taking 0.387878 ms,1.309088 mj
+2023-08-12 19:30:33,323 - INFO - episode:2 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,323 - INFO - episode:2 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,323 - INFO - episode:2 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,323 - INFO - episode:2 - Time:1 - [Device-1] upload to [Server-1] take 0.048251 ms, and 0.048251 mj energy
+2023-08-12 19:30:33,323 - INFO - episode:2 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.969695 ms
+2023-08-12 19:30:33,323 - INFO - episode:2 - Time:1 - [Device-1] total processing consume 1.017947 ms, 1.357340 mj
+2023-08-12 19:30:33,323 - INFO - if process on device completely it will need 0.484848 ms, 1.636360 mj
+2023-08-12 19:30:33,323 - WARNING - device[1] time error:0.484848 < 1.017947
+2023-08-12 19:30:33,323 - INFO - episode:2 - Time:1- [Device-1] request task {982} bits
+2023-08-12 19:30:33,323 - INFO - episode:2 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,323 - INFO - episode:3 - start
+2023-08-12 19:30:33,323 - INFO - episode:3 - Time:1 - [Device-1] totally need process 995 bits data
+2023-08-12 19:30:33,323 - INFO - episode:3 - Time:1 - [Device-1] locally process 796.690341 bits data taking 0.391706 ms,1.322008 mj
+2023-08-12 19:30:33,323 - INFO - episode:3 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,323 - INFO - episode:3 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,323 - INFO - episode:3 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,323 - INFO - episode:3 - Time:1 - [Device-1] upload to [Server-1] take 0.048728 ms, and 0.048728 mj energy
+2023-08-12 19:30:33,323 - INFO - episode:3 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.979265 ms
+2023-08-12 19:30:33,324 - INFO - episode:3 - Time:1 - [Device-1] total processing consume 1.027993 ms, 1.370736 mj
+2023-08-12 19:30:33,324 - INFO - if process on device completely it will need 0.489633 ms, 1.652510 mj
+2023-08-12 19:30:33,324 - WARNING - device[1] time error:0.489633 < 1.027993
+2023-08-12 19:30:33,337 - INFO - episode:3 - Time:1- [Device-1] request task {968} bits
+2023-08-12 19:30:33,337 - INFO - episode:3 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,337 - INFO - episode:4 - start
+2023-08-12 19:30:33,337 - INFO - episode:4 - Time:1 - [Device-1] totally need process 997 bits data
+2023-08-12 19:30:33,337 - INFO - episode:4 - Time:1 - [Device-1] locally process 798.247273 bits data taking 0.392472 ms,1.324592 mj
+2023-08-12 19:30:33,337 - INFO - episode:4 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,337 - INFO - episode:4 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,337 - INFO - episode:4 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,337 - INFO - episode:4 - Time:1 - [Device-1] upload to [Server-1] take 0.048823 ms, and 0.048823 mj energy
+2023-08-12 19:30:33,337 - INFO - episode:4 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.981179 ms
+2023-08-12 19:30:33,337 - INFO - episode:4 - Time:1 - [Device-1] total processing consume 1.030002 ms, 1.373414 mj
+2023-08-12 19:30:33,337 - INFO - if process on device completely it will need 0.490589 ms, 1.655739 mj
+2023-08-12 19:30:33,337 - WARNING - device[1] time error:0.490589 < 1.030002
+2023-08-12 19:30:33,337 - INFO - episode:4 - Time:1- [Device-1] request task {976} bits
+2023-08-12 19:30:33,338 - INFO - episode:4 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,338 - INFO - episode:5 - start
+2023-08-12 19:30:33,338 - INFO - episode:5 - Time:1 - [Device-1] totally need process 934 bits data
+2023-08-12 19:30:33,338 - INFO - episode:5 - Time:1 - [Device-1] locally process 747.445410 bits data taking 0.367494 ms,1.240292 mj
+2023-08-12 19:30:33,338 - INFO - episode:5 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,338 - INFO - episode:5 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,338 - INFO - episode:5 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,338 - INFO - episode:5 - Time:1 - [Device-1] upload to [Server-1] take 0.045716 ms, and 0.045716 mj energy
+2023-08-12 19:30:33,338 - INFO - episode:5 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.918735 ms
+2023-08-12 19:30:33,338 - INFO - episode:5 - Time:1 - [Device-1] total processing consume 0.964451 ms, 1.286008 mj
+2023-08-12 19:30:33,338 - INFO - if process on device completely it will need 0.459367 ms, 1.550365 mj
+2023-08-12 19:30:33,338 - WARNING - device[1] time error:0.459367 < 0.964451
+2023-08-12 19:30:33,338 - INFO - episode:5 - Time:1- [Device-1] request task {1044} bits
+2023-08-12 19:30:33,338 - INFO - episode:5 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,338 - INFO - episode:6 - start
+2023-08-12 19:30:33,338 - INFO - episode:6 - Time:1 - [Device-1] totally need process 1044 bits data
+2023-08-12 19:30:33,338 - INFO - episode:6 - Time:1 - [Device-1] locally process 835.252722 bits data taking 0.410666 ms,1.385997 mj
+2023-08-12 19:30:33,338 - INFO - episode:6 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,338 - INFO - episode:6 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,338 - INFO - episode:6 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,338 - INFO - episode:6 - Time:1 - [Device-1] upload to [Server-1] take 0.051086 ms, and 0.051086 mj energy
+2023-08-12 19:30:33,339 - INFO - episode:6 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.026665 ms
+2023-08-12 19:30:33,339 - INFO - episode:6 - Time:1 - [Device-1] total processing consume 1.077751 ms, 1.437084 mj
+2023-08-12 19:30:33,339 - INFO - if process on device completely it will need 0.513332 ms, 1.732497 mj
+2023-08-12 19:30:33,339 - WARNING - device[1] time error:0.513332 < 1.077751
+2023-08-12 19:30:33,339 - INFO - episode:6 - Time:1- [Device-1] request task {1085} bits
+2023-08-12 19:30:33,339 - INFO - episode:6 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,339 - INFO - episode:7 - start
+2023-08-12 19:30:33,339 - INFO - episode:7 - Time:1 - [Device-1] totally need process 1002 bits data
+2023-08-12 19:30:33,339 - INFO - episode:7 - Time:1 - [Device-1] locally process 802.001346 bits data taking 0.394317 ms,1.330821 mj
+2023-08-12 19:30:33,339 - INFO - episode:7 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,339 - INFO - episode:7 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,339 - INFO - episode:7 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,339 - INFO - episode:7 - Time:1 - [Device-1] upload to [Server-1] take 0.049053 ms, and 0.049053 mj energy
+2023-08-12 19:30:33,339 - INFO - episode:7 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.985793 ms
+2023-08-12 19:30:33,339 - INFO - episode:7 - Time:1 - [Device-1] total processing consume 1.034846 ms, 1.379873 mj
+2023-08-12 19:30:33,352 - INFO - if process on device completely it will need 0.492897 ms, 1.663526 mj
+2023-08-12 19:30:33,352 - WARNING - device[1] time error:0.492897 < 1.034846
+2023-08-12 19:30:33,352 - INFO - episode:7 - Time:1- [Device-1] request task {979} bits
+2023-08-12 19:30:33,352 - INFO - episode:7 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,352 - INFO - episode:8 - start
+2023-08-12 19:30:33,352 - INFO - episode:8 - Time:1 - [Device-1] totally need process 972 bits data
+2023-08-12 19:30:33,352 - INFO - episode:8 - Time:1 - [Device-1] locally process 778.185602 bits data taking 0.382608 ms,1.291302 mj
+2023-08-12 19:30:33,352 - INFO - episode:8 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,352 - INFO - episode:8 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,352 - INFO - episode:8 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,352 - INFO - episode:8 - Time:1 - [Device-1] upload to [Server-1] take 0.047596 ms, and 0.047596 mj energy
+2023-08-12 19:30:33,352 - INFO - episode:8 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.956520 ms
+2023-08-12 19:30:33,352 - INFO - episode:8 - Time:1 - [Device-1] total processing consume 1.004116 ms, 1.338898 mj
+2023-08-12 19:30:33,352 - INFO - if process on device completely it will need 0.478260 ms, 1.614127 mj
+2023-08-12 19:30:33,352 - WARNING - device[1] time error:0.478260 < 1.004116
+2023-08-12 19:30:33,353 - INFO - episode:8 - Time:1- [Device-1] request task {922} bits
+2023-08-12 19:30:33,353 - INFO - episode:8 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,353 - INFO - episode:9 - start
+2023-08-12 19:30:33,353 - INFO - episode:9 - Time:1 - [Device-1] totally need process 1049 bits data
+2023-08-12 19:30:33,353 - INFO - episode:9 - Time:1 - [Device-1] locally process 839.294697 bits data taking 0.412653 ms,1.392705 mj
+2023-08-12 19:30:33,353 - INFO - episode:9 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,353 - INFO - episode:9 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,353 - INFO - episode:9 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,353 - INFO - episode:9 - Time:1 - [Device-1] upload to [Server-1] take 0.051333 ms, and 0.051333 mj energy
+2023-08-12 19:30:33,353 - INFO - episode:9 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.031633 ms
+2023-08-12 19:30:33,353 - INFO - episode:9 - Time:1 - [Device-1] total processing consume 1.082967 ms, 1.444038 mj
+2023-08-12 19:30:33,353 - INFO - if process on device completely it will need 0.515817 ms, 1.740881 mj
+2023-08-12 19:30:33,353 - WARNING - device[1] time error:0.515817 < 1.082967
+2023-08-12 19:30:33,353 - INFO - episode:9 - Time:1- [Device-1] request task {944} bits
+2023-08-12 19:30:33,353 - INFO - episode:9 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,353 - INFO - episode:10 - start
+2023-08-12 19:30:33,353 - INFO - episode:10 - Time:1 - [Device-1] totally need process 940 bits data
+2023-08-12 19:30:33,353 - INFO - episode:10 - Time:1 - [Device-1] locally process 752.598139 bits data taking 0.370027 ms,1.248843 mj
+2023-08-12 19:30:33,353 - INFO - episode:10 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,354 - INFO - episode:10 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,354 - INFO - episode:10 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,354 - INFO - episode:10 - Time:1 - [Device-1] upload to [Server-1] take 0.046031 ms, and 0.046031 mj energy
+2023-08-12 19:30:33,354 - INFO - episode:10 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.925069 ms
+2023-08-12 19:30:33,354 - INFO - episode:10 - Time:1 - [Device-1] total processing consume 0.971099 ms, 1.294873 mj
+2023-08-12 19:30:33,354 - INFO - if process on device completely it will need 0.462534 ms, 1.561053 mj
+2023-08-12 19:30:33,354 - WARNING - device[1] time error:0.462534 < 0.971099
+2023-08-12 19:30:33,354 - INFO - episode:10 - Time:1- [Device-1] request task {989} bits
+2023-08-12 19:30:33,354 - INFO - episode:10 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,354 - INFO - episode:11 - start
+2023-08-12 19:30:33,354 - INFO - episode:11 - Time:1 - [Device-1] totally need process 1074 bits data
+2023-08-12 19:30:33,354 - INFO - episode:11 - Time:1 - [Device-1] locally process 859.445934 bits data taking 0.422561 ms,1.426143 mj
+2023-08-12 19:30:33,354 - INFO - episode:11 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,354 - INFO - episode:11 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,354 - INFO - episode:11 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,354 - INFO - episode:11 - Time:1 - [Device-1] upload to [Server-1] take 0.052566 ms, and 0.052566 mj energy
+2023-08-12 19:30:33,354 - INFO - episode:11 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.056402 ms
+2023-08-12 19:30:33,367 - INFO - episode:11 - Time:1 - [Device-1] total processing consume 1.108968 ms, 1.478709 mj
+2023-08-12 19:30:33,367 - INFO - if process on device completely it will need 0.528201 ms, 1.782679 mj
+2023-08-12 19:30:33,367 - WARNING - device[1] time error:0.528201 < 1.108968
+2023-08-12 19:30:33,367 - INFO - episode:11 - Time:1- [Device-1] request task {1011} bits
+2023-08-12 19:30:33,367 - INFO - episode:11 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,367 - INFO - episode:12 - start
+2023-08-12 19:30:33,367 - INFO - episode:12 - Time:1 - [Device-1] totally need process 948 bits data
+2023-08-12 19:30:33,367 - INFO - episode:12 - Time:1 - [Device-1] locally process 759.048594 bits data taking 0.373199 ms,1.259546 mj
+2023-08-12 19:30:33,367 - INFO - episode:12 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,367 - INFO - episode:12 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,367 - INFO - episode:12 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,367 - INFO - episode:12 - Time:1 - [Device-1] upload to [Server-1] take 0.046425 ms, and 0.046425 mj energy
+2023-08-12 19:30:33,367 - INFO - episode:12 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.932997 ms
+2023-08-12 19:30:33,367 - INFO - episode:12 - Time:1 - [Device-1] total processing consume 0.979423 ms, 1.305972 mj
+2023-08-12 19:30:33,368 - INFO - if process on device completely it will need 0.466499 ms, 1.574433 mj
+2023-08-12 19:30:33,368 - WARNING - device[1] time error:0.466499 < 0.979423
+2023-08-12 19:30:33,368 - INFO - episode:12 - Time:1- [Device-1] request task {964} bits
+2023-08-12 19:30:33,368 - INFO - episode:12 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,368 - INFO - episode:13 - start
+2023-08-12 19:30:33,368 - INFO - episode:13 - Time:1 - [Device-1] totally need process 1031 bits data
+2023-08-12 19:30:33,368 - INFO - episode:13 - Time:1 - [Device-1] locally process 825.009799 bits data taking 0.405630 ms,1.369001 mj
+2023-08-12 19:30:33,368 - INFO - episode:13 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,368 - INFO - episode:13 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,368 - INFO - episode:13 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,368 - INFO - episode:13 - Time:1 - [Device-1] upload to [Server-1] take 0.050460 ms, and 0.050460 mj energy
+2023-08-12 19:30:33,368 - INFO - episode:13 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.014075 ms
+2023-08-12 19:30:33,368 - INFO - episode:13 - Time:1 - [Device-1] total processing consume 1.064534 ms, 1.419460 mj
+2023-08-12 19:30:33,368 - INFO - if process on device completely it will need 0.507037 ms, 1.711251 mj
+2023-08-12 19:30:33,368 - WARNING - device[1] time error:0.507037 < 1.064534
+2023-08-12 19:30:33,368 - INFO - episode:13 - Time:1- [Device-1] request task {991} bits
+2023-08-12 19:30:33,368 - INFO - episode:13 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,368 - INFO - episode:14 - start
+2023-08-12 19:30:33,368 - INFO - episode:14 - Time:1 - [Device-1] totally need process 961 bits data
+2023-08-12 19:30:33,369 - INFO - episode:14 - Time:1 - [Device-1] locally process 769.246546 bits data taking 0.378213 ms,1.276468 mj
+2023-08-12 19:30:33,369 - INFO - episode:14 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,369 - INFO - episode:14 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,369 - INFO - episode:14 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,369 - INFO - episode:14 - Time:1 - [Device-1] upload to [Server-1] take 0.047049 ms, and 0.047049 mj energy
+2023-08-12 19:30:33,369 - INFO - episode:14 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.945532 ms
+2023-08-12 19:30:33,369 - INFO - episode:14 - Time:1 - [Device-1] total processing consume 0.992581 ms, 1.323518 mj
+2023-08-12 19:30:33,369 - INFO - if process on device completely it will need 0.472766 ms, 1.595586 mj
+2023-08-12 19:30:33,369 - WARNING - device[1] time error:0.472766 < 0.992581
+2023-08-12 19:30:33,369 - INFO - episode:14 - Time:1- [Device-1] request task {988} bits
+2023-08-12 19:30:33,369 - INFO - episode:14 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,369 - INFO - episode:15 - start
+2023-08-12 19:30:33,369 - INFO - episode:15 - Time:1 - [Device-1] totally need process 1037 bits data
+2023-08-12 19:30:33,369 - INFO - episode:15 - Time:1 - [Device-1] locally process 829.802251 bits data taking 0.407986 ms,1.376953 mj
+2023-08-12 19:30:33,369 - INFO - episode:15 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,369 - INFO - episode:15 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,369 - INFO - episode:15 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,369 - INFO - episode:15 - Time:1 - [Device-1] upload to [Server-1] take 0.050753 ms, and 0.050753 mj energy
+2023-08-12 19:30:33,383 - INFO - episode:15 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.019965 ms
+2023-08-12 19:30:33,383 - INFO - episode:15 - Time:1 - [Device-1] total processing consume 1.070718 ms, 1.427706 mj
+2023-08-12 19:30:33,383 - INFO - if process on device completely it will need 0.509983 ms, 1.721191 mj
+2023-08-12 19:30:33,383 - WARNING - device[1] time error:0.509983 < 1.070718
+2023-08-12 19:30:33,383 - INFO - episode:15 - Time:1- [Device-1] request task {1098} bits
+2023-08-12 19:30:33,383 - INFO - episode:15 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,383 - INFO - episode:16 - start
+2023-08-12 19:30:33,383 - INFO - episode:16 - Time:1 - [Device-1] totally need process 937 bits data
+2023-08-12 19:30:33,383 - INFO - episode:16 - Time:1 - [Device-1] locally process 750.235067 bits data taking 0.368866 ms,1.244921 mj
+2023-08-12 19:30:33,383 - INFO - episode:16 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,383 - INFO - episode:16 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,383 - INFO - episode:16 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,383 - INFO - episode:16 - Time:1 - [Device-1] upload to [Server-1] take 0.045886 ms, and 0.045886 mj energy
+2023-08-12 19:30:33,383 - INFO - episode:16 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.922164 ms
+2023-08-12 19:30:33,383 - INFO - episode:16 - Time:1 - [Device-1] total processing consume 0.968050 ms, 1.290808 mj
+2023-08-12 19:30:33,384 - INFO - if process on device completely it will need 0.461082 ms, 1.556152 mj
+2023-08-12 19:30:33,384 - WARNING - device[1] time error:0.461082 < 0.968050
+2023-08-12 19:30:33,384 - INFO - episode:16 - Time:1- [Device-1] request task {968} bits
+2023-08-12 19:30:33,384 - INFO - episode:16 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,384 - INFO - episode:17 - start
+2023-08-12 19:30:33,384 - INFO - episode:17 - Time:1 - [Device-1] totally need process 959 bits data
+2023-08-12 19:30:33,384 - INFO - episode:17 - Time:1 - [Device-1] locally process 767.849356 bits data taking 0.377526 ms,1.274150 mj
+2023-08-12 19:30:33,384 - INFO - episode:17 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,384 - INFO - episode:17 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,384 - INFO - episode:17 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,384 - INFO - episode:17 - Time:1 - [Device-1] upload to [Server-1] take 0.046964 ms, and 0.046964 mj energy
+2023-08-12 19:30:33,384 - INFO - episode:17 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.943815 ms
+2023-08-12 19:30:33,384 - INFO - episode:17 - Time:1 - [Device-1] total processing consume 0.990779 ms, 1.321114 mj
+2023-08-12 19:30:33,384 - INFO - if process on device completely it will need 0.471907 ms, 1.592688 mj
+2023-08-12 19:30:33,384 - WARNING - device[1] time error:0.471907 < 0.990779
+2023-08-12 19:30:33,384 - INFO - episode:17 - Time:1- [Device-1] request task {879} bits
+2023-08-12 19:30:33,384 - INFO - episode:17 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,384 - INFO - episode:18 - start
+2023-08-12 19:30:33,384 - INFO - episode:18 - Time:1 - [Device-1] totally need process 953 bits data
+2023-08-12 19:30:33,385 - INFO - episode:18 - Time:1 - [Device-1] locally process 763.048319 bits data taking 0.375165 ms,1.266183 mj
+2023-08-12 19:30:33,385 - INFO - episode:18 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,385 - INFO - episode:18 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,385 - INFO - episode:18 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,385 - INFO - episode:18 - Time:1 - [Device-1] upload to [Server-1] take 0.046670 ms, and 0.046670 mj energy
+2023-08-12 19:30:33,385 - INFO - episode:18 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.937914 ms
+2023-08-12 19:30:33,385 - INFO - episode:18 - Time:1 - [Device-1] total processing consume 0.984584 ms, 1.312853 mj
+2023-08-12 19:30:33,385 - INFO - if process on device completely it will need 0.468957 ms, 1.582729 mj
+2023-08-12 19:30:33,385 - WARNING - device[1] time error:0.468957 < 0.984584
+2023-08-12 19:30:33,385 - INFO - episode:18 - Time:1- [Device-1] request task {948} bits
+2023-08-12 19:30:33,385 - INFO - episode:18 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,385 - INFO - episode:19 - start
+2023-08-12 19:30:33,385 - INFO - episode:19 - Time:1 - [Device-1] totally need process 1056 bits data
+2023-08-12 19:30:33,385 - INFO - episode:19 - Time:1 - [Device-1] locally process 844.959118 bits data taking 0.415438 ms,1.402104 mj
+2023-08-12 19:30:33,385 - INFO - episode:19 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,385 - INFO - episode:19 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,399 - INFO - episode:19 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,399 - INFO - episode:19 - Time:1 - [Device-1] upload to [Server-1] take 0.051680 ms, and 0.051680 mj energy
+2023-08-12 19:30:33,399 - INFO - episode:19 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.038596 ms
+2023-08-12 19:30:33,399 - INFO - episode:19 - Time:1 - [Device-1] total processing consume 1.090276 ms, 1.453784 mj
+2023-08-12 19:30:33,399 - INFO - if process on device completely it will need 0.519298 ms, 1.752630 mj
+2023-08-12 19:30:33,399 - WARNING - device[1] time error:0.519298 < 1.090276
+2023-08-12 19:30:33,399 - INFO - episode:19 - Time:1- [Device-1] request task {993} bits
+2023-08-12 19:30:33,399 - INFO - episode:19 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,399 - INFO - episode:20 - start
+2023-08-12 19:30:33,399 - INFO - episode:20 - Time:1 - [Device-1] totally need process 918 bits data
+2023-08-12 19:30:33,399 - INFO - episode:20 - Time:1 - [Device-1] locally process 735.068582 bits data taking 0.361409 ms,1.219754 mj
+2023-08-12 19:30:33,399 - INFO - episode:20 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,399 - INFO - episode:20 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,399 - INFO - episode:20 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,399 - INFO - episode:20 - Time:1 - [Device-1] upload to [Server-1] take 0.044959 ms, and 0.044959 mj energy
+2023-08-12 19:30:33,400 - INFO - episode:20 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.903522 ms
+2023-08-12 19:30:33,400 - INFO - episode:20 - Time:1 - [Device-1] total processing consume 0.948481 ms, 1.264713 mj
+2023-08-12 19:30:33,400 - INFO - if process on device completely it will need 0.451761 ms, 1.524693 mj
+2023-08-12 19:30:33,400 - WARNING - device[1] time error:0.451761 < 0.948481
+2023-08-12 19:30:33,400 - INFO - episode:20 - Time:1- [Device-1] request task {1032} bits
+2023-08-12 19:30:33,400 - INFO - episode:20 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,400 - INFO - episode:21 - start
+2023-08-12 19:30:33,400 - INFO - episode:21 - Time:1 - [Device-1] totally need process 982 bits data
+2023-08-12 19:30:33,400 - INFO - episode:21 - Time:1 - [Device-1] locally process 785.749170 bits data taking 0.386327 ms,1.303853 mj
+2023-08-12 19:30:33,400 - INFO - episode:21 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,400 - INFO - episode:21 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,400 - INFO - episode:21 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,400 - INFO - episode:21 - Time:1 - [Device-1] upload to [Server-1] take 0.048058 ms, and 0.048058 mj energy
+2023-08-12 19:30:33,400 - INFO - episode:21 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.965817 ms
+2023-08-12 19:30:33,400 - INFO - episode:21 - Time:1 - [Device-1] total processing consume 1.013875 ms, 1.351911 mj
+2023-08-12 19:30:33,400 - INFO - if process on device completely it will need 0.482908 ms, 1.629816 mj
+2023-08-12 19:30:33,400 - WARNING - device[1] time error:0.482908 < 1.013875
+2023-08-12 19:30:33,400 - INFO - episode:21 - Time:1- [Device-1] request task {912} bits
+2023-08-12 19:30:33,400 - INFO - episode:21 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,401 - INFO - episode:22 - start
+2023-08-12 19:30:33,401 - INFO - episode:22 - Time:1 - [Device-1] totally need process 970 bits data
+2023-08-12 19:30:33,401 - INFO - episode:22 - Time:1 - [Device-1] locally process 776.134014 bits data taking 0.381599 ms,1.287897 mj
+2023-08-12 19:30:33,401 - INFO - episode:22 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,401 - INFO - episode:22 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,401 - INFO - episode:22 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,401 - INFO - episode:22 - Time:1 - [Device-1] upload to [Server-1] take 0.047470 ms, and 0.047470 mj energy
+2023-08-12 19:30:33,401 - INFO - episode:22 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.953998 ms
+2023-08-12 19:30:33,401 - INFO - episode:22 - Time:1 - [Device-1] total processing consume 1.001468 ms, 1.335368 mj
+2023-08-12 19:30:33,401 - INFO - if process on device completely it will need 0.476999 ms, 1.609872 mj
+2023-08-12 19:30:33,401 - WARNING - device[1] time error:0.476999 < 1.001468
+2023-08-12 19:30:33,401 - INFO - episode:22 - Time:1- [Device-1] request task {970} bits
+2023-08-12 19:30:33,401 - INFO - episode:22 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,401 - INFO - episode:23 - start
+2023-08-12 19:30:33,401 - INFO - episode:23 - Time:1 - [Device-1] totally need process 956 bits data
+2023-08-12 19:30:33,401 - INFO - episode:23 - Time:1 - [Device-1] locally process 765.044708 bits data taking 0.376147 ms,1.269496 mj
+2023-08-12 19:30:33,414 - INFO - episode:23 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,414 - INFO - episode:23 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,414 - INFO - episode:23 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,414 - INFO - episode:23 - Time:1 - [Device-1] upload to [Server-1] take 0.046792 ms, and 0.046792 mj energy
+2023-08-12 19:30:33,414 - INFO - episode:23 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.940367 ms
+2023-08-12 19:30:33,414 - INFO - episode:23 - Time:1 - [Device-1] total processing consume 0.987160 ms, 1.316288 mj
+2023-08-12 19:30:33,414 - INFO - if process on device completely it will need 0.470184 ms, 1.586870 mj
+2023-08-12 19:30:33,414 - WARNING - device[1] time error:0.470184 < 0.987160
+2023-08-12 19:30:33,414 - INFO - episode:23 - Time:1- [Device-1] request task {1001} bits
+2023-08-12 19:30:33,414 - INFO - episode:23 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,414 - INFO - episode:24 - start
+2023-08-12 19:30:33,414 - INFO - episode:24 - Time:1 - [Device-1] totally need process 887 bits data
+2023-08-12 19:30:33,414 - INFO - episode:24 - Time:1 - [Device-1] locally process 710.069689 bits data taking 0.349118 ms,1.178272 mj
+2023-08-12 19:30:33,414 - INFO - episode:24 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,414 - INFO - episode:24 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,415 - INFO - episode:24 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,415 - INFO - episode:24 - Time:1 - [Device-1] upload to [Server-1] take 0.043430 ms, and 0.043430 mj energy
+2023-08-12 19:30:33,415 - INFO - episode:24 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.872794 ms
+2023-08-12 19:30:33,415 - INFO - episode:24 - Time:1 - [Device-1] total processing consume 0.916224 ms, 1.221702 mj
+2023-08-12 19:30:33,415 - INFO - if process on device completely it will need 0.436397 ms, 1.472840 mj
+2023-08-12 19:30:33,415 - WARNING - device[1] time error:0.436397 < 0.916224
+2023-08-12 19:30:33,415 - INFO - episode:24 - Time:1- [Device-1] request task {986} bits
+2023-08-12 19:30:33,415 - INFO - episode:24 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,415 - INFO - episode:25 - start
+2023-08-12 19:30:33,415 - INFO - episode:25 - Time:1 - [Device-1] totally need process 1050 bits data
+2023-08-12 19:30:33,415 - INFO - episode:25 - Time:1 - [Device-1] locally process 840.527338 bits data taking 0.413259 ms,1.394750 mj
+2023-08-12 19:30:33,415 - INFO - episode:25 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,415 - INFO - episode:25 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,415 - INFO - episode:25 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,415 - INFO - episode:25 - Time:1 - [Device-1] upload to [Server-1] take 0.051409 ms, and 0.051409 mj energy
+2023-08-12 19:30:33,415 - INFO - episode:25 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.033148 ms
+2023-08-12 19:30:33,415 - INFO - episode:25 - Time:1 - [Device-1] total processing consume 1.084557 ms, 1.446159 mj
+2023-08-12 19:30:33,415 - INFO - if process on device completely it will need 0.516574 ms, 1.743438 mj
+2023-08-12 19:30:33,415 - WARNING - device[1] time error:0.516574 < 1.084557
+2023-08-12 19:30:33,416 - INFO - episode:25 - Time:1- [Device-1] request task {1042} bits
+2023-08-12 19:30:33,416 - INFO - episode:25 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,416 - INFO - episode:26 - start
+2023-08-12 19:30:33,416 - INFO - episode:26 - Time:1 - [Device-1] totally need process 1055 bits data
+2023-08-12 19:30:33,416 - INFO - episode:26 - Time:1 - [Device-1] locally process 844.327500 bits data taking 0.415128 ms,1.401056 mj
+2023-08-12 19:30:33,416 - INFO - episode:26 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,416 - INFO - episode:26 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,416 - INFO - episode:26 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,416 - INFO - episode:26 - Time:1 - [Device-1] upload to [Server-1] take 0.051641 ms, and 0.051641 mj energy
+2023-08-12 19:30:33,416 - INFO - episode:26 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.037819 ms
+2023-08-12 19:30:33,416 - INFO - episode:26 - Time:1 - [Device-1] total processing consume 1.089461 ms, 1.452697 mj
+2023-08-12 19:30:33,416 - INFO - if process on device completely it will need 0.518910 ms, 1.751320 mj
+2023-08-12 19:30:33,416 - WARNING - device[1] time error:0.518910 < 1.089461
+2023-08-12 19:30:33,416 - INFO - episode:26 - Time:1- [Device-1] request task {1055} bits
+2023-08-12 19:30:33,416 - INFO - episode:26 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,416 - INFO - episode:27 - start
+2023-08-12 19:30:33,429 - INFO - episode:27 - Time:1 - [Device-1] totally need process 1074 bits data
+2023-08-12 19:30:33,429 - INFO - episode:27 - Time:1 - [Device-1] locally process 859.501725 bits data taking 0.422588 ms,1.426236 mj
+2023-08-12 19:30:33,429 - INFO - episode:27 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,429 - INFO - episode:27 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,429 - INFO - episode:27 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,429 - INFO - episode:27 - Time:1 - [Device-1] upload to [Server-1] take 0.052569 ms, and 0.052569 mj energy
+2023-08-12 19:30:33,429 - INFO - episode:27 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.056471 ms
+2023-08-12 19:30:33,429 - INFO - episode:27 - Time:1 - [Device-1] total processing consume 1.109040 ms, 1.478805 mj
+2023-08-12 19:30:33,429 - INFO - if process on device completely it will need 0.528235 ms, 1.782795 mj
+2023-08-12 19:30:33,429 - WARNING - device[1] time error:0.528235 < 1.109040
+2023-08-12 19:30:33,429 - INFO - episode:27 - Time:1- [Device-1] request task {944} bits
+2023-08-12 19:30:33,430 - INFO - episode:27 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,430 - INFO - episode:28 - start
+2023-08-12 19:30:33,430 - INFO - episode:28 - Time:1 - [Device-1] totally need process 1042 bits data
+2023-08-12 19:30:33,430 - INFO - episode:28 - Time:1 - [Device-1] locally process 833.833336 bits data taking 0.409968 ms,1.383642 mj
+2023-08-12 19:30:33,430 - INFO - episode:28 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,430 - INFO - episode:28 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,430 - INFO - episode:28 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,430 - INFO - episode:28 - Time:1 - [Device-1] upload to [Server-1] take 0.050999 ms, and 0.050999 mj energy
+2023-08-12 19:30:33,430 - INFO - episode:28 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.024920 ms
+2023-08-12 19:30:33,430 - INFO - episode:28 - Time:1 - [Device-1] total processing consume 1.075920 ms, 1.434642 mj
+2023-08-12 19:30:33,430 - INFO - if process on device completely it will need 0.512460 ms, 1.729553 mj
+2023-08-12 19:30:33,430 - WARNING - device[1] time error:0.512460 < 1.075920
+2023-08-12 19:30:33,430 - INFO - episode:28 - Time:1- [Device-1] request task {906} bits
+2023-08-12 19:30:33,430 - INFO - episode:28 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,430 - INFO - episode:29 - start
+2023-08-12 19:30:33,430 - INFO - episode:29 - Time:1 - [Device-1] totally need process 969 bits data
+2023-08-12 19:30:33,430 - INFO - episode:29 - Time:1 - [Device-1] locally process 775.884596 bits data taking 0.381477 ms,1.287484 mj
+2023-08-12 19:30:33,430 - INFO - episode:29 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,430 - INFO - episode:29 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,431 - INFO - episode:29 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,431 - INFO - episode:29 - Time:1 - [Device-1] upload to [Server-1] take 0.047455 ms, and 0.047455 mj energy
+2023-08-12 19:30:33,431 - INFO - episode:29 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.953691 ms
+2023-08-12 19:30:33,431 - INFO - episode:29 - Time:1 - [Device-1] total processing consume 1.001147 ms, 1.334939 mj
+2023-08-12 19:30:33,431 - INFO - if process on device completely it will need 0.476846 ms, 1.609354 mj
+2023-08-12 19:30:33,431 - WARNING - device[1] time error:0.476846 < 1.001147
+2023-08-12 19:30:33,431 - INFO - episode:29 - Time:1- [Device-1] request task {904} bits
+2023-08-12 19:30:33,431 - INFO - episode:29 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,431 - INFO - episode:30 - start
+2023-08-12 19:30:33,431 - INFO - episode:30 - Time:1 - [Device-1] totally need process 1052 bits data
+2023-08-12 19:30:33,431 - INFO - episode:30 - Time:1 - [Device-1] locally process 841.925900 bits data taking 0.413947 ms,1.397071 mj
+2023-08-12 19:30:33,431 - INFO - episode:30 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,431 - INFO - episode:30 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,431 - INFO - episode:30 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,431 - INFO - episode:30 - Time:1 - [Device-1] upload to [Server-1] take 0.051494 ms, and 0.051494 mj energy
+2023-08-12 19:30:33,431 - INFO - episode:30 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.034867 ms
+2023-08-12 19:30:33,431 - INFO - episode:30 - Time:1 - [Device-1] total processing consume 1.086362 ms, 1.448565 mj
+2023-08-12 19:30:33,431 - INFO - if process on device completely it will need 0.517434 ms, 1.746338 mj
+2023-08-12 19:30:33,432 - WARNING - device[1] time error:0.517434 < 1.086362
+2023-08-12 19:30:33,445 - INFO - episode:30 - Time:1- [Device-1] request task {1066} bits
+2023-08-12 19:30:33,445 - INFO - episode:30 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,445 - INFO - episode:31 - start
+2023-08-12 19:30:33,445 - INFO - episode:31 - Time:1 - [Device-1] totally need process 990 bits data
+2023-08-12 19:30:33,445 - INFO - episode:31 - Time:1 - [Device-1] locally process 792.103413 bits data taking 0.389451 ms,1.314397 mj
+2023-08-12 19:30:33,445 - INFO - episode:31 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,445 - INFO - episode:31 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,445 - INFO - episode:31 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,445 - INFO - episode:31 - Time:1 - [Device-1] upload to [Server-1] take 0.048447 ms, and 0.048447 mj energy
+2023-08-12 19:30:33,445 - INFO - episode:31 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.973627 ms
+2023-08-12 19:30:33,445 - INFO - episode:31 - Time:1 - [Device-1] total processing consume 1.022074 ms, 1.362844 mj
+2023-08-12 19:30:33,445 - INFO - if process on device completely it will need 0.486814 ms, 1.642996 mj
+2023-08-12 19:30:33,445 - WARNING - device[1] time error:0.486814 < 1.022074
+2023-08-12 19:30:33,445 - INFO - episode:31 - Time:1- [Device-1] request task {1088} bits
+2023-08-12 19:30:33,446 - INFO - episode:31 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,446 - INFO - episode:32 - start
+2023-08-12 19:30:33,446 - INFO - episode:32 - Time:1 - [Device-1] totally need process 966 bits data
+2023-08-12 19:30:33,446 - INFO - episode:32 - Time:1 - [Device-1] locally process 773.010900 bits data taking 0.380064 ms,1.282715 mj
+2023-08-12 19:30:33,446 - INFO - episode:32 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,446 - INFO - episode:32 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,446 - INFO - episode:32 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,446 - INFO - episode:32 - Time:1 - [Device-1] upload to [Server-1] take 0.047279 ms, and 0.047279 mj energy
+2023-08-12 19:30:33,446 - INFO - episode:32 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.950159 ms
+2023-08-12 19:30:33,446 - INFO - episode:32 - Time:1 - [Device-1] total processing consume 0.997439 ms, 1.329994 mj
+2023-08-12 19:30:33,446 - INFO - if process on device completely it will need 0.475080 ms, 1.603394 mj
+2023-08-12 19:30:33,446 - WARNING - device[1] time error:0.475080 < 0.997439
+2023-08-12 19:30:33,446 - INFO - episode:32 - Time:1- [Device-1] request task {1007} bits
+2023-08-12 19:30:33,446 - INFO - episode:32 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,446 - INFO - episode:33 - start
+2023-08-12 19:30:33,446 - INFO - episode:33 - Time:1 - [Device-1] totally need process 1007 bits data
+2023-08-12 19:30:33,446 - INFO - episode:33 - Time:1 - [Device-1] locally process 806.117828 bits data taking 0.396341 ms,1.337652 mj
+2023-08-12 19:30:33,446 - INFO - episode:33 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,446 - INFO - episode:33 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,446 - INFO - episode:33 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,447 - INFO - episode:33 - Time:1 - [Device-1] upload to [Server-1] take 0.049304 ms, and 0.049304 mj energy
+2023-08-12 19:30:33,447 - INFO - episode:33 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.990853 ms
+2023-08-12 19:30:33,447 - INFO - episode:33 - Time:1 - [Device-1] total processing consume 1.040157 ms, 1.386956 mj
+2023-08-12 19:30:33,447 - INFO - if process on device completely it will need 0.495427 ms, 1.672065 mj
+2023-08-12 19:30:33,447 - WARNING - device[1] time error:0.495427 < 1.040157
+2023-08-12 19:30:33,447 - INFO - episode:33 - Time:1- [Device-1] request task {946} bits
+2023-08-12 19:30:33,447 - INFO - episode:33 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,447 - INFO - episode:34 - start
+2023-08-12 19:30:33,447 - INFO - episode:34 - Time:1 - [Device-1] totally need process 1021 bits data
+2023-08-12 19:30:33,447 - INFO - episode:34 - Time:1 - [Device-1] locally process 817.517864 bits data taking 0.401946 ms,1.356569 mj
+2023-08-12 19:30:33,447 - INFO - episode:34 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,447 - INFO - episode:34 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,447 - INFO - episode:34 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,447 - INFO - episode:34 - Time:1 - [Device-1] upload to [Server-1] take 0.050002 ms, and 0.050002 mj energy
+2023-08-12 19:30:33,447 - INFO - episode:34 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.004866 ms
+2023-08-12 19:30:33,447 - INFO - episode:34 - Time:1 - [Device-1] total processing consume 1.054867 ms, 1.406570 mj
+2023-08-12 19:30:33,461 - INFO - if process on device completely it will need 0.502433 ms, 1.695711 mj
+2023-08-12 19:30:33,461 - WARNING - device[1] time error:0.502433 < 1.054867
+2023-08-12 19:30:33,461 - INFO - episode:34 - Time:1- [Device-1] request task {1096} bits
+2023-08-12 19:30:33,461 - INFO - episode:34 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,461 - INFO - episode:35 - start
+2023-08-12 19:30:33,461 - INFO - episode:35 - Time:1 - [Device-1] totally need process 948 bits data
+2023-08-12 19:30:33,461 - INFO - episode:35 - Time:1 - [Device-1] locally process 759.002765 bits data taking 0.373176 ms,1.259470 mj
+2023-08-12 19:30:33,461 - INFO - episode:35 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,461 - INFO - episode:35 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,461 - INFO - episode:35 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,461 - INFO - episode:35 - Time:1 - [Device-1] upload to [Server-1] take 0.046423 ms, and 0.046423 mj energy
+2023-08-12 19:30:33,461 - INFO - episode:35 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.932941 ms
+2023-08-12 19:30:33,461 - INFO - episode:35 - Time:1 - [Device-1] total processing consume 0.979364 ms, 1.305893 mj
+2023-08-12 19:30:33,461 - INFO - if process on device completely it will need 0.466470 ms, 1.574338 mj
+2023-08-12 19:30:33,461 - WARNING - device[1] time error:0.466470 < 0.979364
+2023-08-12 19:30:33,461 - INFO - episode:35 - Time:1- [Device-1] request task {1044} bits
+2023-08-12 19:30:33,461 - INFO - episode:35 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,461 - INFO - episode:36 - start
+2023-08-12 19:30:33,461 - INFO - episode:36 - Time:1 - [Device-1] totally need process 992 bits data
+2023-08-12 19:30:33,461 - INFO - episode:36 - Time:1 - [Device-1] locally process 793.819726 bits data taking 0.390295 ms,1.317245 mj
+2023-08-12 19:30:33,461 - INFO - episode:36 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,461 - INFO - episode:36 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,461 - INFO - episode:36 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,461 - INFO - episode:36 - Time:1 - [Device-1] upload to [Server-1] take 0.048552 ms, and 0.048552 mj energy
+2023-08-12 19:30:33,461 - INFO - episode:36 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.975737 ms
+2023-08-12 19:30:33,461 - INFO - episode:36 - Time:1 - [Device-1] total processing consume 1.024289 ms, 1.365797 mj
+2023-08-12 19:30:33,461 - INFO - if process on device completely it will need 0.487868 ms, 1.646556 mj
+2023-08-12 19:30:33,461 - WARNING - device[1] time error:0.487868 < 1.024289
+2023-08-12 19:30:33,461 - INFO - episode:36 - Time:1- [Device-1] request task {1088} bits
+2023-08-12 19:30:33,461 - INFO - episode:36 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,461 - INFO - episode:37 - start
+2023-08-12 19:30:33,461 - INFO - episode:37 - Time:1 - [Device-1] totally need process 1024 bits data
+2023-08-12 19:30:33,461 - INFO - episode:37 - Time:1 - [Device-1] locally process 819.351534 bits data taking 0.402848 ms,1.359611 mj
+2023-08-12 19:30:33,461 - INFO - episode:37 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,461 - INFO - episode:37 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,461 - INFO - episode:37 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,462 - INFO - episode:37 - Time:1 - [Device-1] upload to [Server-1] take 0.050114 ms, and 0.050114 mj energy
+2023-08-12 19:30:33,462 - INFO - episode:37 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.007120 ms
+2023-08-12 19:30:33,462 - INFO - episode:37 - Time:1 - [Device-1] total processing consume 1.057233 ms, 1.409725 mj
+2023-08-12 19:30:33,462 - INFO - if process on device completely it will need 0.503560 ms, 1.699514 mj
+2023-08-12 19:30:33,462 - WARNING - device[1] time error:0.503560 < 1.057233
+2023-08-12 19:30:33,462 - INFO - episode:37 - Time:1- [Device-1] request task {1033} bits
+2023-08-12 19:30:33,462 - INFO - episode:37 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,462 - INFO - episode:38 - start
+2023-08-12 19:30:33,462 - INFO - episode:38 - Time:1 - [Device-1] totally need process 1032 bits data
+2023-08-12 19:30:33,462 - INFO - episode:38 - Time:1 - [Device-1] locally process 825.726531 bits data taking 0.405982 ms,1.370190 mj
+2023-08-12 19:30:33,462 - INFO - episode:38 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,462 - INFO - episode:38 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,462 - INFO - episode:38 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,462 - INFO - episode:38 - Time:1 - [Device-1] upload to [Server-1] take 0.050504 ms, and 0.050504 mj energy
+2023-08-12 19:30:33,476 - INFO - episode:38 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.014956 ms
+2023-08-12 19:30:33,476 - INFO - episode:38 - Time:1 - [Device-1] total processing consume 1.065459 ms, 1.420694 mj
+2023-08-12 19:30:33,476 - INFO - if process on device completely it will need 0.507478 ms, 1.712737 mj
+2023-08-12 19:30:33,476 - WARNING - device[1] time error:0.507478 < 1.065459
+2023-08-12 19:30:33,476 - INFO - episode:38 - Time:1- [Device-1] request task {1012} bits
+2023-08-12 19:30:33,476 - INFO - episode:38 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,476 - INFO - episode:39 - start
+2023-08-12 19:30:33,476 - INFO - episode:39 - Time:1 - [Device-1] totally need process 930 bits data
+2023-08-12 19:30:33,476 - INFO - episode:39 - Time:1 - [Device-1] locally process 744.169460 bits data taking 0.365883 ms,1.234856 mj
+2023-08-12 19:30:33,476 - INFO - episode:39 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,476 - INFO - episode:39 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,476 - INFO - episode:39 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,476 - INFO - episode:39 - Time:1 - [Device-1] upload to [Server-1] take 0.045515 ms, and 0.045515 mj energy
+2023-08-12 19:30:33,477 - INFO - episode:39 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.914708 ms
+2023-08-12 19:30:33,477 - INFO - episode:39 - Time:1 - [Device-1] total processing consume 0.960224 ms, 1.280372 mj
+2023-08-12 19:30:33,477 - INFO - if process on device completely it will need 0.457354 ms, 1.543570 mj
+2023-08-12 19:30:33,477 - WARNING - device[1] time error:0.457354 < 0.960224
+2023-08-12 19:30:33,477 - INFO - episode:39 - Time:1- [Device-1] request task {1069} bits
+2023-08-12 19:30:33,477 - INFO - episode:39 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,477 - INFO - episode:40 - start
+2023-08-12 19:30:33,477 - INFO - episode:40 - Time:1 - [Device-1] totally need process 931 bits data
+2023-08-12 19:30:33,477 - INFO - episode:40 - Time:1 - [Device-1] locally process 745.173239 bits data taking 0.366377 ms,1.236522 mj
+2023-08-12 19:30:33,477 - INFO - episode:40 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,477 - INFO - episode:40 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,477 - INFO - episode:40 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,477 - INFO - episode:40 - Time:1 - [Device-1] upload to [Server-1] take 0.045577 ms, and 0.045577 mj energy
+2023-08-12 19:30:33,477 - INFO - episode:40 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.915942 ms
+2023-08-12 19:30:33,477 - INFO - episode:40 - Time:1 - [Device-1] total processing consume 0.961519 ms, 1.282099 mj
+2023-08-12 19:30:33,477 - INFO - if process on device completely it will need 0.457971 ms, 1.545652 mj
+2023-08-12 19:30:33,477 - WARNING - device[1] time error:0.457971 < 0.961519
+2023-08-12 19:30:33,477 - INFO - episode:40 - Time:1- [Device-1] request task {1011} bits
+2023-08-12 19:30:33,477 - INFO - episode:40 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,478 - INFO - episode:41 - start
+2023-08-12 19:30:33,478 - INFO - episode:41 - Time:1 - [Device-1] totally need process 1030 bits data
+2023-08-12 19:30:33,478 - INFO - episode:41 - Time:1 - [Device-1] locally process 824.563084 bits data taking 0.405410 ms,1.368259 mj
+2023-08-12 19:30:33,478 - INFO - episode:41 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,478 - INFO - episode:41 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,478 - INFO - episode:41 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,478 - INFO - episode:41 - Time:1 - [Device-1] upload to [Server-1] take 0.050432 ms, and 0.050432 mj energy
+2023-08-12 19:30:33,478 - INFO - episode:41 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.013525 ms
+2023-08-12 19:30:33,478 - INFO - episode:41 - Time:1 - [Device-1] total processing consume 1.063958 ms, 1.418692 mj
+2023-08-12 19:30:33,478 - INFO - if process on device completely it will need 0.506763 ms, 1.710324 mj
+2023-08-12 19:30:33,478 - WARNING - device[1] time error:0.506763 < 1.063958
+2023-08-12 19:30:33,478 - INFO - episode:41 - Time:1- [Device-1] request task {958} bits
+2023-08-12 19:30:33,478 - INFO - episode:41 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,478 - INFO - episode:42 - start
+2023-08-12 19:30:33,478 - INFO - episode:42 - Time:1 - [Device-1] totally need process 1007 bits data
+2023-08-12 19:30:33,478 - INFO - episode:42 - Time:1 - [Device-1] locally process 805.802529 bits data taking 0.396186 ms,1.337129 mj
+2023-08-12 19:30:33,478 - INFO - episode:42 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,478 - INFO - episode:42 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,491 - INFO - episode:42 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,491 - INFO - episode:42 - Time:1 - [Device-1] upload to [Server-1] take 0.049285 ms, and 0.049285 mj energy
+2023-08-12 19:30:33,491 - INFO - episode:42 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.990466 ms
+2023-08-12 19:30:33,491 - INFO - episode:42 - Time:1 - [Device-1] total processing consume 1.039751 ms, 1.386414 mj
+2023-08-12 19:30:33,491 - INFO - if process on device completely it will need 0.495233 ms, 1.671411 mj
+2023-08-12 19:30:33,491 - WARNING - device[1] time error:0.495233 < 1.039751
+2023-08-12 19:30:33,491 - INFO - episode:42 - Time:1- [Device-1] request task {1058} bits
+2023-08-12 19:30:33,491 - INFO - episode:42 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,491 - INFO - episode:43 - start
+2023-08-12 19:30:33,491 - INFO - episode:43 - Time:1 - [Device-1] totally need process 998 bits data
+2023-08-12 19:30:33,491 - INFO - episode:43 - Time:1 - [Device-1] locally process 799.035821 bits data taking 0.392859 ms,1.325900 mj
+2023-08-12 19:30:33,491 - INFO - episode:43 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,491 - INFO - episode:43 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,491 - INFO - episode:43 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,491 - INFO - episode:43 - Time:1 - [Device-1] upload to [Server-1] take 0.048871 ms, and 0.048871 mj energy
+2023-08-12 19:30:33,491 - INFO - episode:43 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.982148 ms
+2023-08-12 19:30:33,492 - INFO - episode:43 - Time:1 - [Device-1] total processing consume 1.031019 ms, 1.374771 mj
+2023-08-12 19:30:33,492 - INFO - if process on device completely it will need 0.491074 ms, 1.657375 mj
+2023-08-12 19:30:33,492 - WARNING - device[1] time error:0.491074 < 1.031019
+2023-08-12 19:30:33,492 - INFO - episode:43 - Time:1- [Device-1] request task {955} bits
+2023-08-12 19:30:33,492 - INFO - episode:43 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,492 - INFO - episode:44 - start
+2023-08-12 19:30:33,492 - INFO - episode:44 - Time:1 - [Device-1] totally need process 854 bits data
+2023-08-12 19:30:33,492 - INFO - episode:44 - Time:1 - [Device-1] locally process 683.370490 bits data taking 0.335990 ms,1.133968 mj
+2023-08-12 19:30:33,492 - INFO - episode:44 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,492 - INFO - episode:44 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,492 - INFO - episode:44 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,492 - INFO - episode:44 - Time:1 - [Device-1] upload to [Server-1] take 0.041797 ms, and 0.041797 mj energy
+2023-08-12 19:30:33,492 - INFO - episode:44 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.839976 ms
+2023-08-12 19:30:33,492 - INFO - episode:44 - Time:1 - [Device-1] total processing consume 0.881773 ms, 1.175765 mj
+2023-08-12 19:30:33,492 - INFO - if process on device completely it will need 0.419988 ms, 1.417460 mj
+2023-08-12 19:30:33,492 - WARNING - device[1] time error:0.419988 < 0.881773
+2023-08-12 19:30:33,492 - INFO - episode:44 - Time:1- [Device-1] request task {951} bits
+2023-08-12 19:30:33,492 - INFO - episode:44 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,492 - INFO - episode:45 - start
+2023-08-12 19:30:33,493 - INFO - episode:45 - Time:1 - [Device-1] totally need process 970 bits data
+2023-08-12 19:30:33,493 - INFO - episode:45 - Time:1 - [Device-1] locally process 776.356850 bits data taking 0.381709 ms,1.288267 mj
+2023-08-12 19:30:33,493 - INFO - episode:45 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,493 - INFO - episode:45 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,493 - INFO - episode:45 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,493 - INFO - episode:45 - Time:1 - [Device-1] upload to [Server-1] take 0.047484 ms, and 0.047484 mj energy
+2023-08-12 19:30:33,493 - INFO - episode:45 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.954272 ms
+2023-08-12 19:30:33,493 - INFO - episode:45 - Time:1 - [Device-1] total processing consume 1.001756 ms, 1.335751 mj
+2023-08-12 19:30:33,493 - INFO - if process on device completely it will need 0.477136 ms, 1.610334 mj
+2023-08-12 19:30:33,493 - WARNING - device[1] time error:0.477136 < 1.001756
+2023-08-12 19:30:33,493 - INFO - episode:45 - Time:1- [Device-1] request task {974} bits
+2023-08-12 19:30:33,493 - INFO - episode:45 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,493 - INFO - episode:46 - start
+2023-08-12 19:30:33,493 - INFO - episode:46 - Time:1 - [Device-1] totally need process 952 bits data
+2023-08-12 19:30:33,493 - INFO - episode:46 - Time:1 - [Device-1] locally process 761.600153 bits data taking 0.374453 ms,1.263780 mj
+2023-08-12 19:30:33,506 - INFO - episode:46 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,506 - INFO - episode:46 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,506 - INFO - episode:46 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,506 - INFO - episode:46 - Time:1 - [Device-1] upload to [Server-1] take 0.046581 ms, and 0.046581 mj energy
+2023-08-12 19:30:33,506 - INFO - episode:46 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.936134 ms
+2023-08-12 19:30:33,506 - INFO - episode:46 - Time:1 - [Device-1] total processing consume 0.982715 ms, 1.310362 mj
+2023-08-12 19:30:33,506 - INFO - if process on device completely it will need 0.468067 ms, 1.579725 mj
+2023-08-12 19:30:33,506 - WARNING - device[1] time error:0.468067 < 0.982715
+2023-08-12 19:30:33,506 - INFO - episode:46 - Time:1- [Device-1] request task {1018} bits
+2023-08-12 19:30:33,506 - INFO - episode:46 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,506 - INFO - episode:47 - start
+2023-08-12 19:30:33,506 - INFO - episode:47 - Time:1 - [Device-1] totally need process 971 bits data
+2023-08-12 19:30:33,506 - INFO - episode:47 - Time:1 - [Device-1] locally process 777.011663 bits data taking 0.382031 ms,1.289354 mj
+2023-08-12 19:30:33,506 - INFO - episode:47 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,506 - INFO - episode:47 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,507 - INFO - episode:47 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,507 - INFO - episode:47 - Time:1 - [Device-1] upload to [Server-1] take 0.047524 ms, and 0.047524 mj energy
+2023-08-12 19:30:33,507 - INFO - episode:47 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.955077 ms
+2023-08-12 19:30:33,507 - INFO - episode:47 - Time:1 - [Device-1] total processing consume 1.002601 ms, 1.336878 mj
+2023-08-12 19:30:33,507 - INFO - if process on device completely it will need 0.477538 ms, 1.611692 mj
+2023-08-12 19:30:33,507 - WARNING - device[1] time error:0.477538 < 1.002601
+2023-08-12 19:30:33,507 - INFO - episode:47 - Time:1- [Device-1] request task {994} bits
+2023-08-12 19:30:33,507 - INFO - episode:47 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,507 - INFO - episode:48 - start
+2023-08-12 19:30:33,507 - INFO - episode:48 - Time:1 - [Device-1] totally need process 1033 bits data
+2023-08-12 19:30:33,507 - INFO - episode:48 - Time:1 - [Device-1] locally process 827.162864 bits data taking 0.406688 ms,1.372573 mj
+2023-08-12 19:30:33,507 - INFO - episode:48 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,507 - INFO - episode:48 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,507 - INFO - episode:48 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,507 - INFO - episode:48 - Time:1 - [Device-1] upload to [Server-1] take 0.050591 ms, and 0.050591 mj energy
+2023-08-12 19:30:33,507 - INFO - episode:48 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.016721 ms
+2023-08-12 19:30:33,507 - INFO - episode:48 - Time:1 - [Device-1] total processing consume 1.067312 ms, 1.423165 mj
+2023-08-12 19:30:33,507 - INFO - if process on device completely it will need 0.508361 ms, 1.715717 mj
+2023-08-12 19:30:33,507 - WARNING - device[1] time error:0.508361 < 1.067312
+2023-08-12 19:30:33,508 - INFO - episode:48 - Time:1- [Device-1] request task {957} bits
+2023-08-12 19:30:33,508 - INFO - episode:48 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,508 - INFO - episode:49 - start
+2023-08-12 19:30:33,508 - INFO - episode:49 - Time:1 - [Device-1] totally need process 984 bits data
+2023-08-12 19:30:33,508 - INFO - episode:49 - Time:1 - [Device-1] locally process 787.991757 bits data taking 0.387429 ms,1.307574 mj
+2023-08-12 19:30:33,508 - INFO - episode:49 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,508 - INFO - episode:49 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,508 - INFO - episode:49 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,508 - INFO - episode:49 - Time:1 - [Device-1] upload to [Server-1] take 0.048196 ms, and 0.048196 mj energy
+2023-08-12 19:30:33,508 - INFO - episode:49 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.968573 ms
+2023-08-12 19:30:33,508 - INFO - episode:49 - Time:1 - [Device-1] total processing consume 1.016769 ms, 1.355769 mj
+2023-08-12 19:30:33,508 - INFO - if process on device completely it will need 0.484287 ms, 1.634467 mj
+2023-08-12 19:30:33,508 - WARNING - device[1] time error:0.484287 < 1.016769
+2023-08-12 19:30:33,508 - INFO - episode:49 - Time:1- [Device-1] request task {1107} bits
+2023-08-12 19:30:33,508 - INFO - episode:49 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,508 - INFO - episode:50 - start
+2023-08-12 19:30:33,522 - INFO - episode:50 - Time:1 - [Device-1] totally need process 1043 bits data
+2023-08-12 19:30:33,522 - INFO - episode:50 - Time:1 - [Device-1] locally process 834.971429 bits data taking 0.410528 ms,1.385531 mj
+2023-08-12 19:30:33,522 - INFO - episode:50 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,522 - INFO - episode:50 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,522 - INFO - episode:50 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,522 - INFO - episode:50 - Time:1 - [Device-1] upload to [Server-1] take 0.051069 ms, and 0.051069 mj energy
+2023-08-12 19:30:33,522 - INFO - episode:50 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.026319 ms
+2023-08-12 19:30:33,522 - INFO - episode:50 - Time:1 - [Device-1] total processing consume 1.077388 ms, 1.436600 mj
+2023-08-12 19:30:33,522 - INFO - if process on device completely it will need 0.513160 ms, 1.731913 mj
+2023-08-12 19:30:33,522 - WARNING - device[1] time error:0.513160 < 1.077388
+2023-08-12 19:30:33,522 - INFO - episode:50 - Time:1- [Device-1] request task {935} bits
+2023-08-12 19:30:33,522 - INFO - episode:50 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,522 - INFO - episode:51 - start
+2023-08-12 19:30:33,522 - INFO - episode:51 - Time:1 - [Device-1] totally need process 996 bits data
+2023-08-12 19:30:33,522 - INFO - episode:51 - Time:1 - [Device-1] locally process 796.810362 bits data taking 0.391765 ms,1.322207 mj
+2023-08-12 19:30:33,523 - INFO - episode:51 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,523 - INFO - episode:51 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,523 - INFO - episode:51 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,523 - INFO - episode:51 - Time:1 - [Device-1] upload to [Server-1] take 0.048735 ms, and 0.048735 mj energy
+2023-08-12 19:30:33,523 - INFO - episode:51 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.979413 ms
+2023-08-12 19:30:33,523 - INFO - episode:51 - Time:1 - [Device-1] total processing consume 1.028148 ms, 1.370942 mj
+2023-08-12 19:30:33,523 - INFO - if process on device completely it will need 0.489706 ms, 1.652759 mj
+2023-08-12 19:30:33,523 - WARNING - device[1] time error:0.489706 < 1.028148
+2023-08-12 19:30:33,523 - INFO - episode:51 - Time:1- [Device-1] request task {1028} bits
+2023-08-12 19:30:33,523 - INFO - episode:51 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,523 - INFO - episode:52 - start
+2023-08-12 19:30:33,523 - INFO - episode:52 - Time:1 - [Device-1] totally need process 1061 bits data
+2023-08-12 19:30:33,523 - INFO - episode:52 - Time:1 - [Device-1] locally process 849.338842 bits data taking 0.417592 ms,1.409372 mj
+2023-08-12 19:30:33,523 - INFO - episode:52 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,523 - INFO - episode:52 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,523 - INFO - episode:52 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,523 - INFO - episode:52 - Time:1 - [Device-1] upload to [Server-1] take 0.051948 ms, and 0.051948 mj energy
+2023-08-12 19:30:33,523 - INFO - episode:52 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.043979 ms
+2023-08-12 19:30:33,523 - INFO - episode:52 - Time:1 - [Device-1] total processing consume 1.095927 ms, 1.461319 mj
+2023-08-12 19:30:33,523 - INFO - if process on device completely it will need 0.521989 ms, 1.761715 mj
+2023-08-12 19:30:33,524 - WARNING - device[1] time error:0.521989 < 1.095927
+2023-08-12 19:30:33,524 - INFO - episode:52 - Time:1- [Device-1] request task {1007} bits
+2023-08-12 19:30:33,524 - INFO - episode:52 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,524 - INFO - episode:53 - start
+2023-08-12 19:30:33,524 - INFO - episode:53 - Time:1 - [Device-1] totally need process 973 bits data
+2023-08-12 19:30:33,524 - INFO - episode:53 - Time:1 - [Device-1] locally process 778.776714 bits data taking 0.382899 ms,1.292283 mj
+2023-08-12 19:30:33,524 - INFO - episode:53 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,524 - INFO - episode:53 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,524 - INFO - episode:53 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,524 - INFO - episode:53 - Time:1 - [Device-1] upload to [Server-1] take 0.047632 ms, and 0.047632 mj energy
+2023-08-12 19:30:33,524 - INFO - episode:53 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.957246 ms
+2023-08-12 19:30:33,524 - INFO - episode:53 - Time:1 - [Device-1] total processing consume 1.004878 ms, 1.339915 mj
+2023-08-12 19:30:33,524 - INFO - if process on device completely it will need 0.478623 ms, 1.615353 mj
+2023-08-12 19:30:33,524 - WARNING - device[1] time error:0.478623 < 1.004878
+2023-08-12 19:30:33,537 - INFO - episode:53 - Time:1- [Device-1] request task {963} bits
+2023-08-12 19:30:33,537 - INFO - episode:53 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,537 - INFO - episode:54 - start
+2023-08-12 19:30:33,537 - INFO - episode:54 - Time:1 - [Device-1] totally need process 1032 bits data
+2023-08-12 19:30:33,537 - INFO - episode:54 - Time:1 - [Device-1] locally process 825.802479 bits data taking 0.406020 ms,1.370316 mj
+2023-08-12 19:30:33,537 - INFO - episode:54 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,537 - INFO - episode:54 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,537 - INFO - episode:54 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,537 - INFO - episode:54 - Time:1 - [Device-1] upload to [Server-1] take 0.050508 ms, and 0.050508 mj energy
+2023-08-12 19:30:33,537 - INFO - episode:54 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.015049 ms
+2023-08-12 19:30:33,537 - INFO - episode:54 - Time:1 - [Device-1] total processing consume 1.065557 ms, 1.420824 mj
+2023-08-12 19:30:33,537 - INFO - if process on device completely it will need 0.507524 ms, 1.712895 mj
+2023-08-12 19:30:33,537 - WARNING - device[1] time error:0.507524 < 1.065557
+2023-08-12 19:30:33,538 - INFO - episode:54 - Time:1- [Device-1] request task {1015} bits
+2023-08-12 19:30:33,538 - INFO - episode:54 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,538 - INFO - episode:55 - start
+2023-08-12 19:30:33,538 - INFO - episode:55 - Time:1 - [Device-1] totally need process 974 bits data
+2023-08-12 19:30:33,538 - INFO - episode:55 - Time:1 - [Device-1] locally process 779.334083 bits data taking 0.383173 ms,1.293207 mj
+2023-08-12 19:30:33,538 - INFO - episode:55 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,538 - INFO - episode:55 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,538 - INFO - episode:55 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,538 - INFO - episode:55 - Time:1 - [Device-1] upload to [Server-1] take 0.047666 ms, and 0.047666 mj energy
+2023-08-12 19:30:33,538 - INFO - episode:55 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.957931 ms
+2023-08-12 19:30:33,538 - INFO - episode:55 - Time:1 - [Device-1] total processing consume 1.005598 ms, 1.340874 mj
+2023-08-12 19:30:33,538 - INFO - if process on device completely it will need 0.478966 ms, 1.616509 mj
+2023-08-12 19:30:33,538 - WARNING - device[1] time error:0.478966 < 1.005598
+2023-08-12 19:30:33,538 - INFO - episode:55 - Time:1- [Device-1] request task {990} bits
+2023-08-12 19:30:33,538 - INFO - episode:55 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,538 - INFO - episode:56 - start
+2023-08-12 19:30:33,538 - INFO - episode:56 - Time:1 - [Device-1] totally need process 979 bits data
+2023-08-12 19:30:33,538 - INFO - episode:56 - Time:1 - [Device-1] locally process 783.352079 bits data taking 0.385148 ms,1.299875 mj
+2023-08-12 19:30:33,538 - INFO - episode:56 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,538 - INFO - episode:56 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,539 - INFO - episode:56 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,539 - INFO - episode:56 - Time:1 - [Device-1] upload to [Server-1] take 0.047912 ms, and 0.047912 mj energy
+2023-08-12 19:30:33,539 - INFO - episode:56 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.962870 ms
+2023-08-12 19:30:33,539 - INFO - episode:56 - Time:1 - [Device-1] total processing consume 1.010782 ms, 1.347787 mj
+2023-08-12 19:30:33,539 - INFO - if process on device completely it will need 0.481435 ms, 1.624844 mj
+2023-08-12 19:30:33,539 - WARNING - device[1] time error:0.481435 < 1.010782
+2023-08-12 19:30:33,539 - INFO - episode:56 - Time:1- [Device-1] request task {1036} bits
+2023-08-12 19:30:33,539 - INFO - episode:56 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,539 - INFO - episode:57 - start
+2023-08-12 19:30:33,539 - INFO - episode:57 - Time:1 - [Device-1] totally need process 965 bits data
+2023-08-12 19:30:33,539 - INFO - episode:57 - Time:1 - [Device-1] locally process 772.401573 bits data taking 0.379764 ms,1.281704 mj
+2023-08-12 19:30:33,539 - INFO - episode:57 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,539 - INFO - episode:57 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,539 - INFO - episode:57 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,539 - INFO - episode:57 - Time:1 - [Device-1] upload to [Server-1] take 0.047242 ms, and 0.047242 mj energy
+2023-08-12 19:30:33,539 - INFO - episode:57 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.949410 ms
+2023-08-12 19:30:33,539 - INFO - episode:57 - Time:1 - [Device-1] total processing consume 0.996652 ms, 1.328946 mj
+2023-08-12 19:30:33,552 - INFO - if process on device completely it will need 0.474705 ms, 1.602130 mj
+2023-08-12 19:30:33,552 - WARNING - device[1] time error:0.474705 < 0.996652
+2023-08-12 19:30:33,552 - INFO - episode:57 - Time:1- [Device-1] request task {1024} bits
+2023-08-12 19:30:33,552 - INFO - episode:57 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,552 - INFO - episode:58 - start
+2023-08-12 19:30:33,552 - INFO - episode:58 - Time:1 - [Device-1] totally need process 1042 bits data
+2023-08-12 19:30:33,552 - INFO - episode:58 - Time:1 - [Device-1] locally process 834.060758 bits data taking 0.410080 ms,1.384020 mj
+2023-08-12 19:30:33,552 - INFO - episode:58 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,552 - INFO - episode:58 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,552 - INFO - episode:58 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,552 - INFO - episode:58 - Time:1 - [Device-1] upload to [Server-1] take 0.051013 ms, and 0.051013 mj energy
+2023-08-12 19:30:33,552 - INFO - episode:58 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.025200 ms
+2023-08-12 19:30:33,552 - INFO - episode:58 - Time:1 - [Device-1] total processing consume 1.076213 ms, 1.435033 mj
+2023-08-12 19:30:33,552 - INFO - if process on device completely it will need 0.512600 ms, 1.730024 mj
+2023-08-12 19:30:33,552 - WARNING - device[1] time error:0.512600 < 1.076213
+2023-08-12 19:30:33,553 - INFO - episode:58 - Time:1- [Device-1] request task {1024} bits
+2023-08-12 19:30:33,553 - INFO - episode:58 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,553 - INFO - episode:59 - start
+2023-08-12 19:30:33,553 - INFO - episode:59 - Time:1 - [Device-1] totally need process 958 bits data
+2023-08-12 19:30:33,553 - INFO - episode:59 - Time:1 - [Device-1] locally process 766.630406 bits data taking 0.376927 ms,1.272127 mj
+2023-08-12 19:30:33,553 - INFO - episode:59 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,553 - INFO - episode:59 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,553 - INFO - episode:59 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,553 - INFO - episode:59 - Time:1 - [Device-1] upload to [Server-1] take 0.046889 ms, and 0.046889 mj energy
+2023-08-12 19:30:33,553 - INFO - episode:59 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.942317 ms
+2023-08-12 19:30:33,553 - INFO - episode:59 - Time:1 - [Device-1] total processing consume 0.989206 ms, 1.319016 mj
+2023-08-12 19:30:33,553 - INFO - if process on device completely it will need 0.471158 ms, 1.590159 mj
+2023-08-12 19:30:33,553 - WARNING - device[1] time error:0.471158 < 0.989206
+2023-08-12 19:30:33,553 - INFO - episode:59 - Time:1- [Device-1] request task {1067} bits
+2023-08-12 19:30:33,553 - INFO - episode:59 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,553 - INFO - episode:60 - start
+2023-08-12 19:30:33,553 - INFO - episode:60 - Time:1 - [Device-1] totally need process 966 bits data
+2023-08-12 19:30:33,553 - INFO - episode:60 - Time:1 - [Device-1] locally process 772.871493 bits data taking 0.379995 ms,1.282484 mj
+2023-08-12 19:30:33,553 - INFO - episode:60 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,554 - INFO - episode:60 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,554 - INFO - episode:60 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,554 - INFO - episode:60 - Time:1 - [Device-1] upload to [Server-1] take 0.047271 ms, and 0.047271 mj energy
+2023-08-12 19:30:33,554 - INFO - episode:60 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.949988 ms
+2023-08-12 19:30:33,554 - INFO - episode:60 - Time:1 - [Device-1] total processing consume 0.997259 ms, 1.329754 mj
+2023-08-12 19:30:33,554 - INFO - if process on device completely it will need 0.474994 ms, 1.603105 mj
+2023-08-12 19:30:33,554 - WARNING - device[1] time error:0.474994 < 0.997259
+2023-08-12 19:30:33,554 - INFO - episode:60 - Time:1- [Device-1] request task {1021} bits
+2023-08-12 19:30:33,554 - INFO - episode:60 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,554 - INFO - episode:61 - start
+2023-08-12 19:30:33,554 - INFO - episode:61 - Time:1 - [Device-1] totally need process 962 bits data
+2023-08-12 19:30:33,554 - INFO - episode:61 - Time:1 - [Device-1] locally process 769.866608 bits data taking 0.378518 ms,1.277497 mj
+2023-08-12 19:30:33,554 - INFO - episode:61 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,554 - INFO - episode:61 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,554 - INFO - episode:61 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,554 - INFO - episode:61 - Time:1 - [Device-1] upload to [Server-1] take 0.047087 ms, and 0.047087 mj energy
+2023-08-12 19:30:33,567 - INFO - episode:61 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.946294 ms
+2023-08-12 19:30:33,567 - INFO - episode:61 - Time:1 - [Device-1] total processing consume 0.993381 ms, 1.324584 mj
+2023-08-12 19:30:33,567 - INFO - if process on device completely it will need 0.473147 ms, 1.596872 mj
+2023-08-12 19:30:33,567 - WARNING - device[1] time error:0.473147 < 0.993381
+2023-08-12 19:30:33,567 - INFO - episode:61 - Time:1- [Device-1] request task {912} bits
+2023-08-12 19:30:33,567 - INFO - episode:61 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,567 - INFO - episode:62 - start
+2023-08-12 19:30:33,567 - INFO - episode:62 - Time:1 - [Device-1] totally need process 1011 bits data
+2023-08-12 19:30:33,567 - INFO - episode:62 - Time:1 - [Device-1] locally process 809.030011 bits data taking 0.397773 ms,1.342484 mj
+2023-08-12 19:30:33,567 - INFO - episode:62 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,567 - INFO - episode:62 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,567 - INFO - episode:62 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,567 - INFO - episode:62 - Time:1 - [Device-1] upload to [Server-1] take 0.049482 ms, and 0.049482 mj energy
+2023-08-12 19:30:33,567 - INFO - episode:62 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.994433 ms
+2023-08-12 19:30:33,568 - INFO - episode:62 - Time:1 - [Device-1] total processing consume 1.043915 ms, 1.391967 mj
+2023-08-12 19:30:33,568 - INFO - if process on device completely it will need 0.497216 ms, 1.678105 mj
+2023-08-12 19:30:33,568 - WARNING - device[1] time error:0.497216 < 1.043915
+2023-08-12 19:30:33,568 - INFO - episode:62 - Time:1- [Device-1] request task {1014} bits
+2023-08-12 19:30:33,568 - INFO - episode:62 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,568 - INFO - episode:63 - start
+2023-08-12 19:30:33,568 - INFO - episode:63 - Time:1 - [Device-1] totally need process 996 bits data
+2023-08-12 19:30:33,568 - INFO - episode:63 - Time:1 - [Device-1] locally process 796.902362 bits data taking 0.391810 ms,1.322360 mj
+2023-08-12 19:30:33,568 - INFO - episode:63 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,568 - INFO - episode:63 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,568 - INFO - episode:63 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,568 - INFO - episode:63 - Time:1 - [Device-1] upload to [Server-1] take 0.048741 ms, and 0.048741 mj energy
+2023-08-12 19:30:33,568 - INFO - episode:63 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.979526 ms
+2023-08-12 19:30:33,568 - INFO - episode:63 - Time:1 - [Device-1] total processing consume 1.028266 ms, 1.371101 mj
+2023-08-12 19:30:33,568 - INFO - if process on device completely it will need 0.489763 ms, 1.652950 mj
+2023-08-12 19:30:33,568 - WARNING - device[1] time error:0.489763 < 1.028266
+2023-08-12 19:30:33,568 - INFO - episode:63 - Time:1- [Device-1] request task {1013} bits
+2023-08-12 19:30:33,568 - INFO - episode:63 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,569 - INFO - episode:64 - start
+2023-08-12 19:30:33,569 - INFO - episode:64 - Time:1 - [Device-1] totally need process 967 bits data
+2023-08-12 19:30:33,569 - INFO - episode:64 - Time:1 - [Device-1] locally process 774.063564 bits data taking 0.380581 ms,1.284462 mj
+2023-08-12 19:30:33,569 - INFO - episode:64 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,569 - INFO - episode:64 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,569 - INFO - episode:64 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,569 - INFO - episode:64 - Time:1 - [Device-1] upload to [Server-1] take 0.047344 ms, and 0.047344 mj energy
+2023-08-12 19:30:33,569 - INFO - episode:64 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.951453 ms
+2023-08-12 19:30:33,569 - INFO - episode:64 - Time:1 - [Device-1] total processing consume 0.998797 ms, 1.331805 mj
+2023-08-12 19:30:33,569 - INFO - if process on device completely it will need 0.475727 ms, 1.605577 mj
+2023-08-12 19:30:33,569 - WARNING - device[1] time error:0.475727 < 0.998797
+2023-08-12 19:30:33,569 - INFO - episode:64 - Time:1- [Device-1] request task {963} bits
+2023-08-12 19:30:33,569 - INFO - episode:64 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,569 - INFO - episode:65 - start
+2023-08-12 19:30:33,569 - INFO - episode:65 - Time:1 - [Device-1] totally need process 991 bits data
+2023-08-12 19:30:33,569 - INFO - episode:65 - Time:1 - [Device-1] locally process 793.276396 bits data taking 0.390028 ms,1.316343 mj
+2023-08-12 19:30:33,569 - INFO - episode:65 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,569 - INFO - episode:65 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,583 - INFO - episode:65 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,583 - INFO - episode:65 - Time:1 - [Device-1] upload to [Server-1] take 0.048519 ms, and 0.048519 mj energy
+2023-08-12 19:30:33,583 - INFO - episode:65 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.975069 ms
+2023-08-12 19:30:33,583 - INFO - episode:65 - Time:1 - [Device-1] total processing consume 1.023588 ms, 1.364862 mj
+2023-08-12 19:30:33,583 - INFO - if process on device completely it will need 0.487534 ms, 1.645429 mj
+2023-08-12 19:30:33,583 - WARNING - device[1] time error:0.487534 < 1.023588
+2023-08-12 19:30:33,583 - INFO - episode:65 - Time:1- [Device-1] request task {1095} bits
+2023-08-12 19:30:33,583 - INFO - episode:65 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,583 - INFO - episode:66 - start
+2023-08-12 19:30:33,583 - INFO - episode:66 - Time:1 - [Device-1] totally need process 1040 bits data
+2023-08-12 19:30:33,583 - INFO - episode:66 - Time:1 - [Device-1] locally process 832.592582 bits data taking 0.409358 ms,1.381583 mj
+2023-08-12 19:30:33,583 - INFO - episode:66 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,583 - INFO - episode:66 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,583 - INFO - episode:66 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,583 - INFO - episode:66 - Time:1 - [Device-1] upload to [Server-1] take 0.050924 ms, and 0.050924 mj energy
+2023-08-12 19:30:33,584 - INFO - episode:66 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.023395 ms
+2023-08-12 19:30:33,584 - INFO - episode:66 - Time:1 - [Device-1] total processing consume 1.074319 ms, 1.432507 mj
+2023-08-12 19:30:33,584 - INFO - if process on device completely it will need 0.511698 ms, 1.726979 mj
+2023-08-12 19:30:33,584 - WARNING - device[1] time error:0.511698 < 1.074319
+2023-08-12 19:30:33,584 - INFO - episode:66 - Time:1- [Device-1] request task {974} bits
+2023-08-12 19:30:33,584 - INFO - episode:66 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,584 - INFO - episode:67 - start
+2023-08-12 19:30:33,584 - INFO - episode:67 - Time:1 - [Device-1] totally need process 1027 bits data
+2023-08-12 19:30:33,584 - INFO - episode:67 - Time:1 - [Device-1] locally process 822.348528 bits data taking 0.404321 ms,1.364585 mj
+2023-08-12 19:30:33,584 - INFO - episode:67 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,584 - INFO - episode:67 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,584 - INFO - episode:67 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,584 - INFO - episode:67 - Time:1 - [Device-1] upload to [Server-1] take 0.050297 ms, and 0.050297 mj energy
+2023-08-12 19:30:33,584 - INFO - episode:67 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.010803 ms
+2023-08-12 19:30:33,584 - INFO - episode:67 - Time:1 - [Device-1] total processing consume 1.061100 ms, 1.414882 mj
+2023-08-12 19:30:33,584 - INFO - if process on device completely it will need 0.505402 ms, 1.705731 mj
+2023-08-12 19:30:33,584 - WARNING - device[1] time error:0.505402 < 1.061100
+2023-08-12 19:30:33,584 - INFO - episode:67 - Time:1- [Device-1] request task {976} bits
+2023-08-12 19:30:33,584 - INFO - episode:67 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,585 - INFO - episode:68 - start
+2023-08-12 19:30:33,585 - INFO - episode:68 - Time:1 - [Device-1] totally need process 977 bits data
+2023-08-12 19:30:33,585 - INFO - episode:68 - Time:1 - [Device-1] locally process 781.709569 bits data taking 0.384341 ms,1.297149 mj
+2023-08-12 19:30:33,585 - INFO - episode:68 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,585 - INFO - episode:68 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,585 - INFO - episode:68 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,585 - INFO - episode:68 - Time:1 - [Device-1] upload to [Server-1] take 0.047811 ms, and 0.047811 mj energy
+2023-08-12 19:30:33,585 - INFO - episode:68 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.960851 ms
+2023-08-12 19:30:33,585 - INFO - episode:68 - Time:1 - [Device-1] total processing consume 1.008663 ms, 1.344961 mj
+2023-08-12 19:30:33,585 - INFO - if process on device completely it will need 0.480426 ms, 1.621437 mj
+2023-08-12 19:30:33,585 - WARNING - device[1] time error:0.480426 < 1.008663
+2023-08-12 19:30:33,585 - INFO - episode:68 - Time:1- [Device-1] request task {1042} bits
+2023-08-12 19:30:33,585 - INFO - episode:68 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,585 - INFO - episode:69 - start
+2023-08-12 19:30:33,585 - INFO - episode:69 - Time:1 - [Device-1] totally need process 973 bits data
+2023-08-12 19:30:33,585 - INFO - episode:69 - Time:1 - [Device-1] locally process 778.989414 bits data taking 0.383003 ms,1.292636 mj
+2023-08-12 19:30:33,598 - INFO - episode:69 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,598 - INFO - episode:69 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,598 - INFO - episode:69 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,598 - INFO - episode:69 - Time:1 - [Device-1] upload to [Server-1] take 0.047645 ms, and 0.047645 mj energy
+2023-08-12 19:30:33,598 - INFO - episode:69 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.957508 ms
+2023-08-12 19:30:33,598 - INFO - episode:69 - Time:1 - [Device-1] total processing consume 1.005153 ms, 1.340281 mj
+2023-08-12 19:30:33,598 - INFO - if process on device completely it will need 0.478754 ms, 1.615794 mj
+2023-08-12 19:30:33,598 - WARNING - device[1] time error:0.478754 < 1.005153
+2023-08-12 19:30:33,598 - INFO - episode:69 - Time:1- [Device-1] request task {916} bits
+2023-08-12 19:30:33,598 - INFO - episode:69 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,598 - INFO - episode:70 - start
+2023-08-12 19:30:33,598 - INFO - episode:70 - Time:1 - [Device-1] totally need process 954 bits data
+2023-08-12 19:30:33,598 - INFO - episode:70 - Time:1 - [Device-1] locally process 763.740212 bits data taking 0.375506 ms,1.267331 mj
+2023-08-12 19:30:33,598 - INFO - episode:70 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,599 - INFO - episode:70 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,599 - INFO - episode:70 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,599 - INFO - episode:70 - Time:1 - [Device-1] upload to [Server-1] take 0.046712 ms, and 0.046712 mj energy
+2023-08-12 19:30:33,599 - INFO - episode:70 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.938764 ms
+2023-08-12 19:30:33,599 - INFO - episode:70 - Time:1 - [Device-1] total processing consume 0.985476 ms, 1.314044 mj
+2023-08-12 19:30:33,599 - INFO - if process on device completely it will need 0.469382 ms, 1.584164 mj
+2023-08-12 19:30:33,599 - WARNING - device[1] time error:0.469382 < 0.985476
+2023-08-12 19:30:33,599 - INFO - episode:70 - Time:1- [Device-1] request task {1004} bits
+2023-08-12 19:30:33,599 - INFO - episode:70 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,599 - INFO - episode:71 - start
+2023-08-12 19:30:33,599 - INFO - episode:71 - Time:1 - [Device-1] totally need process 1006 bits data
+2023-08-12 19:30:33,599 - INFO - episode:71 - Time:1 - [Device-1] locally process 805.120313 bits data taking 0.395851 ms,1.335997 mj
+2023-08-12 19:30:33,599 - INFO - episode:71 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,599 - INFO - episode:71 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,599 - INFO - episode:71 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,599 - INFO - episode:71 - Time:1 - [Device-1] upload to [Server-1] take 0.049243 ms, and 0.049243 mj energy
+2023-08-12 19:30:33,599 - INFO - episode:71 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.989627 ms
+2023-08-12 19:30:33,599 - INFO - episode:71 - Time:1 - [Device-1] total processing consume 1.038870 ms, 1.385240 mj
+2023-08-12 19:30:33,599 - INFO - if process on device completely it will need 0.494814 ms, 1.669996 mj
+2023-08-12 19:30:33,599 - WARNING - device[1] time error:0.494814 < 1.038870
+2023-08-12 19:30:33,600 - INFO - episode:71 - Time:1- [Device-1] request task {1062} bits
+2023-08-12 19:30:33,600 - INFO - episode:71 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,600 - INFO - episode:72 - start
+2023-08-12 19:30:33,600 - INFO - episode:72 - Time:1 - [Device-1] totally need process 964 bits data
+2023-08-12 19:30:33,600 - INFO - episode:72 - Time:1 - [Device-1] locally process 771.358968 bits data taking 0.379251 ms,1.279974 mj
+2023-08-12 19:30:33,600 - INFO - episode:72 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,600 - INFO - episode:72 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,600 - INFO - episode:72 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,600 - INFO - episode:72 - Time:1 - [Device-1] upload to [Server-1] take 0.047178 ms, and 0.047178 mj energy
+2023-08-12 19:30:33,600 - INFO - episode:72 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.948129 ms
+2023-08-12 19:30:33,600 - INFO - episode:72 - Time:1 - [Device-1] total processing consume 0.995307 ms, 1.327152 mj
+2023-08-12 19:30:33,600 - INFO - if process on device completely it will need 0.474064 ms, 1.599967 mj
+2023-08-12 19:30:33,600 - WARNING - device[1] time error:0.474064 < 0.995307
+2023-08-12 19:30:33,600 - INFO - episode:72 - Time:1- [Device-1] request task {1036} bits
+2023-08-12 19:30:33,600 - INFO - episode:72 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,600 - INFO - episode:73 - start
+2023-08-12 19:30:33,614 - INFO - episode:73 - Time:1 - [Device-1] totally need process 1021 bits data
+2023-08-12 19:30:33,614 - INFO - episode:73 - Time:1 - [Device-1] locally process 817.038670 bits data taking 0.401711 ms,1.355774 mj
+2023-08-12 19:30:33,614 - INFO - episode:73 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,614 - INFO - episode:73 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,614 - INFO - episode:73 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,614 - INFO - episode:73 - Time:1 - [Device-1] upload to [Server-1] take 0.049972 ms, and 0.049972 mj energy
+2023-08-12 19:30:33,614 - INFO - episode:73 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.004277 ms
+2023-08-12 19:30:33,614 - INFO - episode:73 - Time:1 - [Device-1] total processing consume 1.054249 ms, 1.405746 mj
+2023-08-12 19:30:33,614 - INFO - if process on device completely it will need 0.502138 ms, 1.694717 mj
+2023-08-12 19:30:33,614 - WARNING - device[1] time error:0.502138 < 1.054249
+2023-08-12 19:30:33,614 - INFO - episode:73 - Time:1- [Device-1] request task {992} bits
+2023-08-12 19:30:33,614 - INFO - episode:73 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,614 - INFO - episode:74 - start
+2023-08-12 19:30:33,614 - INFO - episode:74 - Time:1 - [Device-1] totally need process 1041 bits data
+2023-08-12 19:30:33,615 - INFO - episode:74 - Time:1 - [Device-1] locally process 833.433756 bits data taking 0.409772 ms,1.382979 mj
+2023-08-12 19:30:33,615 - INFO - episode:74 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,615 - INFO - episode:74 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,615 - INFO - episode:74 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,615 - INFO - episode:74 - Time:1 - [Device-1] upload to [Server-1] take 0.050975 ms, and 0.050975 mj energy
+2023-08-12 19:30:33,615 - INFO - episode:74 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.024429 ms
+2023-08-12 19:30:33,615 - INFO - episode:74 - Time:1 - [Device-1] total processing consume 1.075404 ms, 1.433954 mj
+2023-08-12 19:30:33,615 - INFO - if process on device completely it will need 0.512214 ms, 1.728724 mj
+2023-08-12 19:30:33,615 - WARNING - device[1] time error:0.512214 < 1.075404
+2023-08-12 19:30:33,615 - INFO - episode:74 - Time:1- [Device-1] request task {1024} bits
+2023-08-12 19:30:33,615 - INFO - episode:74 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,615 - INFO - episode:75 - start
+2023-08-12 19:30:33,615 - INFO - episode:75 - Time:1 - [Device-1] totally need process 956 bits data
+2023-08-12 19:30:33,615 - INFO - episode:75 - Time:1 - [Device-1] locally process 765.507661 bits data taking 0.376375 ms,1.270264 mj
+2023-08-12 19:30:33,615 - INFO - episode:75 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,615 - INFO - episode:75 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,615 - INFO - episode:75 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,615 - INFO - episode:75 - Time:1 - [Device-1] upload to [Server-1] take 0.046820 ms, and 0.046820 mj energy
+2023-08-12 19:30:33,615 - INFO - episode:75 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.940936 ms
+2023-08-12 19:30:33,615 - INFO - episode:75 - Time:1 - [Device-1] total processing consume 0.987757 ms, 1.317085 mj
+2023-08-12 19:30:33,616 - INFO - if process on device completely it will need 0.470468 ms, 1.587830 mj
+2023-08-12 19:30:33,616 - WARNING - device[1] time error:0.470468 < 0.987757
+2023-08-12 19:30:33,616 - INFO - episode:75 - Time:1- [Device-1] request task {1053} bits
+2023-08-12 19:30:33,616 - INFO - episode:75 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,616 - INFO - episode:76 - start
+2023-08-12 19:30:33,616 - INFO - episode:76 - Time:1 - [Device-1] totally need process 938 bits data
+2023-08-12 19:30:33,616 - INFO - episode:76 - Time:1 - [Device-1] locally process 751.163923 bits data taking 0.369322 ms,1.246463 mj
+2023-08-12 19:30:33,616 - INFO - episode:76 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,616 - INFO - episode:76 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,616 - INFO - episode:76 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,616 - INFO - episode:76 - Time:1 - [Device-1] upload to [Server-1] take 0.045943 ms, and 0.045943 mj energy
+2023-08-12 19:30:33,616 - INFO - episode:76 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.923306 ms
+2023-08-12 19:30:33,616 - INFO - episode:76 - Time:1 - [Device-1] total processing consume 0.969249 ms, 1.292406 mj
+2023-08-12 19:30:33,616 - INFO - if process on device completely it will need 0.461653 ms, 1.558078 mj
+2023-08-12 19:30:33,616 - WARNING - device[1] time error:0.461653 < 0.969249
+2023-08-12 19:30:33,629 - INFO - episode:76 - Time:1- [Device-1] request task {1002} bits
+2023-08-12 19:30:33,629 - INFO - episode:76 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,629 - INFO - episode:77 - start
+2023-08-12 19:30:33,629 - INFO - episode:77 - Time:1 - [Device-1] totally need process 1000 bits data
+2023-08-12 19:30:33,629 - INFO - episode:77 - Time:1 - [Device-1] locally process 800.097766 bits data taking 0.393381 ms,1.327662 mj
+2023-08-12 19:30:33,629 - INFO - episode:77 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,629 - INFO - episode:77 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,629 - INFO - episode:77 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,629 - INFO - episode:77 - Time:1 - [Device-1] upload to [Server-1] take 0.048936 ms, and 0.048936 mj energy
+2023-08-12 19:30:33,629 - INFO - episode:77 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.983454 ms
+2023-08-12 19:30:33,629 - INFO - episode:77 - Time:1 - [Device-1] total processing consume 1.032390 ms, 1.376598 mj
+2023-08-12 19:30:33,629 - INFO - if process on device completely it will need 0.491727 ms, 1.659578 mj
+2023-08-12 19:30:33,629 - WARNING - device[1] time error:0.491727 < 1.032390
+2023-08-12 19:30:33,629 - INFO - episode:77 - Time:1- [Device-1] request task {1021} bits
+2023-08-12 19:30:33,629 - INFO - episode:77 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,630 - INFO - episode:78 - start
+2023-08-12 19:30:33,630 - INFO - episode:78 - Time:1 - [Device-1] totally need process 963 bits data
+2023-08-12 19:30:33,630 - INFO - episode:78 - Time:1 - [Device-1] locally process 770.982661 bits data taking 0.379066 ms,1.279349 mj
+2023-08-12 19:30:33,630 - INFO - episode:78 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,630 - INFO - episode:78 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,630 - INFO - episode:78 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,630 - INFO - episode:78 - Time:1 - [Device-1] upload to [Server-1] take 0.047155 ms, and 0.047155 mj energy
+2023-08-12 19:30:33,630 - INFO - episode:78 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.947666 ms
+2023-08-12 19:30:33,630 - INFO - episode:78 - Time:1 - [Device-1] total processing consume 0.994822 ms, 1.326505 mj
+2023-08-12 19:30:33,630 - INFO - if process on device completely it will need 0.473833 ms, 1.599187 mj
+2023-08-12 19:30:33,630 - WARNING - device[1] time error:0.473833 < 0.994822
+2023-08-12 19:30:33,630 - INFO - episode:78 - Time:1- [Device-1] request task {998} bits
+2023-08-12 19:30:33,630 - INFO - episode:78 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,630 - INFO - episode:79 - start
+2023-08-12 19:30:33,630 - INFO - episode:79 - Time:1 - [Device-1] totally need process 992 bits data
+2023-08-12 19:30:33,630 - INFO - episode:79 - Time:1 - [Device-1] locally process 794.375199 bits data taking 0.390568 ms,1.318166 mj
+2023-08-12 19:30:33,630 - INFO - episode:79 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,630 - INFO - episode:79 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,630 - INFO - episode:79 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,630 - INFO - episode:79 - Time:1 - [Device-1] upload to [Server-1] take 0.048586 ms, and 0.048586 mj energy
+2023-08-12 19:30:33,631 - INFO - episode:79 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.976420 ms
+2023-08-12 19:30:33,631 - INFO - episode:79 - Time:1 - [Device-1] total processing consume 1.025006 ms, 1.366752 mj
+2023-08-12 19:30:33,631 - INFO - if process on device completely it will need 0.488210 ms, 1.647708 mj
+2023-08-12 19:30:33,631 - WARNING - device[1] time error:0.488210 < 1.025006
+2023-08-12 19:30:33,631 - INFO - episode:79 - Time:1- [Device-1] request task {1049} bits
+2023-08-12 19:30:33,631 - INFO - episode:79 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,631 - INFO - episode:80 - start
+2023-08-12 19:30:33,631 - INFO - episode:80 - Time:1 - [Device-1] totally need process 960 bits data
+2023-08-12 19:30:33,631 - INFO - episode:80 - Time:1 - [Device-1] locally process 768.163412 bits data taking 0.377680 ms,1.274671 mj
+2023-08-12 19:30:33,631 - INFO - episode:80 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,631 - INFO - episode:80 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,631 - INFO - episode:80 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,631 - INFO - episode:80 - Time:1 - [Device-1] upload to [Server-1] take 0.046983 ms, and 0.046983 mj energy
+2023-08-12 19:30:33,631 - INFO - episode:80 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.944201 ms
+2023-08-12 19:30:33,631 - INFO - episode:80 - Time:1 - [Device-1] total processing consume 0.991184 ms, 1.321654 mj
+2023-08-12 19:30:33,645 - INFO - if process on device completely it will need 0.472100 ms, 1.593339 mj
+2023-08-12 19:30:33,645 - WARNING - device[1] time error:0.472100 < 0.991184
+2023-08-12 19:30:33,645 - INFO - episode:80 - Time:1- [Device-1] request task {1003} bits
+2023-08-12 19:30:33,645 - INFO - episode:80 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,645 - INFO - episode:81 - start
+2023-08-12 19:30:33,645 - INFO - episode:81 - Time:1 - [Device-1] totally need process 986 bits data
+2023-08-12 19:30:33,645 - INFO - episode:81 - Time:1 - [Device-1] locally process 789.550381 bits data taking 0.388196 ms,1.310160 mj
+2023-08-12 19:30:33,645 - INFO - episode:81 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,645 - INFO - episode:81 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,645 - INFO - episode:81 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,645 - INFO - episode:81 - Time:1 - [Device-1] upload to [Server-1] take 0.048291 ms, and 0.048291 mj energy
+2023-08-12 19:30:33,645 - INFO - episode:81 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.970489 ms
+2023-08-12 19:30:33,645 - INFO - episode:81 - Time:1 - [Device-1] total processing consume 1.018780 ms, 1.358451 mj
+2023-08-12 19:30:33,646 - INFO - if process on device completely it will need 0.485245 ms, 1.637700 mj
+2023-08-12 19:30:33,646 - WARNING - device[1] time error:0.485245 < 1.018780
+2023-08-12 19:30:33,646 - INFO - episode:81 - Time:1- [Device-1] request task {935} bits
+2023-08-12 19:30:33,646 - INFO - episode:81 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,646 - INFO - episode:82 - start
+2023-08-12 19:30:33,646 - INFO - episode:82 - Time:1 - [Device-1] totally need process 1133 bits data
+2023-08-12 19:30:33,646 - INFO - episode:82 - Time:1 - [Device-1] locally process 907.044499 bits data taking 0.445964 ms,1.505127 mj
+2023-08-12 19:30:33,646 - INFO - episode:82 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,646 - INFO - episode:82 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,646 - INFO - episode:82 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,646 - INFO - episode:82 - Time:1 - [Device-1] upload to [Server-1] take 0.055477 ms, and 0.055477 mj energy
+2023-08-12 19:30:33,646 - INFO - episode:82 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.114909 ms
+2023-08-12 19:30:33,646 - INFO - episode:82 - Time:1 - [Device-1] total processing consume 1.170386 ms, 1.560604 mj
+2023-08-12 19:30:33,646 - INFO - if process on device completely it will need 0.557454 ms, 1.881409 mj
+2023-08-12 19:30:33,646 - WARNING - device[1] time error:0.557454 < 1.170386
+2023-08-12 19:30:33,646 - INFO - episode:82 - Time:1- [Device-1] request task {996} bits
+2023-08-12 19:30:33,646 - INFO - episode:82 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,646 - INFO - episode:83 - start
+2023-08-12 19:30:33,646 - INFO - episode:83 - Time:1 - [Device-1] totally need process 925 bits data
+2023-08-12 19:30:33,646 - INFO - episode:83 - Time:1 - [Device-1] locally process 740.533677 bits data taking 0.364096 ms,1.228823 mj
+2023-08-12 19:30:33,647 - INFO - episode:83 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,647 - INFO - episode:83 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,647 - INFO - episode:83 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,647 - INFO - episode:83 - Time:1 - [Device-1] upload to [Server-1] take 0.045293 ms, and 0.045293 mj energy
+2023-08-12 19:30:33,647 - INFO - episode:83 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.910239 ms
+2023-08-12 19:30:33,647 - INFO - episode:83 - Time:1 - [Device-1] total processing consume 0.955532 ms, 1.274116 mj
+2023-08-12 19:30:33,647 - INFO - if process on device completely it will need 0.455120 ms, 1.536029 mj
+2023-08-12 19:30:33,647 - WARNING - device[1] time error:0.455120 < 0.955532
+2023-08-12 19:30:33,647 - INFO - episode:83 - Time:1- [Device-1] request task {1070} bits
+2023-08-12 19:30:33,647 - INFO - episode:83 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,647 - INFO - episode:84 - start
+2023-08-12 19:30:33,647 - INFO - episode:84 - Time:1 - [Device-1] totally need process 946 bits data
+2023-08-12 19:30:33,647 - INFO - episode:84 - Time:1 - [Device-1] locally process 757.176580 bits data taking 0.372278 ms,1.256440 mj
+2023-08-12 19:30:33,647 - INFO - episode:84 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,647 - INFO - episode:84 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,647 - INFO - episode:84 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,647 - INFO - episode:84 - Time:1 - [Device-1] upload to [Server-1] take 0.046311 ms, and 0.046311 mj energy
+2023-08-12 19:30:33,661 - INFO - episode:84 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.930696 ms
+2023-08-12 19:30:33,661 - INFO - episode:84 - Time:1 - [Device-1] total processing consume 0.977007 ms, 1.302751 mj
+2023-08-12 19:30:33,661 - INFO - if process on device completely it will need 0.465348 ms, 1.570550 mj
+2023-08-12 19:30:33,661 - WARNING - device[1] time error:0.465348 < 0.977007
+2023-08-12 19:30:33,661 - INFO - episode:84 - Time:1- [Device-1] request task {1018} bits
+2023-08-12 19:30:33,661 - INFO - episode:84 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,661 - INFO - episode:85 - start
+2023-08-12 19:30:33,661 - INFO - episode:85 - Time:1 - [Device-1] totally need process 1043 bits data
+2023-08-12 19:30:33,661 - INFO - episode:85 - Time:1 - [Device-1] locally process 834.513284 bits data taking 0.410302 ms,1.384770 mj
+2023-08-12 19:30:33,661 - INFO - episode:85 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,661 - INFO - episode:85 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,661 - INFO - episode:85 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,661 - INFO - episode:85 - Time:1 - [Device-1] upload to [Server-1] take 0.051041 ms, and 0.051041 mj energy
+2023-08-12 19:30:33,661 - INFO - episode:85 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.025756 ms
+2023-08-12 19:30:33,662 - INFO - episode:85 - Time:1 - [Device-1] total processing consume 1.076797 ms, 1.435812 mj
+2023-08-12 19:30:33,662 - INFO - if process on device completely it will need 0.512878 ms, 1.730963 mj
+2023-08-12 19:30:33,662 - WARNING - device[1] time error:0.512878 < 1.076797
+2023-08-12 19:30:33,662 - INFO - episode:85 - Time:1- [Device-1] request task {967} bits
+2023-08-12 19:30:33,662 - INFO - episode:85 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,662 - INFO - episode:86 - start
+2023-08-12 19:30:33,662 - INFO - episode:86 - Time:1 - [Device-1] totally need process 978 bits data
+2023-08-12 19:30:33,662 - INFO - episode:86 - Time:1 - [Device-1] locally process 782.764398 bits data taking 0.384859 ms,1.298900 mj
+2023-08-12 19:30:33,662 - INFO - episode:86 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,662 - INFO - episode:86 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,662 - INFO - episode:86 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,662 - INFO - episode:86 - Time:1 - [Device-1] upload to [Server-1] take 0.047876 ms, and 0.047876 mj energy
+2023-08-12 19:30:33,662 - INFO - episode:86 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.962148 ms
+2023-08-12 19:30:33,662 - INFO - episode:86 - Time:1 - [Device-1] total processing consume 1.010024 ms, 1.346776 mj
+2023-08-12 19:30:33,662 - INFO - if process on device completely it will need 0.481074 ms, 1.623625 mj
+2023-08-12 19:30:33,662 - WARNING - device[1] time error:0.481074 < 1.010024
+2023-08-12 19:30:33,662 - INFO - episode:86 - Time:1- [Device-1] request task {972} bits
+2023-08-12 19:30:33,662 - INFO - episode:86 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,662 - INFO - episode:87 - start
+2023-08-12 19:30:33,662 - INFO - episode:87 - Time:1 - [Device-1] totally need process 993 bits data
+2023-08-12 19:30:33,663 - INFO - episode:87 - Time:1 - [Device-1] locally process 794.825560 bits data taking 0.390789 ms,1.318914 mj
+2023-08-12 19:30:33,663 - INFO - episode:87 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,663 - INFO - episode:87 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,663 - INFO - episode:87 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,663 - INFO - episode:87 - Time:1 - [Device-1] upload to [Server-1] take 0.048614 ms, and 0.048614 mj energy
+2023-08-12 19:30:33,663 - INFO - episode:87 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.976973 ms
+2023-08-12 19:30:33,663 - INFO - episode:87 - Time:1 - [Device-1] total processing consume 1.025587 ms, 1.367527 mj
+2023-08-12 19:30:33,663 - INFO - if process on device completely it will need 0.488487 ms, 1.648642 mj
+2023-08-12 19:30:33,663 - WARNING - device[1] time error:0.488487 < 1.025587
+2023-08-12 19:30:33,663 - INFO - episode:87 - Time:1- [Device-1] request task {918} bits
+2023-08-12 19:30:33,663 - INFO - episode:87 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,663 - INFO - episode:88 - start
+2023-08-12 19:30:33,663 - INFO - episode:88 - Time:1 - [Device-1] totally need process 938 bits data
+2023-08-12 19:30:33,663 - INFO - episode:88 - Time:1 - [Device-1] locally process 750.574535 bits data taking 0.369032 ms,1.245485 mj
+2023-08-12 19:30:33,663 - INFO - episode:88 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,663 - INFO - episode:88 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,676 - INFO - episode:88 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,676 - INFO - episode:88 - Time:1 - [Device-1] upload to [Server-1] take 0.045907 ms, and 0.045907 mj energy
+2023-08-12 19:30:33,676 - INFO - episode:88 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.922581 ms
+2023-08-12 19:30:33,676 - INFO - episode:88 - Time:1 - [Device-1] total processing consume 0.968488 ms, 1.291392 mj
+2023-08-12 19:30:33,676 - INFO - if process on device completely it will need 0.461291 ms, 1.556856 mj
+2023-08-12 19:30:33,676 - WARNING - device[1] time error:0.461291 < 0.968488
+2023-08-12 19:30:33,676 - INFO - episode:88 - Time:1- [Device-1] request task {992} bits
+2023-08-12 19:30:33,676 - INFO - episode:88 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,676 - INFO - episode:89 - start
+2023-08-12 19:30:33,676 - INFO - episode:89 - Time:1 - [Device-1] totally need process 1051 bits data
+2023-08-12 19:30:33,676 - INFO - episode:89 - Time:1 - [Device-1] locally process 841.558085 bits data taking 0.413766 ms,1.396460 mj
+2023-08-12 19:30:33,676 - INFO - episode:89 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,676 - INFO - episode:89 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,676 - INFO - episode:89 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,676 - INFO - episode:89 - Time:1 - [Device-1] upload to [Server-1] take 0.051472 ms, and 0.051472 mj energy
+2023-08-12 19:30:33,676 - INFO - episode:89 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.034415 ms
+2023-08-12 19:30:33,677 - INFO - episode:89 - Time:1 - [Device-1] total processing consume 1.085887 ms, 1.447932 mj
+2023-08-12 19:30:33,677 - INFO - if process on device completely it will need 0.517208 ms, 1.745576 mj
+2023-08-12 19:30:33,677 - WARNING - device[1] time error:0.517208 < 1.085887
+2023-08-12 19:30:33,677 - INFO - episode:89 - Time:1- [Device-1] request task {1031} bits
+2023-08-12 19:30:33,677 - INFO - episode:89 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,677 - INFO - episode:90 - start
+2023-08-12 19:30:33,677 - INFO - episode:90 - Time:1 - [Device-1] totally need process 1086 bits data
+2023-08-12 19:30:33,677 - INFO - episode:90 - Time:1 - [Device-1] locally process 869.176697 bits data taking 0.427345 ms,1.442290 mj
+2023-08-12 19:30:33,677 - INFO - episode:90 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,677 - INFO - episode:90 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,677 - INFO - episode:90 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,677 - INFO - episode:90 - Time:1 - [Device-1] upload to [Server-1] take 0.053161 ms, and 0.053161 mj energy
+2023-08-12 19:30:33,677 - INFO - episode:90 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.068363 ms
+2023-08-12 19:30:33,677 - INFO - episode:90 - Time:1 - [Device-1] total processing consume 1.121524 ms, 1.495451 mj
+2023-08-12 19:30:33,677 - INFO - if process on device completely it will need 0.534182 ms, 1.802863 mj
+2023-08-12 19:30:33,677 - WARNING - device[1] time error:0.534182 < 1.121524
+2023-08-12 19:30:33,677 - INFO - episode:90 - Time:1- [Device-1] request task {1034} bits
+2023-08-12 19:30:33,677 - INFO - episode:90 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,677 - INFO - episode:91 - start
+2023-08-12 19:30:33,677 - INFO - episode:91 - Time:1 - [Device-1] totally need process 974 bits data
+2023-08-12 19:30:33,678 - INFO - episode:91 - Time:1 - [Device-1] locally process 779.554840 bits data taking 0.383281 ms,1.293574 mj
+2023-08-12 19:30:33,678 - INFO - episode:91 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,678 - INFO - episode:91 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,678 - INFO - episode:91 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,678 - INFO - episode:91 - Time:1 - [Device-1] upload to [Server-1] take 0.047680 ms, and 0.047680 mj energy
+2023-08-12 19:30:33,678 - INFO - episode:91 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.958203 ms
+2023-08-12 19:30:33,678 - INFO - episode:91 - Time:1 - [Device-1] total processing consume 1.005882 ms, 1.341253 mj
+2023-08-12 19:30:33,678 - INFO - if process on device completely it will need 0.479101 ms, 1.616967 mj
+2023-08-12 19:30:33,678 - WARNING - device[1] time error:0.479101 < 1.005882
+2023-08-12 19:30:33,678 - INFO - episode:91 - Time:1- [Device-1] request task {993} bits
+2023-08-12 19:30:33,678 - INFO - episode:91 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,678 - INFO - episode:92 - start
+2023-08-12 19:30:33,678 - INFO - episode:92 - Time:1 - [Device-1] totally need process 898 bits data
+2023-08-12 19:30:33,678 - INFO - episode:92 - Time:1 - [Device-1] locally process 718.784258 bits data taking 0.353402 ms,1.192733 mj
+2023-08-12 19:30:33,691 - INFO - episode:92 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,691 - INFO - episode:92 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,691 - INFO - episode:92 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,691 - INFO - episode:92 - Time:1 - [Device-1] upload to [Server-1] take 0.043963 ms, and 0.043963 mj energy
+2023-08-12 19:30:33,691 - INFO - episode:92 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.883506 ms
+2023-08-12 19:30:33,691 - INFO - episode:92 - Time:1 - [Device-1] total processing consume 0.927468 ms, 1.236695 mj
+2023-08-12 19:30:33,691 - INFO - if process on device completely it will need 0.441753 ms, 1.490916 mj
+2023-08-12 19:30:33,691 - WARNING - device[1] time error:0.441753 < 0.927468
+2023-08-12 19:30:33,691 - INFO - episode:92 - Time:1- [Device-1] request task {951} bits
+2023-08-12 19:30:33,691 - INFO - episode:92 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,691 - INFO - episode:93 - start
+2023-08-12 19:30:33,691 - INFO - episode:93 - Time:1 - [Device-1] totally need process 948 bits data
+2023-08-12 19:30:33,691 - INFO - episode:93 - Time:1 - [Device-1] locally process 759.185629 bits data taking 0.373266 ms,1.259774 mj
+2023-08-12 19:30:33,691 - INFO - episode:93 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,691 - INFO - episode:93 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,692 - INFO - episode:93 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,692 - INFO - episode:93 - Time:1 - [Device-1] upload to [Server-1] take 0.046434 ms, and 0.046434 mj energy
+2023-08-12 19:30:33,692 - INFO - episode:93 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.933166 ms
+2023-08-12 19:30:33,692 - INFO - episode:93 - Time:1 - [Device-1] total processing consume 0.979599 ms, 1.306207 mj
+2023-08-12 19:30:33,692 - INFO - if process on device completely it will need 0.466583 ms, 1.574717 mj
+2023-08-12 19:30:33,692 - WARNING - device[1] time error:0.466583 < 0.979599
+2023-08-12 19:30:33,692 - INFO - episode:93 - Time:1- [Device-1] request task {1013} bits
+2023-08-12 19:30:33,692 - INFO - episode:93 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,692 - INFO - episode:94 - start
+2023-08-12 19:30:33,692 - INFO - episode:94 - Time:1 - [Device-1] totally need process 1032 bits data
+2023-08-12 19:30:33,692 - INFO - episode:94 - Time:1 - [Device-1] locally process 825.913192 bits data taking 0.406074 ms,1.370500 mj
+2023-08-12 19:30:33,692 - INFO - episode:94 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,692 - INFO - episode:94 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,692 - INFO - episode:94 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,692 - INFO - episode:94 - Time:1 - [Device-1] upload to [Server-1] take 0.050515 ms, and 0.050515 mj energy
+2023-08-12 19:30:33,692 - INFO - episode:94 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.015185 ms
+2023-08-12 19:30:33,692 - INFO - episode:94 - Time:1 - [Device-1] total processing consume 1.065700 ms, 1.421015 mj
+2023-08-12 19:30:33,692 - INFO - if process on device completely it will need 0.507592 ms, 1.713125 mj
+2023-08-12 19:30:33,692 - WARNING - device[1] time error:0.507592 < 1.065700
+2023-08-12 19:30:33,693 - INFO - episode:94 - Time:1- [Device-1] request task {971} bits
+2023-08-12 19:30:33,693 - INFO - episode:94 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,693 - INFO - episode:95 - start
+2023-08-12 19:30:33,693 - INFO - episode:95 - Time:1 - [Device-1] totally need process 970 bits data
+2023-08-12 19:30:33,693 - INFO - episode:95 - Time:1 - [Device-1] locally process 776.459935 bits data taking 0.381759 ms,1.288438 mj
+2023-08-12 19:30:33,693 - INFO - episode:95 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,693 - INFO - episode:95 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,693 - INFO - episode:95 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,693 - INFO - episode:95 - Time:1 - [Device-1] upload to [Server-1] take 0.047490 ms, and 0.047490 mj energy
+2023-08-12 19:30:33,693 - INFO - episode:95 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.954399 ms
+2023-08-12 19:30:33,693 - INFO - episode:95 - Time:1 - [Device-1] total processing consume 1.001889 ms, 1.335929 mj
+2023-08-12 19:30:33,693 - INFO - if process on device completely it will need 0.477199 ms, 1.610548 mj
+2023-08-12 19:30:33,693 - WARNING - device[1] time error:0.477199 < 1.001889
+2023-08-12 19:30:33,693 - INFO - episode:95 - Time:1- [Device-1] request task {922} bits
+2023-08-12 19:30:33,693 - INFO - episode:95 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,693 - INFO - episode:96 - start
+2023-08-12 19:30:33,706 - INFO - episode:96 - Time:1 - [Device-1] totally need process 993 bits data
+2023-08-12 19:30:33,706 - INFO - episode:96 - Time:1 - [Device-1] locally process 794.889518 bits data taking 0.390821 ms,1.319020 mj
+2023-08-12 19:30:33,706 - INFO - episode:96 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,706 - INFO - episode:96 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,706 - INFO - episode:96 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,706 - INFO - episode:96 - Time:1 - [Device-1] upload to [Server-1] take 0.048618 ms, and 0.048618 mj energy
+2023-08-12 19:30:33,706 - INFO - episode:96 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.977052 ms
+2023-08-12 19:30:33,706 - INFO - episode:96 - Time:1 - [Device-1] total processing consume 1.025669 ms, 1.367637 mj
+2023-08-12 19:30:33,706 - INFO - if process on device completely it will need 0.488526 ms, 1.648775 mj
+2023-08-12 19:30:33,706 - WARNING - device[1] time error:0.488526 < 1.025669
+2023-08-12 19:30:33,706 - INFO - episode:96 - Time:1- [Device-1] request task {1012} bits
+2023-08-12 19:30:33,706 - INFO - episode:96 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,706 - INFO - episode:97 - start
+2023-08-12 19:30:33,707 - INFO - episode:97 - Time:1 - [Device-1] totally need process 1022 bits data
+2023-08-12 19:30:33,707 - INFO - episode:97 - Time:1 - [Device-1] locally process 817.831238 bits data taking 0.402100 ms,1.357089 mj
+2023-08-12 19:30:33,707 - INFO - episode:97 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,707 - INFO - episode:97 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,707 - INFO - episode:97 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,707 - INFO - episode:97 - Time:1 - [Device-1] upload to [Server-1] take 0.050021 ms, and 0.050021 mj energy
+2023-08-12 19:30:33,707 - INFO - episode:97 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.005251 ms
+2023-08-12 19:30:33,707 - INFO - episode:97 - Time:1 - [Device-1] total processing consume 1.055272 ms, 1.407109 mj
+2023-08-12 19:30:33,707 - INFO - if process on device completely it will need 0.502625 ms, 1.696361 mj
+2023-08-12 19:30:33,707 - WARNING - device[1] time error:0.502625 < 1.055272
+2023-08-12 19:30:33,707 - INFO - episode:97 - Time:1- [Device-1] request task {960} bits
+2023-08-12 19:30:33,707 - INFO - episode:97 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,707 - INFO - episode:98 - start
+2023-08-12 19:30:33,707 - INFO - episode:98 - Time:1 - [Device-1] totally need process 1099 bits data
+2023-08-12 19:30:33,707 - INFO - episode:98 - Time:1 - [Device-1] locally process 879.539587 bits data taking 0.432440 ms,1.459486 mj
+2023-08-12 19:30:33,707 - INFO - episode:98 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,707 - INFO - episode:98 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,707 - INFO - episode:98 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,708 - INFO - episode:98 - Time:1 - [Device-1] upload to [Server-1] take 0.053795 ms, and 0.053795 mj energy
+2023-08-12 19:30:33,708 - INFO - episode:98 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 1.081101 ms
+2023-08-12 19:30:33,708 - INFO - episode:98 - Time:1 - [Device-1] total processing consume 1.134896 ms, 1.513281 mj
+2023-08-12 19:30:33,708 - INFO - if process on device completely it will need 0.540550 ms, 1.824358 mj
+2023-08-12 19:30:33,708 - WARNING - device[1] time error:0.540550 < 1.134896
+2023-08-12 19:30:33,708 - INFO - episode:98 - Time:1- [Device-1] request task {1059} bits
+2023-08-12 19:30:33,708 - INFO - episode:98 - Time:2 - [Device-1] totally need process 1500 bits data
+2023-08-12 19:30:33,708 - INFO - episode:99 - start
+2023-08-12 19:30:33,708 - INFO - episode:99 - Time:1 - [Device-1] totally need process 995 bits data
+2023-08-12 19:30:33,708 - INFO - episode:99 - Time:1 - [Device-1] locally process 796.190496 bits data taking 0.391460 ms,1.321179 mj
+2023-08-12 19:30:33,708 - INFO - episode:99 - Time:1 - [Device-1] offload to [Server-1] with action offloadingRate=0.200000
+2023-08-12 19:30:33,708 - INFO - episode:99 - Time:1 - [Server-1] start processing
+2023-08-12 19:30:33,708 - INFO - episode:99 - Time:1 - [Device-1] upload to [Server-1] with uploadRate 4087462.841250 bit/s
+2023-08-12 19:30:33,708 - INFO - episode:99 - Time:1 - [Device-1] upload to [Server-1] take 0.048697 ms, and 0.048697 mj energy
+2023-08-12 19:30:33,708 - INFO - episode:99 - Time:1 - [Device-1] get [Server-1] 0.150000 cpu frequency, so process consume 0.978651 ms
+2023-08-12 19:30:33,708 - INFO - episode:99 - Time:1 - [Device-1] total processing consume 1.027348 ms, 1.369876 mj
+2023-08-12 19:30:33,708 - INFO - if process on device completely it will need 0.489325 ms, 1.651473 mj
+2023-08-12 19:30:33,708 - WARNING - device[1] time error:0.489325 < 1.027348
+2023-08-12 19:30:33,722 - INFO - episode:99 - Time:1- [Device-1] request task {973} bits
+2023-08-12 19:30:33,722 - INFO - episode:99 - Time:2 - [Device-1] totally need process 1500 bits data
