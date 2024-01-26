@@ -1,14 +1,14 @@
 from typing import List
-from enum import Enum, auto
+from enum import Enum
 from graph_generator import *
 
 np.random.seed(3)
 
 
 class TaskStatus(Enum):
-    NOT_SCHEDULED = auto()
-    RUNNING = auto()
-    FINISHED = auto()
+    NOT_SCHEDULED = 0
+    RUNNING = 1
+    FINISHED = 2
 
 
 class Task:
@@ -34,7 +34,9 @@ class Task:
 
         self.T_exec_server_i = None  # 服务器执行的时间
         self.status = TaskStatus.NOT_SCHEDULED
-        self.current_step = None
+        self.start_step = None  # 1...N
+        self.expected_local_finish_step = None
+        self.expected_sever_finish_step = None
         self.device_id = None
 
     @property
@@ -69,15 +71,15 @@ class DAG:
         self.exitTask = exitTask
         self.tasks: List[Task] = tasks
         self.dagTaskNum = dagTaskNum
-        self.currentTask: Task = None
+        self.currentTask: Task = self.tasks[0]
         self.is_finished = False
         self.t_dag = 0
         self.e_dag = 0
 
-    def update_status(self, task: Task):
-        self.currentTask = task.id
-        self.t_dag = self.t_dag + task.T_i
-        self.e_dag = self.e_dag + task.E_i
-        if all(task.is_finished for task in self.tasks):
-            self.is_finished = True
-
+    def update_status(self):
+        if self.currentTask.status == TaskStatus.FINISHED:
+            self.t_dag = self.t_dag + self.currentTask.T_i
+            self.e_dag = self.e_dag + self.currentTask.E_i
+            self.currentTask = self.tasks[self.currentTask.id]  # next task
+            if all(task.status == TaskStatus.FINISHED for task in self.tasks):
+                self.is_finished = True

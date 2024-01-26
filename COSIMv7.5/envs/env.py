@@ -83,7 +83,6 @@ class Env(object):
         # put device state
         for device in self.devices:
             state.append(device.cpuFrequency)
-            state.append(device.dag.)
 
         # put server state
         for server in self.servers:
@@ -208,7 +207,7 @@ class Env(object):
         np.savetxt(output, self.rewards, fmt="%f", delimiter=',')
 
     def hardReset(self):
-        """
+        """vm
         完全重置
         :return:
         """

@@ -1,5 +1,5 @@
 from device import *
-
+import math
 
 class Server(object):
     def __init__(self, id, config, env):
@@ -15,28 +15,49 @@ class Server(object):
         logging.info('init [Server-%d] BW:%f MHZ,maxCpuFrequency: %f GHZ' % (
             self.id, self.BW, self.maxCpuFrequency))
 
-    def updateState(self):
+    def updateState(self, time_step):
         """
-        用于环境更新',list中所有未完成task current_step加1
+        用于环境更新',list中所有未完成task current_step加1,当前的cpu_freq
         :return:
         """
         self.tasks = []
 
     def acceptTask(self, task: Task):
-        self.tasks.append(task)
+        f_sum = sum(task.computing_f for task in self.tasks)
+        if f_sum + task.computing_f > self.maxCpuFrequency:
+            logging.info("已经到达最大cpu freq，不能再offload到server%d上", self.id)
+            return False
+        else:
+            self.tasks.append(task)
+            task.server_id = self.id
+            return True
 
     def process(self, timeslot, time_step):
         logging.info('episode:%d - Time:%d -[Server-%d] start processing' % (self.env.episode, self.env.clock, self.id))
-        f_sum = sum(task.computing_f for task in self.tasks)
-        if f_sum > self.maxCpuFrequency:
-            logging.error("当前任务已经超过server%d的计算能力", self.id)
-        for task in self.tasks:
+        new_tasks = [task for task in self.tasks if task.expected_sever_finish_step is None]
+        for task in new_tasks:
             device = self.env.devices[task.device_id - 1]
-            BW = self.BW * 1.0 / len(self.tasks)
+            BW = self.BW * 1.0 / len(new_tasks)
             uploadRate = BW * 1e6 * math.log2(1 + (device.transPower * device.channelGain / (BW * device.channelNoise)))
             downloadRate = device.BW*1e6*math.log2(1+(self.transPower*self.channelGain/(device.BW * self.channelNoise)))
             uploadTime = task.upload_data_sum * 1.0 / uploadRate * 1000
-            cpuFrequency = self.maxCpuFrequency * task.computing_f * 1.0 / f_sum
-            processTime = task.process_data * self.cpuCyclePerBit * 1.0 / cpuFrequency * 1e-9 * 1000
+            processTime = task.process_data * self.cpuCyclePerBit * 1.0 / task.computing_f * 1e-9 * 1000
             downloadTime = task.download_data_sum * 1.0 / downloadRate * 1000
-            device.serverFinishTask(task, uploadTime+downloadTime, processTime)
+            total_t = uploadTime + downloadTime + processTime
+            task.expected_sever_finish_step = math.ceil(total_t / timeslot) + task.start_step - 1
+            task.T_trans_i = uploadTime+downloadTime
+            task.E_trans_i = device.En * task.T_trans_i
+            task.T_exec_server_i = processTime
+
+        finished_tasks = [task for task in self.tasks if task.expected_sever_finish_step == time_step]
+        for task in finished_tasks:
+            device = self.env.devices[task.device_id - 1]
+            device.ifFinish(task, time_step)
+
+        self.tasks = [task for task in self.tasks if task not in finished_tasks]
+        self.maxCpuFrequency = self.maxCpuFrequency - sum(task.computing_f for task in self.tasks)
+
+    def updateState(self):
+        # TODO://BW STATE update
+        print("aa")
+
