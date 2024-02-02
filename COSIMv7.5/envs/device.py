@@ -19,7 +19,6 @@ class Device(object):
         self.transPower = config['transmission_power']
         self.channelGain = config['channel_gain']
         self.channelNoise = config['channel_noise']
-        self.maxTaskLoadPerTimeSlot = config['max_process_load_per_time_slot']
         self.cpuCyclePerBit = self.env.constants['avg_cpu_cycle_per_bit']
         self.effectiveCapacitanceCoefficient = self.env.constants['effective_capacitance_coefficient']
         self.dag = None
@@ -64,7 +63,6 @@ class Device(object):
             for line in readFile:
                 task = Task()  # yy实例化Task，每一行是一个任务
                 tem = taskCPUCycleNumber.values[taskIndex][0]
-                task.c_i = float(taskCPUCycleNumber.values[taskIndex][0] * 10)
                 task.d_i = float(taskInputDataSize.values[taskIndex][0])
                 task.q_i = float(taskOutputDataSize.values[taskIndex][0])
                 taskIndex += 1
@@ -99,13 +97,13 @@ class Device(object):
         logging.info("episode:%d - Time:%d - [Device-%d] -[instance name %s]" % (
             self.env.episode, self.env.clock, self.id, instance_name))
 
-    def localProcess(self, task: Task):
+    def localProcess(self, task: Task, timeslot):
         dataSize = (1 - task.offloading_rate) * task.d_i
         # calculate z(n) unit J
         energyConsumptionPerCycle = self.effectiveCapacitanceCoefficient * math.pow(self.cpuFrequency * 1e9, 2)
         task.T_exec_local_i = dataSize * self.cpuCyclePerBit * 1.0 / self.cpuFrequency * 1e-9 * 1000
         task.E_exec_local_i = dataSize * self.cpuCyclePerBit * energyConsumptionPerCycle * 1000
-        increment = 1 if dataSize == 0 else math.ceil(dataSize / self.currProcessedTaskLoad)
+        increment = 1 if dataSize == 0 else math.ceil(task.T_exec_local_i / timeslot)
         task.expected_local_finish_step = task.start_step + increment - 1
 
     def offload(self, curr_task: Task, time_step):
@@ -129,10 +127,11 @@ class Device(object):
     def ifFinish(self, curr_task: Task, time_step):
         if curr_task.expected_local_finish_step == time_step:
             curr_task.status = TaskStatus.FINISHED
-            logging.info("episode:%d - Time:%d - [Device-%d] , T_i %d ms, E_i %d J" % (
-                self.env.episode, self.env.clock, self.id, curr_task.T_i(), curr_task.E_i()))
+            logging.info("episode:%d - Time:%d - [Device-%d] , finish_step %d ms, E_i %d J" % (
+                self.env.episode, self.env.clock, self.id, curr_task.finish_step(), curr_task.E_i()))
         else:
             curr_task.status = TaskStatus.RUNNING
+            logging.info("server finished, local still running ")
 
     def reset(self):
         self.dag = None

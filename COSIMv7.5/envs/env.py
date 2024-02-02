@@ -49,6 +49,7 @@ class Env(object):
         self.episode = 0
         self.devices: List[Device] = []
         self.servers: List[Server] = []
+        self.time_slot = 100
         deviceConfigs = config['device_configs']
         serverConfigs = config['server_configs']
 
@@ -74,63 +75,17 @@ class Env(object):
         self.totalEnergyCosts = np.zeros(shape=(self.episodes, 3))
         self.rewards = np.zeros(shape=(self.episodes, 1))
 
-    def getEnvState(self, time_step):
-        """
-        返回当前的环境，s_dim为4*device+2*server
-        :return:
-        """
+    def getEnvState(self):
         state = []
-        # put device state
         for device in self.devices:
             state.append(device.cpuFrequency)
+            state.append(device.dag.currentTask.d_i)
+            state.append(device.dag.currentTask.q_i)
 
-        # put server state
         for server in self.servers:
-            state.append(server.BW)
-            state.append(server.maxCpuFrequency)
+            state.append(server.availableBW)
+            state.append(server.availableFreq)
         return np.array(state)
-
-    def calculateCost(self):
-        """
-        分别计算在当前策略，全部本地以及全部卸载三种情况下，按权重得到的总消耗，并将其存储
-        :return:
-        """
-        weightSum = self.timeWeight + self.energyWeight
-        for device in self.devices:
-            # 记录对应权重
-            p1 = device.priority * 1.0 / self.prioritySum
-            # 部分卸载
-            timeCost1 = (self.timeWeight / weightSum) * device.currProcessedDelay * p1
-            energyCost1 = (self.energyWeight / weightSum) * device.currProcessedEnergy * p1
-            totalCost1 = timeCost1 + energyCost1
-            self.totalTimeCosts[self.episode][0] = self.totalTimeCosts[self.episode][0] + timeCost1
-            self.totalEnergyCosts[self.episode][0] = self.totalEnergyCosts[self.episode][0] + energyCost1
-            # 全部本地处理
-            timeCost2 = (self.timeWeight / weightSum) * device.totalLocalProcessTime * p1
-            energyCost2 = (self.energyWeight / weightSum) * device.totalLocalProcessEnergy * p1
-            totalCost2 = timeCost2 + energyCost2
-            self.totalTimeCosts[self.episode][1] = self.totalTimeCosts[self.episode][1] + timeCost2
-            self.totalEnergyCosts[self.episode][1] = self.totalEnergyCosts[self.episode][1] + energyCost2
-            # 全部卸载
-            timeCost3 = (self.timeWeight / weightSum) * device.totalRemoteProcessTime * p1
-            energyCost3 = (self.energyWeight / weightSum) * device.totalRemoteProcessEnergy * p1
-            totalCost3 = timeCost3 + energyCost3
-            self.totalTimeCosts[self.episode][2] = self.totalTimeCosts[self.episode][2] + timeCost3
-            self.totalEnergyCosts[self.episode][2] = self.totalEnergyCosts[self.episode][2] + energyCost3
-
-            self.totalWeightCosts[self.episode][0] = self.totalWeightCosts[self.episode][0] + totalCost1
-            self.totalWeightCosts[self.episode][1] = self.totalWeightCosts[self.episode][1] + totalCost2
-            self.totalWeightCosts[self.episode][2] = self.totalWeightCosts[self.episode][2] + totalCost3
-
-    def stepIntoNextState(self):
-        """
-        更新到下一个状态
-        :return:
-        """
-        for device in self.devices:
-            device.updateState()
-        for server in self.servers:
-            server.updateState()
 
     def setUp(self):
         self.logger.info('set up start')
@@ -138,11 +93,12 @@ class Env(object):
             device.setUp()
         self.logger.info('set up finish')
 
+    def stepIntoNextState(self):
+        for device in self.devices:
+            device.updateState()
+
     def getEnvReward(self):
-        """
-        获取reward
-        :return:
-        """
+
         total_reward = 0
         for device in self.devices:
             d_local, e_local = device.localProcess(device.currProcessedTaskLoad)  # 以全部本地处理作为比较
@@ -231,3 +187,35 @@ class Env(object):
         # server reset
         for server in self.servers:
             server.updateState()
+
+    def calculateCost(self):
+        """
+        分别计算在当前策略，全部本地以及全部卸载三种情况下，按权重得到的总消耗，并将其存储
+        :return:
+        """
+        weightSum = self.timeWeight + self.energyWeight
+        for device in self.devices:
+            # 记录对应权重
+            p1 = device.priority * 1.0 / self.prioritySum
+            # 部分卸载
+            timeCost1 = (self.timeWeight / weightSum) * device.currProcessedDelay * p1
+            energyCost1 = (self.energyWeight / weightSum) * device.currProcessedEnergy * p1
+            totalCost1 = timeCost1 + energyCost1
+            self.totalTimeCosts[self.episode][0] = self.totalTimeCosts[self.episode][0] + timeCost1
+            self.totalEnergyCosts[self.episode][0] = self.totalEnergyCosts[self.episode][0] + energyCost1
+            # 全部本地处理
+            timeCost2 = (self.timeWeight / weightSum) * device.totalLocalProcessTime * p1
+            energyCost2 = (self.energyWeight / weightSum) * device.totalLocalProcessEnergy * p1
+            totalCost2 = timeCost2 + energyCost2
+            self.totalTimeCosts[self.episode][1] = self.totalTimeCosts[self.episode][1] + timeCost2
+            self.totalEnergyCosts[self.episode][1] = self.totalEnergyCosts[self.episode][1] + energyCost2
+            # 全部卸载
+            timeCost3 = (self.timeWeight / weightSum) * device.totalRemoteProcessTime * p1
+            energyCost3 = (self.energyWeight / weightSum) * device.totalRemoteProcessEnergy * p1
+            totalCost3 = timeCost3 + energyCost3
+            self.totalTimeCosts[self.episode][2] = self.totalTimeCosts[self.episode][2] + timeCost3
+            self.totalEnergyCosts[self.episode][2] = self.totalEnergyCosts[self.episode][2] + energyCost3
+
+            self.totalWeightCosts[self.episode][0] = self.totalWeightCosts[self.episode][0] + totalCost1
+            self.totalWeightCosts[self.episode][1] = self.totalWeightCosts[self.episode][1] + totalCost2
+            self.totalWeightCosts[self.episode][2] = self.totalWeightCosts[self.episode][2] + totalCost3
