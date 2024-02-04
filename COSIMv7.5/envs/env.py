@@ -98,26 +98,20 @@ class Env(object):
             device.updateState()
 
     def getEnvReward(self):
-
         total_reward = 0
         for device in self.devices:
-            d_local, e_local = device.localProcess(device.currProcessedTaskLoad)  # 以全部本地处理作为比较
+            t_local, e_local = device.totalLocalProcess(device.dag.currentTask.d_i)
 
-            # 这里将全部本地改为全部卸载
-            # d_local = device.totalRemoteProcessTime
-            # e_local = device.totalRemoteProcessEnergy
+            if t_local - device.dag.currentTask.T_i < 0:
+                logging.info('device[%d] time error:%f < %f' % (device.id, t_local, device.dag.currentTask.T_i))
+            time_r = (t_local - device.dag.currentTask.T_i) / t_local
 
-            p1 = device.priority * 1.0 / self.prioritySum
-            if d_local - device.currProcessedDelay < 0:
-                self.logger.warn('device[%d] time error:%f < %f' % (device.id, d_local, device.currProcessedDelay))
-                self.errors = self.errors + 1
-            time_r = p1 * (d_local - device.currProcessedDelay) / d_local
-            if e_local - device.currProcessedEnergy < 0:
-                self.logger.warn('device[%d] energy error:%f < %f' % (device.id, e_local, device.currProcessedEnergy))
-                self.errors = self.errors + 1
-            energy_r = p1 * (e_local - device.currProcessedEnergy) / e_local
+            if e_local - device.dag.currentTask.E_i < 0:
+                logging.info('device[%d] energy error:%f < %f' % (device.id, e_local, device.dag.currentTask.E_i))
+            energy_r = (e_local - device.dag.currentTask.E_i) / e_local
+
             failed_p = 0 if device.finished == True else 1
-            total_reward = total_reward + self.timeWeight * time_r + self.energyWeight * energy_r - 0.5 * failed_p
+            total_reward = currentTask + self.timeWeight * time_r + self.energyWeight * energy_r - 0.5 * failed_p
         self.rewards[self.episode][0] = self.rewards[self.episode][0] + total_reward
         if self.clock == self.T:
             self.logger.info(

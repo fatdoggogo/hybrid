@@ -24,6 +24,7 @@ class Device(object):
         self.dag = None
         self.global_sequence = []
         self.metrics = np.zeros(shape=(self.env.T, 16))
+        self.timeslot = 100
         logging.info('init [Device-%d] finish' % self.id)
 
     @staticmethod
@@ -91,11 +92,18 @@ class Device(object):
     def setUp(self):  # 在env的reset中进行了调用，用于初始化设备
         instance_name, dagTaskNum = self.generateDAG(10, 0.7)
         taskSet, entryTask, exitTask = self.get_taskSet(instance_name)
-        self.dag = DAG(instance_name, entryTask, exitTask, taskSet, dagTaskNum)
+        self.dag = DAG(instance_name, taskSet, dagTaskNum)
         for task in taskSet:
             self.global_sequence.append(task.id)
         logging.info("episode:%d - Time:%d - [Device-%d] -[instance name %s]" % (
             self.env.episode, self.env.clock, self.id, instance_name))
+
+    def totalLocalProcess(self, datasize):
+        # calculate z(n) unit J
+        energyConsumptionPerCycle = self.effectiveCapacitanceCoefficient * math.pow(self.cpuFrequency * 1e9, 2)
+        t_local = datasize * self.cpuCyclePerBit * 1.0 / self.cpuFrequency * 1e-9 * 1000
+        e_local = datasize * self.cpuCyclePerBit * energyConsumptionPerCycle * 1000
+        return t_local, e_local
 
     def localProcess(self, task: Task, timeslot):
         dataSize = (1 - task.offloading_rate) * task.d_i
@@ -114,11 +122,11 @@ class Device(object):
         if curr_task.offloading_rate == 0 and curr_task.server_id == 0 and curr_task.computing_f == 0:
             curr_task.T_trans_i = 0
             curr_task.E_trans_i = 0
-            self.localProcess(curr_task)
+            self.localProcess(curr_task, self.timeslot)
             curr_task.T_exec_server_i = 0
             logging.info("episode:%d - Time:%d - [Device-%d] local process no offloading" % (self.env.episode, self.env.clock, self.id))
         if 0 < curr_task.offloading_rate <= 1 and curr_task.server_id is not None and curr_task.computing_f is not None:
-            self.localProcess(curr_task)
+            self.localProcess(curr_task, self.timeslot)
             logging.info("episode:%d - Time:%d - [Device-%d] offload to [Server-%d] with action offloadingRate=%f" % (
                 self.env.episode, self.env.clock, self.id, curr_task.server_id, curr_task.offloading_rate))
             curr_task.device_id = self.id
@@ -140,5 +148,4 @@ class Device(object):
 
     def updateState(self):
         self.dag.update_status()
-
 

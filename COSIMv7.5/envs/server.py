@@ -60,3 +60,10 @@ class Server(object):
         self.tasks = [task for task in self.tasks if task not in finished_tasks]
         self.availableFreq = self.maxCpuFrequency - sum(task.computing_f for task in self.tasks)
         self.availableBW = self.BW - sum(task.computing_f for task in not_finished_trans_tasks)
+
+    def updateState(self, time_step):
+        """
+        用于环境更新',list中所有未完成task current_step加1,当前的cpu_freq
+        # TODO://BW STATE update
+        :return:
+        """
