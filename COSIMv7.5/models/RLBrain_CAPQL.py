@@ -15,31 +15,6 @@ def weights_init_(m):
         torch.nn.init.xavier_uniform_(m.weight, gain=1)
         torch.nn.init.constant_(m.bias, 0)
 
-def randombin(numberOfDevice, action):
-    """
-
-    :param numberOfDevice: 设备数量
-    :param action: 动作
-    :return: 1001这样的字符串
-    """
-    userlist = list(bin(action).replace('0b', ''))
-    zeros = numberOfDevice - len(userlist)
-    ll = [0 for i in range(zeros)]
-    for i in userlist:
-        ll.append(int(i))
-    return ll
-
-def makeOffloadDecision(env, dis_action, con_action, f_action):
-
-    userlist = randombin(env.numberOfDevice, dis_action)
-    i = 0
-    for device in env.devices:
-        if userlist[device.id - 1] == 1:
-            device.offload(1, con_action[dis_action * 6 + i], f_action[dis_action * 6 + i])
-        else:
-            device.offload(0, 0, 0)
-        i += 1
-
 
 class Actor(nn.Module):
 
@@ -117,11 +92,10 @@ class QNetwork(nn.Module):
         return x1, x2
 
 
-class CAPQL():
+class CAPQL:
     def __init__(self, env, all_weights):
 
         self.env = env
-
         self.batch_size = 32
         self.episode_number = 2000
         self.ep_steps = 100  # 每次训练100个batch_size
@@ -186,13 +160,6 @@ class CAPQL():
 
         return action_c, action_d, log_prob_c, log_prob_d, prob_d
 
-    def to_offload_action(self, action_c, action_d):
-        action_c_list = action_c.squeeze().tolist()  # Squeeze 用于移除多余的维度
-        ac1 = action_c_list[0]
-        ac2 = action_c_list[1]
-        ad = action_d.squeeze().item()  # 假设 action_d 是一个标量或形状为 [1] 的张量
-        return [ad, ac1, ac2]
-
     def remember(self, trace, time_step, current_weight, state, action, next_state, reward):
         data = (state, action, next_state, reward)
         trace.transitions.append(data)  # 任务调度完成之前，每次只在trace中记录本条轨迹中的各个状态转移
@@ -207,27 +174,29 @@ class CAPQL():
             total_loss = []
             # 每个回合 变换权重
             self.current_weight = self.set_weight_encoun_sque(eps_idx)
-            current_state = self.env.reset(self.current_weight)
+            self.env.reset(self.current_weight)
             one_episode_dis_actions = []
             trace = Trace(eps_idx, self.current_weight)  # yy 实例化trace
             for time_step in range(1, self.env.taskNumber + 1):
+                current_state = self.env.getEnvState()
                 step += 1
                 action_c, action_d, log_prob_c, log_prob_d, prob_d = self.select_action(current_state,
                                                                                         self.current_weight)
                 one_episode_dis_actions.append(action_c)
-                [ad, ac1, ac2] = self.to_offload_action(action_c, action_d)
-                self.env.offload(makeOffloadDecision, ad, ac1, ac2)
+                self.env.offload(time_step, current_state[0], action_c, action_d)
                 reward = self.env.getEnvReward(self.current_weight)
                 self.env.stepIntoNextState()
                 next_state = self.env.getEnvState()
 
-                self.remember(trace, time_step, self.current_weight, current_state, [ad, ac1, ac2], next_state, reward)
+                self.remember(trace, time_step, self.current_weight, current_state, [action_c, action_d], next_state,
+                              reward)
                 one_episode_rewards.append(np.array(reward))
 
                 # training
                 if len(self.memory) > self.batch_size:
                     state_wt, action_wt, next_state_wt, wt_batch, reward_wt, \
-                        state_wh, action_wh, next_state_wh, wh_batch, reward_wh = self.memory_sample(eps_idx, self.current_weight)
+                        state_wh, action_wh, next_state_wh, wh_batch, reward_wh = self.memory_sample(eps_idx,
+                                                                                                     self.current_weight)
 
                     # compute next_q_value target
                     qf_loss_wt = self.get_critic_loss(state_wt, action_wt, next_state_wt, wt_batch, reward_wt)
@@ -265,13 +234,13 @@ class CAPQL():
             disc_actual = np.sum(np.array([(self.discount ** i) * r for i, r in enumerate(one_episode_rewards)]),
                                  axis=0)
             disc_actual_01 = np.sum(np.array([r for i, r in enumerate(one_episode_rewards)]),
-                             axis=0)
+                                    axis=0)
             total_reward_01 = np.dot(disc_actual_01, self.current_weight)
             total_reward = np.dot(disc_actual, self.current_weight)
             running_reward = total_reward if running_reward == None else running_reward * 0.99 + total_reward * 0.01
 
             self.each_episode_DR.append(total_reward)  # 索引为回合数，其元素为当前回合的权重和temp
-            self.each_episode_history_DR.append(running_reward)  #历史回合回报+当前回合总回报更新历史回合回报
+            self.each_episode_history_DR.append(running_reward)  # 历史回合回报+当前回合总回报更新历史回合回报
             self.each_episode_DR_actual_01.append(total_reward_01)
             self.each_episode_loss.append(sum(total_loss))
             self.weight_opt_DR[tuple(self.current_weight)].append(total_reward)
@@ -279,10 +248,9 @@ class CAPQL():
 
             get_w_opt_fitness(tuple(self.current_weight), self.weight_opt_fitness, self.env.current_schedule.fitness)
             one_episode_rewards = []
-            print('Episode: ', eps_idx, ' | reward: ', disc_actual,' | total_reward: ', total_reward, ' | one_episode_actions: ', one_episode_dis_actions,
-              ' | weight: ', self.current_weight)
-
-
+            print('Episode: ', eps_idx, ' | reward: ', disc_actual, ' | total_reward: ', total_reward,
+                  ' | one_episode_actions: ', one_episode_dis_actions,
+                  ' | weight: ', self.current_weight)
 
         self.env.outputMetric()
         total = self.env.episodes * self.env.T * self.env.numberOfDevice
@@ -309,9 +277,11 @@ class CAPQL():
 
     def get_critic_loss(self, state_batch, action_batch, next_state, w_batch, reward):
         with torch.no_grad():
-            next_s_actions_c, next_s_actions_d, next_s_log_pi_c, next_s_log_pi_d, next_s_prob_d = self.actor.sample(next_state, w_batch)
+            next_s_actions_c, next_s_actions_d, next_s_log_pi_c, next_s_log_pi_d, next_s_prob_d = self.actor.sample(
+                next_state, w_batch)
             qf1_next_target, qf2_next_target = self.critic_target(next_state, next_s_actions_c, w_batch)
-            min_qf_next_target_wt = next_s_prob_d * (torch.min(qf1_next_target, qf2_next_target) - self.alpha_c * next_s_prob_d * next_s_log_pi_c - self.alpha_d * next_s_log_pi_d)
+            min_qf_next_target_wt = next_s_prob_d * (torch.min(qf1_next_target,
+                                                               qf2_next_target) - self.alpha_c * next_s_prob_d * next_s_log_pi_c - self.alpha_d * next_s_log_pi_d)
             next_q_value = reward + self.gamma * (min_qf_next_target_wt.sum(1)).view(-1)
 
         s_actions_c, s_actions_d = self.to_torch_action(action_batch)
@@ -322,7 +292,6 @@ class CAPQL():
         qf2_loss = F.mse_loss(qf2, next_q_value)
         qf_loss = (qf1_loss + qf2_loss) / 2
         return qf_loss
-
 
     def memory_sample(self, eps_idx, weight):
 

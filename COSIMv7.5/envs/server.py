@@ -1,6 +1,7 @@
 from device import *
 import math
 
+
 class Server(object):
     def __init__(self, id, config, env):
         self.id = id
@@ -37,17 +38,19 @@ class Server(object):
         for task in new_tasks:
             device = self.env.devices[task.device_id - 1]
             occupied_bw = self.availableBW * 1.0 / len(new_tasks)
-            uploadRate = occupied_bw * 1e6 * math.log2(1 + (device.transPower * device.channelGain / (occupied_bw * device.channelNoise)))
-            downloadRate = device.BW*1e6*math.log2(1+(self.transPower*self.channelGain/(device.BW * self.channelNoise)))
+            uploadRate = occupied_bw * 1e6 * math.log2(
+                1 + (device.transPower * device.channelGain / (occupied_bw * device.channelNoise)))
+            downloadRate = device.BW * 1e6 * math.log2(
+                1 + (self.transPower * self.channelGain / (device.BW * self.channelNoise)))
             uploadTime = task.upload_data_sum * 1.0 / uploadRate * 1000
-            #calculate BW
+            # calculate BW
             task.expected_trans_finish_step = math.ceil(uploadTime / timeslot) + task.start_step - 1
             cpuFreq = task.computing_f * 1.0 / freqsum * self.availableFreq
             processTime = task.process_data * self.cpuCyclePerBit * 1.0 / cpuFreq * 1e-9 * 1000
             downloadTime = task.download_data_sum * 1.0 / downloadRate * 1000
             total_t = uploadTime + downloadTime + processTime
             task.expected_sever_finish_step = math.ceil(total_t / timeslot) + task.start_step - 1
-            task.T_trans_i = uploadTime+downloadTime
+            task.T_trans_i = uploadTime + downloadTime
             task.E_trans_i = device.En * task.T_trans_i
             task.T_exec_server_i = processTime
 
@@ -67,3 +70,8 @@ class Server(object):
         # TODO://BW STATE update
         :return:
         """
+
+    def reset(self):
+        self.tasks: List[Task] = []
+        self.availableBW = self.BW
+        self.availableFreq = self.maxCpuFrequency

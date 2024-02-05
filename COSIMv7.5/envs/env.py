@@ -1,7 +1,7 @@
 from typing import List
 
-from server import Server
-from device import Device
+from server import *
+from device import *
 import logging
 import json
 import numpy as np
@@ -36,15 +36,9 @@ class Env(object):
         os.mkdir(self.algorithmDir)
         self.imageDir = self.algorithmDir + '/images'
         self.metricDir = self.algorithmDir + '/metrics'
-        self.logDir = self.algorithmDir + '/logs'
         os.mkdir(self.imageDir)
         os.mkdir(self.metricDir)
-        os.mkdir(self.logDir)
 
-        self.logger = logging.getLogger()
-
-        # 环境当前时钟
-        self.clock = 1
         self.episodes = config['episodes']
         self.episode = 0
         self.devices: List[Device] = []
@@ -78,24 +72,13 @@ class Env(object):
     def getEnvState(self):
         state = []
         for device in self.devices:
+            state.append(device.dag.currentTask)
             state.append(device.cpuFrequency)
-            state.append(device.dag.currentTask.d_i)
-            state.append(device.dag.currentTask.q_i)
 
         for server in self.servers:
             state.append(server.availableBW)
             state.append(server.availableFreq)
-        return np.array(state)
-
-    def setUp(self):
-        self.logger.info('set up start')
-        for device in self.devices:
-            device.setUp()
-        self.logger.info('set up finish')
-
-    def stepIntoNextState(self):
-        for device in self.devices:
-            device.updateState()
+        return state
 
     def getEnvReward(self, current_weight):
         total_reward = 0
@@ -114,81 +97,54 @@ class Env(object):
         self.rewards[self.episode][0] = self.rewards[self.episode][0] + total_reward
         return total_reward
 
-    def offload(self, makeOffloadDecision, dis_actions, con_actions, f_action):
-        makeOffloadDecision(self, dis_actions, con_actions, f_action)
-        # server在每个time slot 会处理当前time slot提交到该server的所有任务
+    def offload(self, time_step, curr_task: Task, dis_action, con_action):
+        i = 0
+        for device in self.devices:
+            server_id = dis_action[i]
+            if server_id >= 1:
+                curr_task.server_id = server_id
+                curr_task.offloading_rate = con_action[i * 2]
+                curr_task.computing_f = con_action[i * 2 + 1]
+            else:
+                curr_task.server_id = 0
+                curr_task.offloading_rate = 0
+                curr_task.computing_f = 0
+            device.offload(curr_task, time_step)
+            i += 1
         for server in self.servers:
-            server.process()  # server端的计算
+            server.process(self.time_slot, time_step)
         self.calculateCost()
 
-    def outputMetric(self):
-        """
-        存储结果
-        :return:
-        """
-        output = self.metricDir + '/cost.csv'
-        np.savetxt(output, self.totalWeightCosts, fmt="%f", delimiter=',')
-        output = self.metricDir + '/time-cost.csv'
-        np.savetxt(output, self.totalTimeCosts, fmt="%f", delimiter=',')
-        output = self.metricDir + '/energy-cost.csv'
-        np.savetxt(output, self.totalEnergyCosts, fmt="%f", delimiter=',')
-        output = self.metricDir + '/reward.csv'
-        np.savetxt(output, self.rewards, fmt="%f", delimiter=',')
+    def setUp(self, timestep):
+        for device in self.devices:
+            device.setUp(timestep)
 
-    def hardReset(self):
-        """vm
-        完全重置
-        :return:
-        """
-        self.reset()
-        self.totalWeightCosts = np.zeros(shape=(self.episodes, 3))
-        self.totalTimeCosts = np.zeros(shape=(self.episodes, 3))
-        self.totalEnergyCosts = np.zeros(shape=(self.episodes, 3))
-        self.rewards = np.zeros(shape=(self.episodes, 1))
-        self.failures = 0
-        self.errors = 0
+    def stepIntoNextState(self):
+        for device in self.devices:
+            device.updateState()
 
-    def reset(self):
-        """
-        重置
-        :return:
-        """
-        # device reset
+    def reset(self, timestep):
         for device in self.devices:
             device.reset()
-            device.setUp()
-        # server reset
+            device.setUp(timestep)
         for server in self.servers:
-            server.updateState()
+            server.reset()
 
     def calculateCost(self):
         """
         分别计算在当前策略，全部本地以及全部卸载三种情况下，按权重得到的总消耗，并将其存储
         :return:
         """
-        weightSum = self.timeWeight + self.energyWeight
-        for device in self.devices:
-            # 记录对应权重
-            p1 = device.priority * 1.0 / self.prioritySum
-            # 部分卸载
-            timeCost1 = (self.timeWeight / weightSum) * device.currProcessedDelay * p1
-            energyCost1 = (self.energyWeight / weightSum) * device.currProcessedEnergy * p1
-            totalCost1 = timeCost1 + energyCost1
-            self.totalTimeCosts[self.episode][0] = self.totalTimeCosts[self.episode][0] + timeCost1
-            self.totalEnergyCosts[self.episode][0] = self.totalEnergyCosts[self.episode][0] + energyCost1
-            # 全部本地处理
-            timeCost2 = (self.timeWeight / weightSum) * device.totalLocalProcessTime * p1
-            energyCost2 = (self.energyWeight / weightSum) * device.totalLocalProcessEnergy * p1
-            totalCost2 = timeCost2 + energyCost2
-            self.totalTimeCosts[self.episode][1] = self.totalTimeCosts[self.episode][1] + timeCost2
-            self.totalEnergyCosts[self.episode][1] = self.totalEnergyCosts[self.episode][1] + energyCost2
-            # 全部卸载
-            timeCost3 = (self.timeWeight / weightSum) * device.totalRemoteProcessTime * p1
-            energyCost3 = (self.energyWeight / weightSum) * device.totalRemoteProcessEnergy * p1
-            totalCost3 = timeCost3 + energyCost3
-            self.totalTimeCosts[self.episode][2] = self.totalTimeCosts[self.episode][2] + timeCost3
-            self.totalEnergyCosts[self.episode][2] = self.totalEnergyCosts[self.episode][2] + energyCost3
-
-            self.totalWeightCosts[self.episode][0] = self.totalWeightCosts[self.episode][0] + totalCost1
-            self.totalWeightCosts[self.episode][1] = self.totalWeightCosts[self.episode][1] + totalCost2
-            self.totalWeightCosts[self.episode][2] = self.totalWeightCosts[self.episode][2] + totalCost3
+    # def outputMetric(self):
+    #     """
+    #     存储结果
+    #     :return:
+    #     """
+    #     output = self.metricDir + '/cost.csv'
+    #     np.savetxt(output, self.totalWeightCosts, fmt="%f", delimiter=',')
+    #     output = self.metricDir + '/time-cost.csv'
+    #     np.savetxt(output, self.totalTimeCosts, fmt="%f", delimiter=',')
+    #     output = self.metricDir + '/energy-cost.csv'
+    #     np.savetxt(output, self.totalEnergyCosts, fmt="%f", delimiter=',')
+    #     output = self.metricDir + '/reward.csv'
+    #     np.savetxt(output, self.rewards, fmt="%f", delimiter=',')

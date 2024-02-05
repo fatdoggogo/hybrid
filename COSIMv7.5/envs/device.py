@@ -1,14 +1,10 @@
 import logging
 import math
-
 import pandas as pd
-
 from task import *
-
 np.random.seed(3)
 
 
-# device一定会处理完这个任务才会处理下一个task
 class Device(object):
     def __init__(self, id, config, env):
         self.env = env  # 设备所在的环境
@@ -25,7 +21,6 @@ class Device(object):
         self.global_sequence = []
         self.metrics = np.zeros(shape=(self.env.T, 16))
         self.time_slot = 100
-        self.time_step = 1
         logging.info('init [Device-%d] finish' % self.id)
 
     @staticmethod
@@ -90,14 +85,14 @@ class Device(object):
                 taskSet.append(task)
         return taskSet, entryTask, exitTask
 
-    def setUp(self):  # 在env的reset中进行了调用，用于初始化设备
+    def setUp(self, time_step):  # 在env的reset中进行了调用，用于初始化设备
         instance_name, dagTaskNum = self.generateDAG(10, 0.7)
         taskSet, entryTask, exitTask = self.get_taskSet(instance_name)
         self.dag = DAG(instance_name, taskSet, dagTaskNum)
         for task in taskSet:
             self.global_sequence.append(task.id)
-        logging.info("episode:%d - Time:%d - [Device-%d] -[instance name %s]" % (
-            self.env.episode, self.env.clock, self.id, instance_name))
+        logging.info("episode:%d - timestep:%d - [Device-%d] -[instance name %s]" % (
+            self.env.episode, time_step, self.id, instance_name))
 
     def totalLocalProcess(self, datasize):
         # calculate z(n) unit J
@@ -115,9 +110,9 @@ class Device(object):
         increment = 1 if dataSize == 0 else math.ceil(task.T_exec_local_i / self.time_slot)
         task.expected_local_finish_step = task.start_step + increment - 1
 
-    def offload(self, curr_task: Task):
+    def offload(self, curr_task: Task, time_step):
         curr_task.status = TaskStatus.RUNNING
-        curr_task.start_step = self.time_step
+        curr_task.start_step = time_step
         if curr_task.offloading_rate < 0 or curr_task.offloading_rate > 1:
             logging.error("offloadingRate must ∈ [0,1]")
         if curr_task.offloading_rate == 0 and curr_task.server_id == 0 and curr_task.computing_f == 0:
