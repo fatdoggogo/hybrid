@@ -15,7 +15,6 @@ def weights_init_(m):
         torch.nn.init.xavier_uniform_(m.weight, gain=1)
         torch.nn.init.constant_(m.bias, 0)
 
-
 def randombin(numberOfDevice, action):
     """
 
@@ -30,14 +29,8 @@ def randombin(numberOfDevice, action):
         ll.append(int(i))
     return ll
 
-
 def makeOffloadDecision(env, dis_action, con_action, f_action):
-    """
-    当前用于进行device中offload的特殊函数，传入env中进行操作
-    :param env: 环境
-    :param actions: 动作
-    :return:
-    """
+
     userlist = randombin(env.numberOfDevice, dis_action)
     i = 0
     for device in env.devices:
@@ -224,7 +217,7 @@ class CAPQL():
                 one_episode_dis_actions.append(action_c)
                 [ad, ac1, ac2] = self.to_offload_action(action_c, action_d)
                 self.env.offload(makeOffloadDecision, ad, ac1, ac2)
-                reward = self.env.getEnvReward()
+                reward = self.env.getEnvReward(self.current_weight)
                 self.env.stepIntoNextState()
                 next_state = self.env.getEnvState()
 

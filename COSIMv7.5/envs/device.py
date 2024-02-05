@@ -24,7 +24,8 @@ class Device(object):
         self.dag = None
         self.global_sequence = []
         self.metrics = np.zeros(shape=(self.env.T, 16))
-        self.timeslot = 100
+        self.time_slot = 100
+        self.time_step = 1
         logging.info('init [Device-%d] finish' % self.id)
 
     @staticmethod
@@ -105,28 +106,28 @@ class Device(object):
         e_local = datasize * self.cpuCyclePerBit * energyConsumptionPerCycle * 1000
         return t_local, e_local
 
-    def localProcess(self, task: Task, timeslot):
+    def localProcess(self, task: Task):
         dataSize = (1 - task.offloading_rate) * task.d_i
         # calculate z(n) unit J
         energyConsumptionPerCycle = self.effectiveCapacitanceCoefficient * math.pow(self.cpuFrequency * 1e9, 2)
         task.T_exec_local_i = dataSize * self.cpuCyclePerBit * 1.0 / self.cpuFrequency * 1e-9 * 1000
         task.E_exec_local_i = dataSize * self.cpuCyclePerBit * energyConsumptionPerCycle * 1000
-        increment = 1 if dataSize == 0 else math.ceil(task.T_exec_local_i / timeslot)
+        increment = 1 if dataSize == 0 else math.ceil(task.T_exec_local_i / self.time_slot)
         task.expected_local_finish_step = task.start_step + increment - 1
 
-    def offload(self, curr_task: Task, time_step):
+    def offload(self, curr_task: Task):
         curr_task.status = TaskStatus.RUNNING
-        curr_task.start_step = time_step
+        curr_task.start_step = self.time_step
         if curr_task.offloading_rate < 0 or curr_task.offloading_rate > 1:
             logging.error("offloadingRate must ∈ [0,1]")
         if curr_task.offloading_rate == 0 and curr_task.server_id == 0 and curr_task.computing_f == 0:
             curr_task.T_trans_i = 0
             curr_task.E_trans_i = 0
-            self.localProcess(curr_task, self.timeslot)
+            self.localProcess(curr_task)
             curr_task.T_exec_server_i = 0
             logging.info("episode:%d - Time:%d - [Device-%d] local process no offloading" % (self.env.episode, self.env.clock, self.id))
         if 0 < curr_task.offloading_rate <= 1 and curr_task.server_id is not None and curr_task.computing_f is not None:
-            self.localProcess(curr_task, self.timeslot)
+            self.localProcess(curr_task)
             logging.info("episode:%d - Time:%d - [Device-%d] offload to [Server-%d] with action offloadingRate=%f" % (
                 self.env.episode, self.env.clock, self.id, curr_task.server_id, curr_task.offloading_rate))
             curr_task.device_id = self.id

@@ -97,7 +97,7 @@ class Env(object):
         for device in self.devices:
             device.updateState()
 
-    def getEnvReward(self):
+    def getEnvReward(self, current_weight):
         total_reward = 0
         for device in self.devices:
             t_local, e_local = device.totalLocalProcess(device.dag.currentTask.d_i)
@@ -110,32 +110,11 @@ class Env(object):
                 logging.info('device[%d] energy error:%f < %f' % (device.id, e_local, device.dag.currentTask.E_i))
             energy_r = (e_local - device.dag.currentTask.E_i) / e_local
 
-            failed_p = 0 if device.finished == True else 1
-            total_reward = currentTask + self.timeWeight * time_r + self.energyWeight * energy_r - 0.5 * failed_p
+            total_reward = total_reward + current_weight[0] * time_r + current_weight[1] * energy_r
         self.rewards[self.episode][0] = self.rewards[self.episode][0] + total_reward
-        if self.clock == self.T:
-            self.logger.info(
-                'episode:%d - environment total reward = %f' % (self.episode, self.rewards[self.episode][0]))
         return total_reward
 
-    # def offload(self, makeOffloadDecision, actions):
-    #     """
-    #     执行计算卸载决策
-    #     :param makeOffloadDecision:传入的操作函数
-    #     :param actions:传入的行为动作
-    #     :return:
-    #     """
-    #     # 同一个time slot,多个device基于同一状态做出卸载决策
-    #     makeOffloadDecision(self, actions)
-    #     # server在每个time slot 会处理当前time slot提交到该server的所有任务
-    #     for server in self.servers:
-    #         server.process()  # server端的计算
-    #         server.testProcess()
-    #     self.calculateCost()
-
-    # TODO://step() 根据当前所有dag的current_task 决定T_i,更新T_i
     def offload(self, makeOffloadDecision, dis_actions, con_actions, f_action):
-        # 同一个time slot,多个device基于同一状态做出卸载决策
         makeOffloadDecision(self, dis_actions, con_actions, f_action)
         # server在每个time slot 会处理当前time slot提交到该server的所有任务
         for server in self.servers:
