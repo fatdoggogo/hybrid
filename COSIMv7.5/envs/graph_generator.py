@@ -1,10 +1,8 @@
 import copy
 import os
 import random
-import torch
 import numpy as np
-from pandas import DataFrame
-import time
+import pandas as pd
 
 random.seed(2)
 
@@ -29,7 +27,7 @@ class DAG_geneator:
 
     def save_to_file(self):
         instance_name = str(self.index) + '-' + str(self.n) + '-' + str(self.fat) + '-' + str(self.density) + '-' + str(
-            self.regularity) + time.strftime("%Y-%m-%d-%H:%M:%S", time.localtime(time.time()))
+            self.regularity)
         isExists = os.path.exists('../dag/instance/' + instance_name)
         if not isExists:
             os.makedirs('../dag/instance/' + instance_name)
@@ -49,17 +47,17 @@ class DAG_geneator:
         # 添加虚拟的开始节点和结束节点
         DAG_temp = copy.deepcopy(self.DAG)
         self.DAG[0] = {}
-        self.DAG[n + 1] = {}
+        self.DAG[self.n + 1] = {}
         self.DAG[0]['pre'] = []
         self.DAG[0]['suc'] = []
-        self.DAG[n + 1]['pre'] = []
-        self.DAG[n + 1]['suc'] = []
+        self.DAG[self.n + 1]['pre'] = []
+        self.DAG[self.n + 1]['suc'] = []
         for idx in DAG_temp.keys():
             if self.DAG[idx]['pre'][0] == 0:
                 self.DAG[0]['suc'].append(idx)
             if len(self.DAG[idx]['suc']) == 0:
-                self.DAG[idx]['suc'].append(n + 1)
-                self.DAG[n + 1]['pre'].append(idx)
+                self.DAG[idx]['suc'].append(self.n + 1)
+                self.DAG[self.n + 1]['pre'].append(idx)
 
     def generateDependencies(self):
         task_idx = 1  # 任务索引，从1开始，空出0以便后续添加一个开始任务
@@ -87,7 +85,8 @@ class DAG_geneator:
                 tmp11 = list(np.arange(1, sum(tmp1) + 1))
                 pre_level_task_idx = list(np.arange(1, sum(tmp2) + 1))
 
-                for e in tmp11: pre_level_task_idx.remove(e)
+                for e in tmp11:
+                    pre_level_task_idx.remove(e)
 
                 avl_parents = copy.deepcopy(pre_level_task_idx)
                 for k in range(nb_parents):
@@ -111,16 +110,17 @@ class DAG_geneator:
         total_nb_tasks = 0
         while True:
             tmp = self.getIntRandomNumberAround(nb_tasks_per_level, 100. - 100. * self.regularity)
-            if total_nb_tasks + tmp > n:
-                tmp = n - total_nb_tasks
+            if total_nb_tasks + tmp > self.n:
+                tmp = self.n - total_nb_tasks
             self.nb_tasks_per_level.append(tmp)
             total_nb_tasks += tmp
-            if total_nb_tasks >= n:
+            if total_nb_tasks >= self.n:
                 break
 
-    def getIntRandomNumberAround(self, x, perc):
+    @staticmethod
+    def getIntRandomNumberAround(x, perc):
         r = -perc + (2 * perc * random.random())
-        new_int = max(1, (int)(x * (1.0 + r / 100.00)))
+        new_int = max(1, int(x * (1.0 + r / 100.00)))
         return new_int
 
 
@@ -132,38 +132,23 @@ def generate_server_task(instance_name):
     for i in range(taskNumber):
         temp = max(fs) - 1 * np.random.poisson(1.5, serverNumber)
         for j in range(serverNumber):
-            if temp[j] == 0: temp[j] = 2  # 计算能力控制在（2,6）之间
+            if temp[j] == 0:
+                temp[j] = 2  # 计算能力控制在（2,6）之间
         total_CP.append(temp)
 
-    serverComputingCapability = DataFrame(total_CP)
-    serverComputingCapability.to_csv('instance/' + instance_name + '/server_computing_capability.csv',
+    serverComputingCapability = pd.DataFrame(total_CP)
+    serverComputingCapability.to_csv('../dag/instance/' + instance_name + '/server_computing_capability.csv',
                                      index=False)  # index=False表示不保存行名
 
-    taskCPUCycleNumber = DataFrame([round(random.uniform(0.1, 0.5), 2) for _ in range(taskNumber)])
-    taskCPUCycleNumber.to_csv('instance/' + instance_name + '/task_CPU_cycles_number.csv', index=False)
+    taskCPUCycleNumber = pd.DataFrame([round(random.uniform(0.1, 0.5), 2) for _ in range(taskNumber)])
+    taskCPUCycleNumber.to_csv('../dag/instance/' + instance_name + '/task_CPU_cycles_number.csv', index=False)
 
-    taskInputDataSize = DataFrame([round(random.uniform(5000, 6000), 2) for _ in range(taskNumber)])
-    taskInputDataSize.to_csv('instance/' + instance_name + '/task_input_data_size.csv', index=False)
+    taskInputDataSize = pd.DataFrame([round(random.uniform(5000, 6000), 2) for _ in range(taskNumber)])
+    taskInputDataSize.to_csv('../dag/instance/' + instance_name + '/task_input_data_size.csv', index=False)
 
-    taskOutputDataSize = DataFrame([round(random.uniform(500, 1000), 2) for _ in range(taskNumber)])
-    taskOutputDataSize.to_csv('instance/' + instance_name + '/task_output_data_size.csv', index=False)
+    taskOutputDataSize = pd.DataFrame([round(random.uniform(500, 1000), 2) for _ in range(taskNumber)])
+    taskOutputDataSize.to_csv('../dag/instance/' + instance_name + '/task_output_data_size.csv', index=False)
 
-
-class Weight_Sampler_pos:
-    def __init__(self, rwd_dim):
-        self.rwd_dim = rwd_dim
-
-    def sample(self, n_sample):
-        s = torch.normal(torch.zeros(n_sample, self.rwd_dim))
-        s = torch.abs(s)
-        s = s / torch.norm(s, dim=1, keepdim=True, p=1)
-        return s
-
-
-# if __name__ == "__main__":
-#     sample = Weight_Sampler_pos(rwd_dim=2)
-#     s = sample.sample(10)
-#     print(s)
 
 if __name__ == "__main__":
     # n_list = [15, 25, 35]      # DAG任务数量
@@ -182,5 +167,5 @@ if __name__ == "__main__":
                 index += 1
 
 
-# if __name__ == "__main__":
-#     generate_server_task('1-15-0.4-0.7-0.5')
+if __name__ == "__main__":
+    generate_server_task('1-3-0.4-0.7-0.5')

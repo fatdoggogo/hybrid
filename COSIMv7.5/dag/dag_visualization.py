@@ -1,5 +1,9 @@
 import networkx as nx
+import matplotlib
+
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
+
 
 def parse_dag_edges(text):
     edges = set()
@@ -32,7 +36,7 @@ def parse_dag_edges(text):
 
 # draw graph
 if __name__ == '__main__':
-    filename = 'DAG.txt'
+    filename = 'instance/1-7-0.5-0.5-0.5/DAG.txt'
     with open(filename, 'r') as f:
         lines = f.readlines()
 

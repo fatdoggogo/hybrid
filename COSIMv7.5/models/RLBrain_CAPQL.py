@@ -1,13 +1,14 @@
-import torch
+import copy
+
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.distributions import Normal
 from torch.distributions.categorical import Categorical
-import copy
-import numpy as np
 from torch.optim import Adam
-import analysis
-import random
+
+import utils
+from utils import *
+from replay_memory import *
 
 
 def weights_init_(m):
@@ -19,6 +20,7 @@ def weights_init_(m):
 class Actor(nn.Module):
 
     def __init__(self, s_dim, out_c, out_d, wt_dim):
+        print(str(s_dim), str(out_c), str(out_d), str(wt_dim))
         super(Actor, self).__init__()
 
         self.linear1 = nn.Linear(s_dim + wt_dim, 128)
@@ -31,12 +33,12 @@ class Actor(nn.Module):
         self.sigmoid = nn.Sigmoid()
         self.apply(weights_init_)
 
-    def forward(self, state, w):
-        # 如果输入的是数组，就将其转换成tensor
-        if isinstance(state, np.ndarray):
-            state = torch.tensor(state, dtype=torch.float)
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+    def forward(self, state, w):
         state_comp = torch.cat((state, w), dim=1)
+        mask = torch.isnan(state_comp).any(dim=1)
+        state_comp = state_comp[~mask]
         x = F.relu(self.linear1(state_comp))
         x = F.relu(self.linear2(x))
 
@@ -47,22 +49,60 @@ class Actor(nn.Module):
         log_std = torch.clamp(log_std, min=-20, max=2)
         return pi_d, mean, log_std
 
-    def sample(self, state, w):
-        # for each state in the mini-batch, get its mean and std
+    def sample(self, state, w, num_device, num_server):
+        state = torch.FloatTensor(state).to(self.device) if not torch.is_tensor(state) else state
+        w = torch.FloatTensor(w).to(self.device) if not torch.is_tensor(w) else w
         pi_d, mean, log_std = self.forward(state, w)
         std = log_std.exp()
         normal = Normal(mean, std)
         x_t = normal.rsample()  # for reparameterization trick (mean + std * N(0,1))
 
-        # restrict the outputs
+        # restrict the outputs for continuous actions
         action_c = torch.sigmoid(x_t)
         log_prob_c = normal.log_prob(x_t)
         log_prob_c -= torch.log(1.0 - action_c.pow(2) + 1e-8)
 
-        dist = Categorical(logits=pi_d)
-        action_d = dist.sample()
-        prob_d = dist.probs
-        log_prob_d = torch.log(prob_d + 1e-8)
+        actions_d = []
+        probs_d = []
+        log_probs_d = []
+        selected_action_c = []
+        selected_log_prob_c = []
+
+        for i in range(num_device):
+            start_idx = i * (num_server+1)
+            end_idx = start_idx + num_server + 1
+
+            dist = Categorical(logits=pi_d[:, start_idx:end_idx])
+            action_d = dist.sample()
+            prob_d = dist.probs
+            log_prob_d = torch.log(prob_d + 1e-8)
+
+            actions_d.append(action_d)
+            probs_d.append(prob_d)
+            log_probs_d.append(log_prob_d)
+
+            # action_c_start_idx = i * (1+num_server) * 2 + action_d.item() * 2
+            # action_c_end_idx = action_c_start_idx + 2
+            #
+            # selected_action_c.append(action_c[:, action_c_start_idx:action_c_end_idx])
+            # selected_log_prob_c.append(log_prob_c[:, action_c_start_idx:action_c_end_idx])
+
+            action_c_start_idxs = i * (1 + num_server) * 2 + action_d * 2
+            action_c_end_idxs = action_c_start_idxs + 2
+            selected_action_c_batch = torch.stack([action_c[i, start:end] for i, (start, end) in enumerate(zip(action_c_start_idxs, action_c_end_idxs))])
+            selected_log_prob_c_batch = torch.stack([log_prob_c[i, start:end] for i, (start, end) in enumerate(zip(action_c_start_idxs, action_c_end_idxs))])
+            selected_action_c.append(selected_action_c_batch)
+            selected_log_prob_c.append(selected_log_prob_c_batch)
+
+        actions_2d = [action.unsqueeze(0) if action.dim() == 1 else action for action in actions_d]
+        prob_d_2d = [prob_d.unsqueeze(0) if prob_d.dim() == 1 else prob_d for prob_d in probs_d]
+        log_prob_d_2d = [log_prob_d.unsqueeze(0) if log_prob_d.dim() == 1 else log_prob_d for log_prob_d in log_probs_d]
+        action_d = torch.cat(actions_2d, dim=1)  # tensor[[server1, server2, local]]
+        prob_d = torch.cat(prob_d_2d, dim=1)
+        log_prob_d = torch.cat(log_prob_d_2d, dim=1)
+
+        action_c = torch.cat(selected_action_c, dim=1)
+        log_prob_c = torch.cat(selected_log_prob_c, dim=1)
 
         return action_c, action_d, log_prob_c, log_prob_d, prob_d
 
@@ -86,6 +126,7 @@ class QNetwork(nn.Module):
         self.apply(weights_init_)
 
     def forward(self, state, action, w):
+        w = torch.tensor(w) if not isinstance(w, torch.Tensor) else w
         x = torch.cat([state, action, w], 1)
         x1 = self.Q1(x)
         x2 = self.Q2(x)
@@ -93,7 +134,7 @@ class QNetwork(nn.Module):
 
 
 class CAPQL:
-    def __init__(self, env, all_weights):
+    def __init__(self, env):
 
         self.env = env
         self.batch_size = 32
@@ -104,9 +145,15 @@ class CAPQL:
         self.tau = 0.01  # 每次两个网络间参数转移的衰减程度
         self.gamma = 0.9  # 未来的r的比例
 
-        self.state_dim = env.numberOfDevice * 4 + env.numberOfServer * 2  # bandwidth + computing capacity
-        self.dis_act_dim = 2 ** env.numberOfDevice
-        self.con_act_dim = env.numberOfDevice * (2 ** env.numberOfDevice)  # 每个设备的卸载率+计算效率
+        self.wt_dim = 2
+        self.rwd_dim = 1
+
+        self.alpha_c = 0.2
+        self.alpha_d = 0.2
+
+        self.state_dim = self.env.numberOfDevice * 4 + self.env.numberOfServer * 2  # bandwidth + computing capacity
+        self.dis_act_dim = (self.env.numberOfServer + 1) * self.env.numberOfDevice
+        self.con_act_dim = (self.env.numberOfServer + 1) * 2 * self.env.numberOfDevice  # 每个设备对每个server的卸载率+计算效率
 
         # define TWO Q networks for training
         self.critic = QNetwork(self.state_dim, self.con_act_dim, self.dis_act_dim, self.wt_dim)
@@ -116,110 +163,65 @@ class CAPQL:
         self.actor_optimizer = Adam(self.actor.parameters(), lr=self.lr)
         self.policy_optimizer = Adam(self.actor.parameters(), lr=self.lr)
 
-        self.memory = DiverseExperienceReplay(int(self.memory_size / env.taskNumber))  # 队列，最大值是5000
+        self.memory = ReplayMemory(100000, 123456)
         self.critic_optim = Adam(self.critic.parameters(), lr=self.lr)
+        self.weight_sampler = Weight_Sampler_pos(2)
 
-        self.all_weights = all_weights
         self.current_weight = None  # 当前权重
-        self.weight_history = []  # 过往权重集
-        self.weight_encounter = []
-        self.encountered_weight = None  # 过往权重
-        self.encountered_weight_num = 1  # 从过往.的数量
-
-        self.each_episode_weight = []
-        self.each_episode_DR = []  # 每个回合的累计折扣奖励
-        self.each_episode_history_DR = []  # 保存每个回合的累计折扣奖励
-        self.each_episode_DR_actual_01 = []
-        self.each_episode_loss = []  # 保存每个回合的loss
-        self.weight_opt_DR = {}  # 保存每个权重下的历史最优累计折扣奖励， 索引是权重向量元组，即(0.1, 0.5, 0.4)
-        for weight in all_weights:
-            self.weight_opt_DR[tuple(weight)] = []
-
-        self.weight_opt_fitness = {}  # 保存所有回合下的适应度向量，索引是权重, 其值为[适应度向量，权重*适应度向量]
-        for weight in all_weights:
-            self.weight_opt_fitness[tuple(weight)] = np.zeros(4)
-
-        self.weight_opt_actions_fitness = {}
-        for weight in all_weights:
-            self.weight_opt_actions_fitness[tuple(weight)] = []
-
-        self.weight_opt_actions_DR = {}
-        for weight in all_weights:
-            self.weight_opt_actions_DR[tuple(weight)] = []
-
-    def select_action(self, state, w):
-        state = torch.FloatTensor(state).to(self.device).unsqueeze(0)
-        w = torch.FloatTensor(w).to(self.device).unsqueeze(0)
-        action_c, action_d, log_prob_c, log_prob_d, prob_d = self.actor.sample(state, w)
-
-        action_c = torch.clamp(action_c, 0, 1).detach()
-        action_d = action_d.detach()
-        log_prob_c = log_prob_c.detach()
-        log_prob_d = log_prob_d.detach()
-        prob_d = prob_d.detach()
-
-        return action_c, action_d, log_prob_c, log_prob_d, prob_d
-
-    def remember(self, trace, time_step, current_weight, state, action, next_state, reward):
-        data = (state, action, next_state, reward)
-        trace.transitions.append(data)  # 任务调度完成之前，每次只在trace中记录本条轨迹中的各个状态转移
-        if time_step == self.env.taskNumber:  # 任务调度完后，记录本次轨迹，包括本次的所有状态转移、本轨迹的权重、适合度等
-            self.memory.update_buffer(trace, current_weight)
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     def run(self):
-        step = 0
-        one_episode_rewards = []
-        running_reward = None
         for eps_idx in range(self.episode_number):
-            total_loss = []
-            # 每个回合 变换权重
-            self.current_weight = self.set_weight_encoun_sque(eps_idx)
-            self.env.reset(self.current_weight)
+            self.current_weight = self.weight_sampler.sample(1)  # 每个回合 变换权重
+            self.env.reset()
+            self.env.setUp()
+            time_step = 0
+            total_reward = 0
             one_episode_dis_actions = []
-            trace = Trace(eps_idx, self.current_weight)  # yy 实例化trace
-            for time_step in range(1, self.env.taskNumber + 1):
+            while not self.env.isDAGsDone():
+                time_step += 1
                 current_state = self.env.getEnvState()
-                step += 1
-                action_c, action_d, log_prob_c, log_prob_d, prob_d = self.select_action(current_state,
-                                                                                        self.current_weight)
-                one_episode_dis_actions.append(action_c)
-                self.env.offload(time_step, current_state[0], action_c, action_d)
+                if current_state is None:
+                    break
+                action_c, action_d, log_prob_c, log_prob_d, prob_d = self.actor.sample(current_state, self.current_weight, self.env.numberOfDevice, self.env.numberOfServer)
+                self.env.offload(time_step, action_d, action_c)
                 reward = self.env.getEnvReward(self.current_weight)
+                total_reward = total_reward + reward
                 self.env.stepIntoNextState()
                 next_state = self.env.getEnvState()
+                self.memory.push(current_state, [action_c, action_d], self.current_weight, reward, next_state, self.env.isDAGsDone())
+                one_episode_dis_actions.append(action_d)
 
-                self.remember(trace, time_step, self.current_weight, current_state, [action_c, action_d], next_state,
-                              reward)
-                one_episode_rewards.append(np.array(reward))
+                if len(self.memory) > 3 * self.batch_size:
+                    state_batch, action_batch, w_batch, reward_batch, next_state_batch, mask_batch = self.memory.sample(self.batch_size)
+                    with torch.no_grad():
+                        next_s_actions_c, next_s_actions_d, next_s_log_pi_c, next_s_log_pi_d, next_s_prob_d = self.actor.sample(next_state_batch, w_batch, self.env.numberOfDevice, self.env.numberOfServer)
+                        qf1_next_target, qf2_next_target = self.critic_target(next_state_batch, next_s_actions_c, w_batch)
+                        min_qf_next_target_wt = next_s_prob_d * (torch.min(qf1_next_target,
+                                                                           qf2_next_target) - self.alpha_c * next_s_prob_d * next_s_log_pi_c - self.alpha_d * next_s_log_pi_d)
+                        mask_batch_tensor = torch.tensor(mask_batch, dtype=torch.float32)
+                        next_q_value = reward + mask_batch_tensor * self.gamma * min_qf_next_target_wt
 
-                # training
-                if len(self.memory) > self.batch_size:
-                    state_wt, action_wt, next_state_wt, wt_batch, reward_wt, \
-                        state_wh, action_wh, next_state_wh, wh_batch, reward_wh = self.memory_sample(eps_idx,
-                                                                                                     self.current_weight)
+                    s_actions_c, s_actions_d = utils.to_torch_action(action_batch, self.device)
+                    qf1, qf2 = self.critic.forward(state_batch, s_actions_c, w_batch)
+                    qf1 = qf1.gather(1, s_actions_d.long().view(-1, 1).to(self.device)).squeeze().view(-1)
+                    qf2 = qf2.gather(1, s_actions_d.long().view(-1, 1).to(self.device)).squeeze().view(-1)
+                    qf1_loss = F.mse_loss(qf1, next_q_value)
+                    qf2_loss = F.mse_loss(qf2, next_q_value)
+                    qf_loss = qf1_loss + qf2_loss
 
-                    # compute next_q_value target
-                    qf_loss_wt = self.get_critic_loss(state_wt, action_wt, next_state_wt, wt_batch, reward_wt)
-                    qf_loss_wh = self.get_critic_loss(state_wh, action_wh, next_state_wh, wh_batch, reward_wh)
-                    qf_loss = (qf_loss_wt + qf_loss_wh) / 2
                     self.critic_optim.zero_grad()
                     qf_loss.backward()
                     self.critic_optim.step()
 
                     # train the policy network
-                    actions_c, actions_d, log_pi_c, log_pi_d, prob_d = self.actor.sample(state_wt, wt_batch)
-                    qf1_pi_wt, qf2_pi_wt = self.critic(state_wt, actions_c, wt_batch)
-                    qf1_pi_wh, qf2_pi_wh = self.critic(state_wh, actions_c, wh_batch)
+                    actions_c, actions_d, log_pi_c, log_pi_d, prob_d = self.actor.sample(state_batch, w_batch, self.env.numberOfDevice, self.env.numberOfServer)
+                    qf1_pi_w, qf2_pi_w = self.critic(state_batch, actions_c, w_batch)
+                    min_qf_pi_w = torch.min(qf1_pi_w, qf2_pi_w)
+                    min_qf_pi_w = (min_qf_pi_w * w_batch).sum(dim=-1, keepdim=True)
 
-                    min_qf_pi_wt = torch.min(qf1_pi_wt, qf2_pi_wt)
-                    min_qf_pi_wt = (min_qf_pi_wt * wt_batch).sum(dim=-1, keepdim=True)
-                    min_qf_pi_wh = torch.min(qf1_pi_wh, qf2_pi_wh)
-                    min_qf_pi_wh = (min_qf_pi_wh * wh_batch).sum(dim=-1, keepdim=True)
-
-                    min_qf_pi = (min_qf_pi_wt + min_qf_pi_wh) / 2
-
-                    policy_loss_d = (prob_d * (self.alpha_d * log_pi_d - min_qf_pi)).sum(1).mean()
-                    policy_loss_c = (prob_d * (self.alpha_c * prob_d * log_pi_c - min_qf_pi)).sum(1).mean()
+                    policy_loss_d = (prob_d * (self.alpha_d * log_pi_d - min_qf_pi_w)).sum(1).mean()
+                    policy_loss_c = (prob_d * (self.alpha_c * prob_d * log_pi_c - min_qf_pi_w)).sum(1).mean()
                     policy_loss = policy_loss_d + policy_loss_c
 
                     self.policy_optimizer.zero_grad()
@@ -227,131 +229,14 @@ class CAPQL:
                     self.policy_optimizer.step()
 
                     # sync the Q networks
-                    if eps_idx % self.target_update_interval == 0:
+                    if eps_idx % 1 == 0:
                         for target_param, param in zip(self.critic_target.parameters(), self.critic.parameters()):
                             target_param.data.copy_(target_param.data * (1.0 - self.tau) + param.data * self.tau)
 
-            disc_actual = np.sum(np.array([(self.discount ** i) * r for i, r in enumerate(one_episode_rewards)]),
-                                 axis=0)
-            disc_actual_01 = np.sum(np.array([r for i, r in enumerate(one_episode_rewards)]),
-                                    axis=0)
-            total_reward_01 = np.dot(disc_actual_01, self.current_weight)
-            total_reward = np.dot(disc_actual, self.current_weight)
-            running_reward = total_reward if running_reward == None else running_reward * 0.99 + total_reward * 0.01
+                if self.env.isDAGsDone():
+                    break
 
-            self.each_episode_DR.append(total_reward)  # 索引为回合数，其元素为当前回合的权重和temp
-            self.each_episode_history_DR.append(running_reward)  # 历史回合回报+当前回合总回报更新历史回合回报
-            self.each_episode_DR_actual_01.append(total_reward_01)
-            self.each_episode_loss.append(sum(total_loss))
-            self.weight_opt_DR[tuple(self.current_weight)].append(total_reward)
-            self.weight_opt_actions_DR[tuple(self.current_weight)].append(one_episode_dis_actions)
-
-            get_w_opt_fitness(tuple(self.current_weight), self.weight_opt_fitness, self.env.current_schedule.fitness)
-            one_episode_rewards = []
-            print('Episode: ', eps_idx, ' | reward: ', disc_actual, ' | total_reward: ', total_reward,
-                  ' | one_episode_actions: ', one_episode_dis_actions,
+            print('Episode: ', eps_idx, ' | total_reward: ', total_reward.item(),
                   ' | weight: ', self.current_weight)
 
-        self.env.outputMetric()
-        total = self.env.episodes * self.env.T * self.env.numberOfDevice
-        print(
-            "finished!!! failure rate = %f,and error rate = %f" % (
-                self.env.failures / total, self.env.errors / (total * 2)))
-        analysis.draw(self.env.envDir, self.env.algorithmDir)
-        np.savetxt('out_dis.txt', all_dis_act, fmt="%f", delimiter=',')
 
-    def sample(self, eps_idx, batch_size):
-        tmp = []
-        for trace in self.main_memory:
-            for trans in trace.transitions:
-                tmp.append(trans)
-        for trace in self.secd_memory:
-            for trans in trace.transitions:
-                tmp.append(trans)
-        return random.sample(tmp, batch_size)
-
-    def to_torch_action(actions, device):
-        ad = torch.Tensor(actions[:, 0]).int().to(device)
-        ac = torch.Tensor(actions[:, 1:]).to(device)
-        return ac, ad
-
-    def get_critic_loss(self, state_batch, action_batch, next_state, w_batch, reward):
-        with torch.no_grad():
-            next_s_actions_c, next_s_actions_d, next_s_log_pi_c, next_s_log_pi_d, next_s_prob_d = self.actor.sample(
-                next_state, w_batch)
-            qf1_next_target, qf2_next_target = self.critic_target(next_state, next_s_actions_c, w_batch)
-            min_qf_next_target_wt = next_s_prob_d * (torch.min(qf1_next_target,
-                                                               qf2_next_target) - self.alpha_c * next_s_prob_d * next_s_log_pi_c - self.alpha_d * next_s_log_pi_d)
-            next_q_value = reward + self.gamma * (min_qf_next_target_wt.sum(1)).view(-1)
-
-        s_actions_c, s_actions_d = self.to_torch_action(action_batch)
-        qf1, qf2 = self.critic.forward(state_batch, s_actions_c, w_batch)
-        qf1 = qf1.gather(1, s_actions_d.long().view(-1, 1).to(self.device)).squeeze().view(-1)
-        qf2 = qf2.gather(1, s_actions_d.long().view(-1, 1).to(self.device)).squeeze().view(-1)
-        qf1_loss = F.mse_loss(qf1, next_q_value)
-        qf2_loss = F.mse_loss(qf2, next_q_value)
-        qf_loss = (qf1_loss + qf2_loss) / 2
-        return qf_loss
-
-    def memory_sample(self, eps_idx, weight):
-
-        # 随机从队列中取出一个batch大小的数据，data是batchsize个transition
-        data = self.memory.sample(eps_idx, self.batch_size)
-        state = [d[0] for d in data]
-        next_state = [d[2] for d in data]
-        state = np.array(state)
-        next_state = np.array(next_state)
-
-        '''------------ 针对当前权重 ------------'''
-        wt_batch = np.repeat([weight], self.batch_size, axis=0)  # 重复最近一次的权重，32次，形成32*3矩阵
-        tt = [state, wt_batch]
-        with tf.device('/gpu:0'):
-            y_wt = self.Q_network(tt).numpy()  # 针对当前权重的一批state放入网络,Q(s,a)
-            Q1_wt = self.target_Q_network([next_state, wt_batch]).numpy()  # TQ(s_,a)
-
-            # double DQN for MO
-            Q2_wt = self.Q_network([next_state, wt_batch]).numpy()  # Q(s_,a)
-        next_action_wt = np.argmax(np.dot(Q2_wt, weight), axis=1)  # 将每个动作的Q值向量与权重相乘,挑选的a
-        '''------------ 针对当前权重 ------------'''
-
-        '''------------ 针对过往权重 ------------'''
-        np.random.seed(eps_idx)
-        max_index = len(self.weight_history)
-        idx = np.random.randint(max_index, size=self.batch_size)
-        wj_batch = np.array(self.weight_history)[idx]
-
-        with tf.device('/gpu:0'):
-            y_wj = self.Q_network([state, wj_batch]).numpy()
-            Q1_wj = self.target_Q_network([next_state, wj_batch]).numpy()
-
-            Q2_wj = self.Q_network([next_state, wj_batch]).numpy()
-        next_action_wj = [np.argmax(np.dot(Q2_wj[i], wj_batch[i])) for i in range(self.batch_size)]
-        '''------------ 针对过往权重 ------------'''
-
-        for i, (_, a, _, r, done) in enumerate(data):
-            if done:
-                target_yt = r
-                target_yj = r
-            else:
-                target_yt = np.add(r, self.discount * Q1_wt[i][next_action_wt[i]])  # 计算的r+maxQ(s_,a)
-                target_yj = np.add(r, self.discount * Q1_wj[i][next_action_wj[i]])
-
-            target_yt = np.array(target_yt, dtype='float32')
-            y_wt[i][a] = target_yt
-
-            target_yj = np.array(target_yj, dtype='float32')
-            y_wj[i][a] = target_yj
-
-        return state, wt_batch, y_wt, state, wj_batch, y_wj
-
-
-class Trace:
-    def __init__(self, eps_idx, weight):
-        self.eps_idx = eps_idx  # Index of episode
-        self.weight = weight  # 该条轨迹对应的权重
-        self.transitions = []  # All transitions
-        self.fitness = []  # 该条轨迹对应的适应度
-        self.weighted_fitness = None  # 加权
-        self.signature = []  # 累积折扣奖励向量
-        self.crd_distance = None  # 该条轨迹的拥挤距离
-        self.temp_signature = None  # 临时标签，用于对缓冲区中的轨迹进行排序
