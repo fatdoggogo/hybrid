@@ -143,7 +143,7 @@ def generate_server_task(instance_name):
     taskCPUCycleNumber = pd.DataFrame([round(random.uniform(0.1, 0.5), 2) for _ in range(taskNumber)])
     taskCPUCycleNumber.to_csv('../dag/instance/' + instance_name + '/task_CPU_cycles_number.csv', index=False)
 
-    taskInputDataSize = pd.DataFrame([round(random.uniform(5000, 6000), 2) for _ in range(taskNumber)])
+    taskInputDataSize = pd.DataFrame([round(random.uniform(3000, 6000), 2) for _ in range(taskNumber)])
     taskInputDataSize.to_csv('../dag/instance/' + instance_name + '/task_input_data_size.csv', index=False)
 
     taskOutputDataSize = pd.DataFrame([round(random.uniform(500, 1000), 2) for _ in range(taskNumber)])

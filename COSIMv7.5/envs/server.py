@@ -19,17 +19,8 @@ class Server(object):
             self.id, self.bandwidth, self.maxCpuFrequency))
 
     def acceptTask(self, task: Task):
-        f_sum = sum(task.computing_f for task in self.tasks)
-        if f_sum + task.computing_f > self.maxCpuFrequency:
-            logging.info("已经到达最大cpu freq，不能再offload到server%d上", self.id)
-            return False
-        if self.bandwidth > 100:
-            logging.info("已经到达最大带宽，不能再offload到server%d上", self.id)
-            return False
-        else:
-            self.tasks.append(task)
-            task.server_id = self.id
-            return True
+        self.tasks.append(task)
+        task.server_id = self.id
 
     def process(self, timeslot, time_step):
         if len(self.tasks) > 0:
@@ -40,10 +31,10 @@ class Server(object):
                     dev = self.env.devices[task.device_id - 1]
                     occupied_bw = self.availableBW * 1.0 / len(new_tasks)
                     uploadRate = occupied_bw * 1e6 * math.log2(
-                        1 + (dev.transPower * dev.channelGain / (occupied_bw * dev.channelNoise)))
+                        1 + (dev.transPower * dev.channelGain / (occupied_bw * 1e6 * dev.channelNoise * 1e-9)))
                     downloadRate = dev.BW * 1e6 * math.log2(
-                        1 + (self.transPower * self.channelGain / (dev.BW * self.channelNoise)))
-                    uploadTime = task.upload_data_sum * 1.0 / uploadRate * 1000
+                        1 + (self.transPower * self.channelGain / (dev.BW * 1e6 * self.channelNoise * 1e-9)))
+                    uploadTime = task.upload_data_sum * 1.0 / uploadRate
                     # calculate BW
                     if timeslot == 0:
                         raise ValueError("timeslot 不能为 0")
@@ -66,9 +57,6 @@ class Server(object):
             self.tasks = [task for task in self.tasks if task not in finished_tasks]
             self.availableFreq = self.maxCpuFrequency - sum(task.computing_f for task in self.tasks)
             self.availableBW = self.bandwidth - sum(task.computing_f for task in not_finished_trans_tasks)
-
-        else:
-            print("all tasks already processed in sever %s", str(self.id))
 
     def updateState(self, time_step):
         """

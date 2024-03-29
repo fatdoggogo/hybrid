@@ -28,10 +28,11 @@ class ReplayMemory:
 
         return np.vstack(arrays_to_stack)
 
-    def push(self, state, action, weights, reward, next_state, done):  # action是一个包含两个张量的列表：[action_c, action_d]
+    def push(self, action_c_full, state, action, weights, reward, next_state, done):  # action是一个包含两个张量的列表：[action_c, action_d]
         if len(self.buffer) < self.capacity:
             self.buffer.append(None)
-        self.buffer[self.position] = (self.detach_and_convert_to_numpy(state),
+        self.buffer[self.position] = (self.detach_and_convert_to_numpy(action_c_full),
+                                      self.detach_and_convert_to_numpy(state),
                                       self.detach_and_convert_to_numpy(action),
                                       self.detach_and_convert_to_numpy(weights).flatten(),
                                       self.detach_and_convert_to_numpy(reward),
@@ -41,7 +42,8 @@ class ReplayMemory:
 
     def sample(self, batch_size):
         batch = random.sample(self.buffer, batch_size)
-        states, actions, ws, rewards, next_states, dones = zip(*batch)
+        action_c_full, states, actions, ws, rewards, next_states, dones = zip(*batch)
+        action_c_full = self.stack_arrays(action_c_full)
         state = self.stack_arrays(states)
         action = self.stack_arrays(actions)
         w = self.stack_arrays(ws)
@@ -49,7 +51,7 @@ class ReplayMemory:
         next_state = self.stack_arrays(next_states)
         done = np.array(dones).reshape(1, -1)
 
-        return state, action, w, reward, next_state, done
+        return action_c_full, state, action, w, reward, next_state, done
 
     def __len__(self):
         return len(self.buffer)

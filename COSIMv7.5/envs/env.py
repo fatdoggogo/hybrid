@@ -63,7 +63,6 @@ class Env:
         state = []
         for device in self.devices:
             if device.dag.currentTask is not None:
-                state.append(device.dag.currentTask.id)
                 state.append(device.dag.currentTask.d_i)
                 state.append(device.dag.currentTask.q_i)
                 state.append(device.cpuFrequency)
@@ -93,25 +92,23 @@ class Env:
         return total_reward
 
     def offload(self, time_step, dis_action, con_action):
-        i = 0
+        print("current timestep: ", time_step, "time_slot:", self.time_slot)
         for device in self.devices:
             if not device.dag.is_finished:
-                server_id = dis_action[0, i].item()
+                server_id = dis_action[0, device.id-1].item()
                 if server_id >= 1:
                     device.dag.currentTask.server_id = server_id
-                    device.dag.currentTask.offloading_rate = con_action[0, i * 2].item()
-                    device.dag.currentTask.computing_f = con_action[0, i * 2 + 1].item()
+                    device.dag.currentTask.offloading_rate = con_action[0, (device.id-1) * 2].item()
+                    device.dag.currentTask.computing_f = con_action[0, (device.id-1) * 2 + 1].item()
                 else:
                     device.dag.currentTask.server_id = 0
                     device.dag.currentTask.offloading_rate = 0
                     device.dag.currentTask.computing_f = 0
                 device.offload(device.dag.currentTask, time_step)
-                i += 1
             else:
                 print("dag is finished, break")
         for server in self.servers:
             server.process(self.time_slot, time_step)
-        self.calculateCost()
 
     def stepIntoNextState(self):
         for d in self.devices:

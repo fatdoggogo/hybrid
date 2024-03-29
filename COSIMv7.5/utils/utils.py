@@ -6,12 +6,13 @@ def update_Q(target, source, tau):
         target_param.data.copy_(target_param.data * (1.0 - tau) + param.data * tau)
 
 
-def to_torch_action(action_batch, device):
-    actions_c = [action[0] for action in action_batch]
-    actions_d = [action[1] for action in action_batch]
+def to_torch_action(action_batch, device, device_num):
 
-    actions_c = torch.stack(actions_c).to(device)
-    actions_d = torch.stack(actions_d).to(device)
+    actions_c = action_batch[:, :device_num*2]
+    actions_d = action_batch[:, device_num*2:]
+
+    actions_c = torch.FloatTensor(actions_c).to(device)
+    actions_d = torch.FloatTensor(actions_d).to(device)
 
     return actions_c, actions_d
 

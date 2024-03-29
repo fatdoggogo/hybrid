@@ -118,12 +118,11 @@ class Device:
             self.localProcess(curr_task)
             curr_task.T_exec_server_i = 0
             self.ifLocalFinish(curr_task, time_step)
-            logging.info("episode:%d - Time:%d - [Device-%d] local process no offloading" % (
-                self.env.episode, time_step, self.id))
+            print("episode:", self.env.episode, " - Time:", time_step, "- Device:", self.id, "local process no offloading")
         if 0 < curr_task.offloading_rate <= 1 and curr_task.server_id > 0 and curr_task.computing_f > 0:
             self.localProcess(curr_task)
-            logging.info("episode:%d - Time:%d - [Device-%d] offload to [Server-%d] with action offloadingRate=%f" % (
-                self.env.episode, time_step, self.id, curr_task.server_id, curr_task.offloading_rate))
+            print("episode:", self.env.episode, " - Time:", time_step, "- Device:", self.id, "- Server:", curr_task.server_id,
+                  "with action offloadingRate:", curr_task.offloading_rate)
             curr_task.device_id = self.id
             selected_server = next((server for server in self.env.servers if server.id == curr_task.server_id), None)
             selected_server.acceptTask(curr_task)
