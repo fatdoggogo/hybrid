@@ -1,6 +1,6 @@
 import json
 import math
-
+import csv
 from task import *
 import logging as logging
 
@@ -11,7 +11,7 @@ class Device:
         self.id = config['cnt']
         self.cpuFrequency = config['cpu_frequency']  # 每个设备的CPU频率  f(n,l)
         self.BW = config['BW']  # server向device传输结果数据时可分配的带宽 unit MHZ
-        self.En = config['energy_consume_per_time_slot']  # 设备单位时间传输数据需要的能量 unit mJ
+        self.En = config['energy_consume_per_time_slot']  # 设备单位时间传输数据需要的能量 unit uJ
         self.transPower = config['transmission_power']
         self.channelGain = config['channel_gain']
         self.channelNoise = config['channel_noise']
@@ -19,11 +19,10 @@ class Device:
         self.fat = config['fat']
         self.density = config['density']
         self.regularity = config['regularity']
-        self.cpuCyclePerBit = 737.5
-        self.effectiveCapacitanceCoefficient = 1e-27
+        self.cpuCyclePerBit = 750
+        self.effectiveCapacitanceCoefficient = 1e-23
         self.dag = None
         self.time_slot = 100
-        logging.info('init [Device-%d] finish' % self.id)
 
     @staticmethod
     def generateDAG(dag_index, task_num, fat_num, density, regularity):
@@ -85,47 +84,56 @@ class Device:
         self.dag = DAG(instance_name, taskSet)
 
     def totalLocalProcess(self, datasize):
-        # calculate z(n) unit J
         energyConsumptionPerCycle = self.effectiveCapacitanceCoefficient * math.pow(self.cpuFrequency * 1e9, 2)
-        t_local = datasize * self.cpuCyclePerBit * 1.0 / self.cpuFrequency * 1e-9 * 1000
-        e_local = datasize * self.cpuCyclePerBit * energyConsumptionPerCycle * 1000
+        t_local = datasize * self.cpuCyclePerBit * 1.0 / (self.cpuFrequency * 1e9) * 1e5
+        e_local = datasize * self.cpuCyclePerBit * energyConsumptionPerCycle
         return t_local, e_local
 
     def localProcess(self, task: Task):
         dataSize = (1 - task.offloading_rate) * task.d_i
-        # calculate z(n) unit J
+        # calculate z(n) unit uJ
         energyConsumptionPerCycle = self.effectiveCapacitanceCoefficient * math.pow(self.cpuFrequency * 1e9, 2)
-        task.T_exec_local_i = dataSize * self.cpuCyclePerBit * 1.0 / self.cpuFrequency * 1e-9 * 1000
-        task.E_exec_local_i = dataSize * self.cpuCyclePerBit * energyConsumptionPerCycle * 1000
+        task.T_exec_local_i = dataSize * self.cpuCyclePerBit * 1.0 / (self.cpuFrequency * 1e9) * 1e5
+        task.E_exec_local_i = dataSize * self.cpuCyclePerBit * energyConsumptionPerCycle
         increment = 1 if dataSize == 0 else math.ceil(task.T_exec_local_i / self.time_slot)
         task.expected_local_finish_step = task.start_step + increment - 1
 
     @staticmethod
     def ifLocalFinish(curr_task: Task, time_step):
-        if curr_task.expected_local_finish_step == time_step:
+        if curr_task.expected_local_finish_step <= time_step:
             curr_task.status = TaskStatus.FINISHED
         else:
             curr_task.status = TaskStatus.RUNNING
 
     def offload(self, curr_task: Task, time_step):
-        curr_task.status = TaskStatus.RUNNING
-        curr_task.start_step = time_step
-        if curr_task.offloading_rate < 0 or curr_task.offloading_rate > 1:
-            logging.error("offloadingRate must ∈ [0,1]")
-        if curr_task.offloading_rate == 0 or curr_task.server_id == 0 or curr_task.computing_f == 0:
-            curr_task.T_trans_i = 0
-            curr_task.E_trans_i = 0
-            self.localProcess(curr_task)
-            curr_task.T_exec_server_i = 0
-            self.ifLocalFinish(curr_task, time_step)
-            print("episode:", self.env.episode, " - Time:", time_step, "- Device:", self.id, "local process no offloading")
-        if 0 < curr_task.offloading_rate <= 1 and curr_task.server_id > 0 and curr_task.computing_f > 0:
-            self.localProcess(curr_task)
-            print("episode:", self.env.episode, " - Time:", time_step, "- Device:", self.id, "- Server:", curr_task.server_id,
-                  "with action offloadingRate:", curr_task.offloading_rate)
+
+        if curr_task.status == TaskStatus.NOT_SCHEDULED:
+            curr_task.status = TaskStatus.RUNNING
+            curr_task.start_step = time_step
             curr_task.device_id = self.id
-            selected_server = next((server for server in self.env.servers if server.id == curr_task.server_id), None)
-            selected_server.acceptTask(curr_task)
+
+            if curr_task.offloading_rate == 0 or curr_task.server_id == 0 or curr_task.computing_f == 0:
+                curr_task.T_trans_i = 0
+                curr_task.E_trans_i = 0
+                curr_task.offloading_rate = 0
+                curr_task.server_id = 0
+                curr_task.computing_f = 0
+                curr_task.bw = 0
+                self.localProcess(curr_task)
+                curr_task.T_exec_server_i = 0
+                self.ifLocalFinish(curr_task, time_step)
+                print("episode:", self.env.episode, " - Time:", time_step, "- Device:", self.id, "local process no offloading")
+
+            elif 0 < curr_task.offloading_rate <= 1 and curr_task.server_id > 0 and curr_task.computing_f > 0:
+                self.localProcess(curr_task)
+                print("episode:", self.env.episode, " - Time:", time_step, "- Device:", self.id, "- Server:", curr_task.server_id,
+                      "with action offloadingRate:", curr_task.offloading_rate)
+                selected_server = next((server for server in self.env.servers if server.id == curr_task.server_id), None)
+                selected_server.acceptTask(curr_task)
+
+        else:
+            if curr_task.offloading_rate == 0 or curr_task.expected_sever_finish_step <= time_step:
+                self.ifLocalFinish(curr_task, time_step)
 
     def reset(self):
         self.dag = None

@@ -1,9 +1,11 @@
+import csv
 from typing import List
 
 import torch
 
 from device import Device
 from server import Server
+from task import *
 import logging
 import json
 import numpy as np
@@ -21,17 +23,14 @@ class Env:
             configStr = f.read()
             config = json.loads(configStr)
 
-        self.envDir = '../result/env_' + str(self.id)
-        self.algorithmDir = self.envDir + '/' + self.algorithm
-        if not os.path.exists("../result"):
-            os.mkdir("../result")
+        self.algorithmDir = '../result/' + self.algorithm
         if os.path.exists(self.algorithmDir):
             shutil.rmtree(path=self.algorithmDir)
-        os.mkdir(self.algorithmDir)
         self.imageDir = self.algorithmDir + '/images'
         self.metricDir = self.algorithmDir + '/metrics'
-        os.mkdir(self.imageDir)
-        os.mkdir(self.metricDir)
+        os.makedirs(self.imageDir, exist_ok=True)
+        os.makedirs(self.metricDir, exist_ok=True)
+
         self.episodes = config['episodes']
         self.episode = 0
         self.devices: List[Device] = []
@@ -56,6 +55,11 @@ class Env:
         self.rewards = np.zeros(shape=(self.episodes, 1))
 
     def setUp(self):
+        output_path = self.metricDir + '/task.csv'
+        with open(output_path, mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['Epi', 'step', 'DevID', 'TaskID', 'status', 'server', 'offRate', 'compf', 'realf', 'realBW',
+                             'd', 'q', 'Ttrans', 'Texec_l', 'Texec_ser', 'start', 'finish', 'rwd', 'rwt_t', 'rwt_e'])
         for d in self.devices:
             d.setUp()
 
@@ -67,27 +71,40 @@ class Env:
                 state.append(device.dag.currentTask.q_i)
                 state.append(device.cpuFrequency)
             else:
-                return None
+                state.append(-1)
+                state.append(-1)
+                state.append(-1)
         for server in self.servers:
             state.append(server.availableBW)
             state.append(server.availableFreq)
         return torch.tensor(state).unsqueeze(0)
 
-    def getEnvReward(self, current_weight):
+    def outputMetric(self, episode, time_step, task):
+        output_path = self.metricDir + '/task.csv'
+        with open(output_path, mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([episode, time_step, task.device_id, task.id, task.status,
+                             task.server_id, task.offloading_rate, task.computing_f, task.computing_f, task.bw,
+                             task.d_i, task.q_i, task.T_trans_i, task.T_exec_local_i, task.T_exec_server_i,
+                             task.start_step, task.finish_step, task.rwd, task.rwd_t, task.rwd_e])
+
+    def getEnvReward(self, time_step, current_weight):
         total_reward = 0
         for device in self.devices:
             if device.dag.currentTask is None:
                 continue
             t_local, e_local = device.totalLocalProcess(device.dag.currentTask.d_i)
-            if t_local - device.dag.currentTask.T_i < 0:
-                logging.info('device[%d] time error:%f < %f' % (device.id, t_local, device.dag.currentTask.T_i))
-            time_r = (t_local - device.dag.currentTask.T_i) / t_local
-
-            if e_local - device.dag.currentTask.E_i < 0:
-                logging.info('device[%d] energy error:%f < %f' % (device.id, e_local, device.dag.currentTask.E_i))
-            energy_r = (e_local - device.dag.currentTask.E_i) / e_local
-
-            total_reward = total_reward + current_weight[0][0] * time_r + current_weight[0][1] * energy_r
+            device.dag.currentTask.rwd_t = (t_local - device.dag.currentTask.T_reward_i) / t_local
+            device.dag.currentTask.rwd_e = (e_local - device.dag.currentTask.E_i) / e_local
+            device.dag.currentTask.rwd = current_weight[0][0] * device.dag.currentTask.rwd_t + current_weight[0][1] * device.dag.currentTask.rwd_e
+            total_reward = total_reward + device.dag.currentTask.rwd
+            print(f'device[{device.id}], T_i: {device.dag.currentTask.T_i}, T_reward_i:{round(device.dag.currentTask.T_reward_i,2)}, t_local:{round(t_local,2)}, '
+                  f'E_i:{round(device.dag.currentTask.E_i,2)}, e_local:{round(e_local,2)}, '
+                  f'time_reward: {round(device.dag.currentTask.rwd_t,2)},energy_reward: {round(device.dag.currentTask.rwd_e,2)},'
+                  f'reward:{round(device.dag.currentTask.rwd.item(),2)}, '
+                  f'weight: {round(current_weight[0][0].item(),2)} {round(current_weight[0][1].item(),2)},'
+                  f'status:{device.dag.currentTask.status}, current_task_id:{device.dag.currentTask.id}')
+            self.outputMetric(self.episode, time_step, device.dag.currentTask)
         self.rewards[self.episode][0] = self.rewards[self.episode][0] + total_reward
         return total_reward
 
@@ -96,17 +113,18 @@ class Env:
         for device in self.devices:
             if not device.dag.is_finished:
                 server_id = dis_action[0, device.id-1].item()
-                if server_id >= 1:
-                    device.dag.currentTask.server_id = server_id
-                    device.dag.currentTask.offloading_rate = con_action[0, (device.id-1) * 2].item()
-                    device.dag.currentTask.computing_f = con_action[0, (device.id-1) * 2 + 1].item()
-                else:
-                    device.dag.currentTask.server_id = 0
-                    device.dag.currentTask.offloading_rate = 0
-                    device.dag.currentTask.computing_f = 0
+                if device.dag.currentTask.status == TaskStatus.NOT_SCHEDULED:
+                    if server_id >= 1:
+                        device.dag.currentTask.server_id = server_id
+                        device.dag.currentTask.offloading_rate = con_action[0, (device.id-1) * 2].item()
+                        device.dag.currentTask.computing_f = con_action[0, (device.id-1) * 2 + 1].item()
+                    else:
+                        device.dag.currentTask.server_id = 0
+                        device.dag.currentTask.offloading_rate = 0
+                        device.dag.currentTask.computing_f = 0
                 device.offload(device.dag.currentTask, time_step)
             else:
-                print("dag is finished, break")
+                print("device", device.id, "is finished, break")
         for server in self.servers:
             server.process(self.time_slot, time_step)
 
@@ -125,24 +143,17 @@ class Env:
     def isDAGsDone(self):
         return all(device.dag.is_finished for device in self.devices)
 
-    def calculateCost(self):
-        """
-        分别计算在当前策略，全部本地以及全部卸载三种情况下，按权重得到的总消耗，并将其存储
-        :return:
-        """
     # def outputMetric(self):
-    #     """
-    #     存储结果
-    #     :return:
-    #     """
-    #     output = self.metricDir + '/cost.csv'
-    #     np.savetxt(output, self.totalWeightCosts, fmt="%f", delimiter=',')
-    #     output = self.metricDir + '/time-cost.csv'
-    #     np.savetxt(output, self.totalTimeCosts, fmt="%f", delimiter=',')
-    #     output = self.metricDir + '/energy-cost.csv'
-    #     np.savetxt(output, self.totalEnergyCosts, fmt="%f", delimiter=',')
-    #     output = self.metricDir + '/reward.csv'
-    #     np.savetxt(output, self.rewards, fmt="%f", delimiter=',')
+    #     output = self.metricDir + '/task.csv'
+    #     np.savetxt(output, self.devices, fmt="%f", delimiter=',')
+        # output = self.metricDir + '/cost.csv'
+        # np.savetxt(output, self.totalWeightCosts, fmt="%f", delimiter=',')
+        # output = self.metricDir + '/time-cost.csv'
+        # np.savetxt(output, self.totalTimeCosts, fmt="%f", delimiter=',')
+        # output = self.metricDir + '/energy-cost.csv'
+        # np.savetxt(output, self.totalEnergyCosts, fmt="%f", delimiter=',')
+        # output = self.metricDir + '/reward.csv'
+        # np.savetxt(output, self.rewards, fmt="%f", delimiter=',')
 
 
 if __name__ == "__main__":

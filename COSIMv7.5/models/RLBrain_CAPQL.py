@@ -58,7 +58,7 @@ class CAPQL:
                     break
                 action_c_full, _, action_c, action_d, _, _, _ = self.actor.sample(current_state, self.current_weight, self.env.numberOfDevice, self.env.numberOfServer)
                 self.env.offload(time_step, action_d, action_c)
-                reward = self.env.getEnvReward(self.current_weight)
+                reward = self.env.getEnvReward(time_step, self.current_weight)
                 total_reward = total_reward + reward
                 self.env.stepIntoNextState()
                 next_state = self.env.getEnvState()

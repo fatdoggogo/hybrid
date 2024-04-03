@@ -24,9 +24,10 @@ class Task:
         self.offloading_rate = None
         self.server_id = None
         self.computing_f = None
+        self.bw = None
 
-        self.T_trans_i = None  # d+qj+qi无线传输时间
-        self.E_trans_i = None  # 传输任务的能耗=En * T_trans_i
+        self.T_trans_i = None  # d+qj+qi无线传输时间             #us
+        self.E_trans_i = None  # 传输任务的能耗=En * T_trans_i  #uj
 
         self.T_exec_local_i = None  # 本地执行任务的时间
         self.E_exec_local_i = None  # 本地执行任务的能耗 = Pn * (1-offloading_rate) * d_i * local_cycle
@@ -39,7 +40,10 @@ class Task:
         self.expected_sever_finish_step = None
         self.device_id = None
         self.expected_trans_finish_step = None
-        self.time_slot = 1000
+        self.time_slot = 100
+        self.rwd = 0.0
+        self.rwd_t = 0.0
+        self.rwd_e = 0.0
 
     @property
     def upload_data_sum(self):
@@ -58,10 +62,15 @@ class Task:
         return self.T_exec_server_i + self.T_trans_i
 
     @property
-    def T_i(self):  # 任务总执行的时间=max{T_local_i,T_server_i}
+    def T_i(self):
         expected_local_finish = 0 if self.expected_local_finish_step is None else self.expected_local_finish_step
         expected_server_finish = 0 if self.expected_sever_finish_step is None else self.expected_sever_finish_step
+        self.finish_step = max(expected_local_finish, expected_server_finish)
         return max(expected_local_finish, expected_server_finish) * self.time_slot
+
+    @property
+    def T_reward_i(self):
+        return max(self.T_trans_i + self.T_exec_server_i, self.T_exec_local_i)
 
     @property
     def E_i(self):  # 任务总消耗=E_trans_i + E_exec_local_i
@@ -79,7 +88,6 @@ class DAG:
         self.t_dag = 0
         self.e_dag = 0
         self.finished_timestep = None
-        self.time_slot = 1000
 
     def update_status(self):
         if self.currentTask.status == TaskStatus.FINISHED:

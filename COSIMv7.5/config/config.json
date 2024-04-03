@@ -11,12 +11,12 @@
             "priority":3,
             "max_process_delay":0.7,
             "max_process_load_per_time_slot" :1500,
-            "energy_consume_per_time_slot":1,
-            "cpu_frequency":1.5,
+            "energy_consume_per_time_slot":0.5,
+            "cpu_frequency":2,
             "max_load_capacity":6000,
-            "transmission_power":2,
+            "transmission_power":6,
             "channel_gain":1,
-            "BW":2,
+            "BW":5,
             "channel_noise":1,
             "cnt":1,
             "instance_name":"1-8-0.6-0.5-0.5"
@@ -29,12 +29,12 @@
             "priority":2,
             "max_process_delay":0.7,
             "max_process_load_per_time_slot" :1000,
-            "energy_consume_per_time_slot":1,
-            "cpu_frequency":1.5,
+            "energy_consume_per_time_slot":0.6,
+            "cpu_frequency":2,
             "max_load_capacity":6000,
-            "transmission_power":2,
+            "transmission_power":7,
             "channel_gain":1,
-            "BW":2,
+            "BW":4,
             "channel_noise":1,
             "cnt":2,
             "instance_name":"2-7-0.6-0.5-0.5"
@@ -46,12 +46,12 @@
             "priority":1,
             "max_process_delay":0.7,
             "max_process_load_per_time_slot" :1000,
-            "energy_consume_per_time_slot":1,
-            "cpu_frequency":1.5,
+            "energy_consume_per_time_slot":0.65,
+            "cpu_frequency":2,
             "max_load_capacity":6000,
-            "transmission_power":2,
+            "transmission_power":8,
             "channel_gain":1,
-            "BW":2,
+            "BW":5,
             "channel_noise":1,
             "cnt":3,
             "instance_name":"3-8-0.4-0.5-0.5"
@@ -59,22 +59,22 @@
     ],
     "server_configs":[
         {
-            "bandwidth":6,
-            "channel_gain":1,
-            "transmission_power":10,
-            "max_cpu_frequency":4,
+            "bandwidth":30,
+            "channel_gain":2,
+            "transmission_power":25,
+            "max_cpu_frequency":8,
             "cnt" :1,
             "gaussian_channel_noise":1,
-            "avg_cpu_cycle_per_bit":737.5
+            "avg_cpu_cycle_per_bit":600
         },
         {
-            "bandwidth":6,
-            "channel_gain":1,
-            "transmission_power":12,
-            "max_cpu_frequency":6,
+            "bandwidth":35,
+            "channel_gain":2,
+            "transmission_power":30,
+            "max_cpu_frequency":10,
             "cnt" :2,
             "gaussian_channel_noise":1,
-            "avg_cpu_cycle_per_bit":800.5
+            "avg_cpu_cycle_per_bit":650
         }
 
     ],
