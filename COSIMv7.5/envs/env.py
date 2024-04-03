@@ -64,20 +64,34 @@ class Env:
             d.setUp()
 
     def getEnvState(self):
-        state = []
+        d_i_states = []
+        q_i_states = []
+        cpu_freq_states = []
         for device in self.devices:
             if device.dag.currentTask is not None:
-                state.append(device.dag.currentTask.d_i)
-                state.append(device.dag.currentTask.q_i)
-                state.append(device.cpuFrequency)
+                d_i_states.append(device.dag.currentTask.d_i)
+                q_i_states.append(device.dag.currentTask.q_i)
+                cpu_freq_states.append(device.cpuFrequency)
             else:
                 state.append(-1)
                 state.append(-1)
                 state.append(-1)
+        bw_states = []
+        freq_states = []
         for server in self.servers:
-            state.append(server.availableBW)
-            state.append(server.availableFreq)
-        return torch.tensor(state).unsqueeze(0)
+            bw_states.append(server.availableBW)
+            freq_states.append(server.availableFreq)
+        d_i_tensor = self.normalize(torch.tensor(d_i_states, dtype=torch.float))
+        q_i_tensor = self.normalize(torch.tensor(q_i_states, dtype=torch.float))
+        cpu_freq_tensor = self.normalize(torch.tensor(cpu_freq_states, dtype=torch.float))
+        bw_tensor = self.normalize(torch.tensor(bw_states, dtype=torch.float))
+        freq_tensor = self.normalize(torch.tensor(freq_states, dtype=torch.float))
+        state = torch.cat((d_i_tensor, q_i_tensor, cpu_freq_tensor, bw_tensor, freq_tensor))[None, :]
+        return state
+
+    @staticmethod
+    def normalize(x: torch.Tensor, eps=1e-5) -> torch.Tensor:
+        return (x - x.mean()) / (x.std() + eps)
 
     def outputMetric(self, episode, time_step, task):
         output_path = self.metricDir + '/task.csv'
