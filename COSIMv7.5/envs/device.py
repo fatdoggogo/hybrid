@@ -1,6 +1,8 @@
 import json
 import math
 import csv
+
+import utils
 from task import *
 import logging as logging
 
@@ -9,7 +11,8 @@ class Device:
     def __init__(self, config, env):
         self.env = env  # 设备所在的环境
         self.id = config['cnt']
-        self.cpuFrequency = config['cpu_frequency']  # 每个设备的CPU频率  f(n,l)
+        self.cpuFrequency = np.random.uniform(1.5, 2.5)
+        self.availableCpuFreq = self.cpuFrequency
         self.BW = config['BW']  # server向device传输结果数据时可分配的带宽 unit MHZ
         self.En = config['energy_consume_per_time_slot']  # 设备单位时间传输数据需要的能量 unit uJ
         self.transPower = config['transmission_power']
@@ -99,14 +102,14 @@ class Device:
         task.expected_local_finish_step = task.start_step + increment - 1
 
     @staticmethod
-    def ifLocalFinish(curr_task: Task, time_step):
+    def ifTaskFinish(curr_task: Task, time_step):
         if curr_task.expected_local_finish_step <= time_step:
+            curr_task.local_finished = 1
             curr_task.status = TaskStatus.FINISHED
         else:
             curr_task.status = TaskStatus.RUNNING
 
     def offload(self, curr_task: Task, time_step):
-
         if curr_task.status == TaskStatus.NOT_SCHEDULED:
             curr_task.status = TaskStatus.RUNNING
             curr_task.start_step = time_step
@@ -121,24 +124,33 @@ class Device:
                 curr_task.bw = 0
                 self.localProcess(curr_task)
                 curr_task.T_exec_server_i = 0
-                self.ifLocalFinish(curr_task, time_step)
-                print("episode:", self.env.episode, " - Time:", time_step, "- Device:", self.id, "local process no offloading")
+                curr_task.server_finished = 1
+                self.ifTaskFinish(curr_task, time_step)
+                logging.info("episode: %d - Time: %d - Device: %d local process no offloading",
+                             self.env.episode, time_step, self.id)
 
             elif 0 < curr_task.offloading_rate <= 1 and curr_task.server_id > 0 and curr_task.computing_f > 0:
                 self.localProcess(curr_task)
-                print("episode:", self.env.episode, " - Time:", time_step, "- Device:", self.id, "- Server:", curr_task.server_id,
-                      "with action offloadingRate:", curr_task.offloading_rate)
+                logging.info("episode: %d - Time: %d - Device: %d - Server: %d with action offloadingRate: %f",
+                             self.env.episode, time_step, self.id, curr_task.server_id, curr_task.offloading_rate)
                 selected_server = next((server for server in self.env.servers if server.id == curr_task.server_id), None)
                 selected_server.acceptTask(curr_task)
 
         else:
+            logging.info("episode: %d - Time: %d - Device: %d none new task, still processing",
+                         self.env.episode, time_step, self.id)
             if curr_task.offloading_rate == 0 or curr_task.expected_sever_finish_step <= time_step:
-                self.ifLocalFinish(curr_task, time_step)
+                self.ifTaskFinish(curr_task, time_step)
 
     def reset(self):
         self.dag = None
 
     def updateState(self):
+        if self.dag.currentTask.status == TaskStatus.RUNNING:
+            self.availableCpuFreq = np.random.uniform(0.01, 0.05)
+        elif self.dag.currentTask.status == TaskStatus.FINISHED:
+            self.cpuFrequency = np.random.uniform(1.5, 2.5)
+            self.availableCpuFreq = self.cpuFrequency
         self.dag.update_status()
 
 

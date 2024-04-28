@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 
 
 def update_Q(target, source, tau):
@@ -61,3 +62,6 @@ class Weight_Sampler_pos:
         s = s / torch.norm(s, dim=1, keepdim=True, p=1)
 
         return s
+
+
+

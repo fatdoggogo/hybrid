@@ -1,0 +1,95 @@
+2024-04-19 01:28:11 - episode: 0 - Time: 1 - Device: 1 local process no offloading
+2024-04-19 01:28:11 - episode: 0 - Time: 1 - Device: 2 - Server: 2 with action offloadingRate: 0.463394
+2024-04-19 01:28:11 - episode: 0 - Time: 1 - Device: 3 - Server: 1 with action offloadingRate: 0.672329
+2024-04-19 01:28:11 - dev[1], T_i: 200, T_rwd_i:184.42, t_local:184.42, E_i:159.07, e_local:159.07, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:0,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - dev[2], T_i: 100, T_rwd_i:60.29, t_local:112.35, E_i:71.46, e_local:120.96, t_rwd: 0.46, e_rwd: 0.41,rwd:0.44, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:0,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 100, T_rwd_i:67.97, t_local:207.42, E_i:54.21, e_local:119.14, t_rwd: 0.67, e_rwd: 0.55,rwd:0.61, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:0,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 2 - Device: 1 none new task, still processing
+2024-04-19 01:28:11 - episode: 0 - Time: 2 - Device: 2 - Server: 1 with action offloadingRate: 0.277231
+2024-04-19 01:28:11 - episode: 0 - Time: 2 - Device: 3 - Server: 2 with action offloadingRate: 0.490633
+2024-04-19 01:28:11 - dev[1], T_i: 200, T_rwd_i:184.42, t_local:184.42, E_i:159.07, e_local:159.07, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:0,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[2], T_i: 200, T_rwd_i:169.25, t_local:234.17, E_i:122.62, e_local:159.51, t_rwd: 0.28, e_rwd: 0.23,rwd:0.25, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:1,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 100, T_rwd_i:67.26, t_local:132.05, E_i:58.88, e_local:98.22, t_rwd: 0.49, e_rwd: 0.40,rwd:0.45, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:1,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 3 - Device: 1 - Server: 1 with action offloadingRate: 0.857812
+2024-04-19 01:28:11 - episode: 0 - Time: 3 - Device: 2 none new task, still processing
+2024-04-19 01:28:11 - episode: 0 - Time: 3 - Device: 3 - Server: 2 with action offloadingRate: 0.380960
+2024-04-19 01:28:11 - dev[1], T_i: 100, T_rwd_i:44.04, t_local:128.02, E_i:24.66, e_local:93.16, t_rwd: 0.66, e_rwd: 0.74,rwd:0.70, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:1,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[2], T_i: 200, T_rwd_i:169.25, t_local:234.17, E_i:122.62, e_local:159.51, t_rwd: 0.28, e_rwd: 0.23,rwd:0.25, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:1,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 200, T_rwd_i:131.23, t_local:211.99, E_i:131.89, e_local:196.47, t_rwd: 0.38, e_rwd: 0.33,rwd:0.36, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:2,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 4 - Device: 1 local process no offloading
+2024-04-19 01:28:11 - episode: 0 - Time: 4 - Device: 2 - Server: 2 with action offloadingRate: 0.514414
+2024-04-19 01:28:11 - episode: 0 - Time: 4 - Device: 3 none new task, still processing
+2024-04-19 01:28:11 - dev[1], T_i: 300, T_rwd_i:225.25, t_local:225.25, E_i:172.40, e_local:172.40, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:2,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - dev[2], T_i: 100, T_rwd_i:86.00, t_local:177.10, E_i:117.50, e_local:215.89, t_rwd: 0.51, e_rwd: 0.46,rwd:0.49, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:2,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 200, T_rwd_i:131.23, t_local:211.99, E_i:131.89, e_local:196.47, t_rwd: 0.38, e_rwd: 0.33,rwd:0.36, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:2,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 5 - Device: 1 none new task, still processing
+2024-04-19 01:28:11 - episode: 0 - Time: 5 - Device: 2 local process no offloading
+2024-04-19 01:28:11 - episode: 0 - Time: 5 - Device: 3 local process no offloading
+2024-04-19 01:28:11 - dev[1], T_i: 300, T_rwd_i:225.25, t_local:225.25, E_i:172.40, e_local:172.40, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:2,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - dev[2], T_i: 200, T_rwd_i:125.28, t_local:125.28, E_i:149.12, e_local:149.12, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:3,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 200, T_rwd_i:148.31, t_local:148.31, E_i:227.72, e_local:227.72, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:3,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 6 - Device: 1 none new task, still processing
+2024-04-19 01:28:11 - episode: 0 - Time: 6 - Device: 2 none new task, still processing
+2024-04-19 01:28:11 - episode: 0 - Time: 6 - Device: 3 none new task, still processing
+2024-04-19 01:28:11 - dev[1], T_i: 300, T_rwd_i:225.25, t_local:225.25, E_i:172.40, e_local:172.40, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:2,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[2], T_i: 200, T_rwd_i:125.28, t_local:125.28, E_i:149.12, e_local:149.12, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:3,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 200, T_rwd_i:148.31, t_local:148.31, E_i:227.72, e_local:227.72, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:3,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 7 - Device: 1 - Server: 1 with action offloadingRate: 0.732004
+2024-04-19 01:28:11 - episode: 0 - Time: 7 - Device: 2 - Server: 2 with action offloadingRate: 0.734517
+2024-04-19 01:28:11 - episode: 0 - Time: 7 - Device: 3 - Server: 1 with action offloadingRate: 0.751795
+2024-04-19 01:28:11 - dev[1], T_i: 100, T_rwd_i:95.39, t_local:218.21, E_i:60.57, e_local:142.20, t_rwd: 0.56, e_rwd: 0.57,rwd:0.57, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:3,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[2], T_i: 100, T_rwd_i:49.47, t_local:151.98, E_i:72.83, e_local:215.25, t_rwd: 0.67, e_rwd: 0.66,rwd:0.67, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:4,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 200, T_rwd_i:117.98, t_local:207.32, E_i:67.14, e_local:154.98, t_rwd: 0.43, e_rwd: 0.57,rwd:0.50, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:4,l_finish:0, server_finish:0
+2024-04-19 01:28:11 - episode: 0 - Time: 8 - Device: 1 local process no offloading
+2024-04-19 01:28:11 - episode: 0 - Time: 8 - Device: 2 local process no offloading
+2024-04-19 01:28:11 - episode: 0 - Time: 8 - Device: 3 none new task, still processing
+2024-04-19 01:28:11 - dev[1], T_i: 200, T_rwd_i:134.42, t_local:134.42, E_i:129.53, e_local:129.53, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:4,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - dev[2], T_i: 200, T_rwd_i:161.50, t_local:161.50, E_i:220.54, e_local:220.54, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:5,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 200, T_rwd_i:117.98, t_local:207.32, E_i:67.14, e_local:154.98, t_rwd: 0.43, e_rwd: 0.57,rwd:0.50, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:4,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 9 - Device: 1 none new task, still processing
+2024-04-19 01:28:11 - episode: 0 - Time: 9 - Device: 2 none new task, still processing
+2024-04-19 01:28:11 - episode: 0 - Time: 9 - Device: 3 local process no offloading
+2024-04-19 01:28:11 - dev[1], T_i: 200, T_rwd_i:134.42, t_local:134.42, E_i:129.53, e_local:129.53, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:4,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[2], T_i: 200, T_rwd_i:161.50, t_local:161.50, E_i:220.54, e_local:220.54, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:5,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 200, T_rwd_i:164.22, t_local:164.22, E_i:100.31, e_local:100.31, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:5,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 10 - Device: 1 - Server: 1 with action offloadingRate: 0.833227
+2024-04-19 01:28:11 - episode: 0 - Time: 10 - Device: 2 - Server: 2 with action offloadingRate: 0.737306
+2024-04-19 01:28:11 - episode: 0 - Time: 10 - Device: 3 none new task, still processing
+2024-04-19 01:28:11 - dev[1], T_i: 100, T_rwd_i:60.80, t_local:205.45, E_i:34.78, e_local:117.79, t_rwd: 0.70, e_rwd: 0.70,rwd:0.70, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:5,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[2], T_i: 100, T_rwd_i:72.71, t_local:276.79, E_i:45.00, e_local:107.96, t_rwd: 0.74, e_rwd: 0.58,rwd:0.66, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:6,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 200, T_rwd_i:164.22, t_local:164.22, E_i:100.31, e_local:100.31, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:5,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 11 - Device: 1 - Server: 1 with action offloadingRate: 0.847106
+2024-04-19 01:28:11 - episode: 0 - Time: 11 - Device: 2 local process no offloading
+2024-04-19 01:28:11 - episode: 0 - Time: 11 - Device: 3 - Server: 1 with action offloadingRate: 0.552490
+2024-04-19 01:28:11 - dev[1], T_i: 200, T_rwd_i:111.03, t_local:171.24, E_i:56.28, e_local:196.16, t_rwd: 0.35, e_rwd: 0.71,rwd:0.53, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:6,l_finish:0, server_finish:0
+2024-04-19 01:28:11 - dev[2], T_i: 200, T_rwd_i:155.77, t_local:155.77, E_i:139.43, e_local:139.43, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:7,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 100, T_rwd_i:60.53, t_local:135.26, E_i:65.92, e_local:109.50, t_rwd: 0.55, e_rwd: 0.40,rwd:0.48, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:6,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 12 - Device: 1 none new task, still processing
+2024-04-19 01:28:11 - episode: 0 - Time: 12 - Device: 2 none new task, still processing
+2024-04-19 01:28:11 - episode: 0 - Time: 12 - Device: 3 - Server: 1 with action offloadingRate: 0.314153
+2024-04-19 01:28:11 - dev[1], T_i: 200, T_rwd_i:111.03, t_local:171.24, E_i:56.28, e_local:196.16, t_rwd: 0.35, e_rwd: 0.71,rwd:0.53, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:6,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[2], T_i: 200, T_rwd_i:155.77, t_local:155.77, E_i:139.43, e_local:139.43, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:7,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 200, T_rwd_i:179.57, t_local:261.83, E_i:98.11, e_local:129.23, t_rwd: 0.31, e_rwd: 0.24,rwd:0.28, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:7,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 13 - Device: 1 local process no offloading
+2024-04-19 01:28:11 - episode: 0 - Time: 13 - Device: 2 - Server: 1 with action offloadingRate: 0.755082
+2024-04-19 01:28:11 - episode: 0 - Time: 13 - Device: 3 none new task, still processing
+2024-04-19 01:28:11 - dev[1], T_i: 300, T_rwd_i:228.19, t_local:228.19, E_i:158.84, e_local:158.84, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:7,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - dev[2], T_i: 100, T_rwd_i:48.89, t_local:157.19, E_i:39.04, e_local:91.83, t_rwd: 0.69, e_rwd: 0.57,rwd:0.63, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:8,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 200, T_rwd_i:179.57, t_local:261.83, E_i:98.11, e_local:129.23, t_rwd: 0.31, e_rwd: 0.24,rwd:0.28, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:7,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 14 - Device: 1 none new task, still processing
+2024-04-19 01:28:11 - episode: 0 - Time: 14 - Device: 3 - Server: 1 with action offloadingRate: 0.559428
+2024-04-19 01:28:11 - dev[1], T_i: 300, T_rwd_i:228.19, t_local:228.19, E_i:158.84, e_local:158.84, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:7,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 100, T_rwd_i:81.61, t_local:185.24, E_i:69.99, e_local:127.01, t_rwd: 0.56, e_rwd: 0.45,rwd:0.50, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:8,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 15 - Device: 1 none new task, still processing
+2024-04-19 01:28:11 - episode: 0 - Time: 15 - Device: 3 - Server: 2 with action offloadingRate: 0.242442
+2024-04-19 01:28:11 - dev[1], T_i: 300, T_rwd_i:228.19, t_local:228.19, E_i:158.84, e_local:158.84, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:7,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dev[3], T_i: 100, T_rwd_i:85.91, t_local:113.40, E_i:102.15, e_local:128.74, t_rwd: 0.24, e_rwd: 0.21,rwd:0.22, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:9,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 16 - Device: 1 local process no offloading
+2024-04-19 01:28:11 - dev[1], T_i: 200, T_rwd_i:139.32, t_local:139.32, E_i:174.29, e_local:174.29, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.RUNNING, curr_task_id:8,l_finish:0, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 17 - Device: 1 none new task, still processing
+2024-04-19 01:28:11 - dev[1], T_i: 200, T_rwd_i:139.32, t_local:139.32, E_i:174.29, e_local:174.29, t_rwd: 0.00, e_rwd: 0.00,rwd:0.00, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:8,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - episode: 0 - Time: 18 - Device: 1 - Server: 1 with action offloadingRate: 0.600383
+2024-04-19 01:28:11 - dev[1], T_i: 100, T_rwd_i:64.89, t_local:162.37, E_i:45.38, e_local:86.07, t_rwd: 0.60, e_rwd: 0.47,rwd:0.54, w: 0.50 0.50,status:TaskStatus.FINISHED, curr_task_id:9,l_finish:1, server_finish:1
+2024-04-19 01:28:11 - dags are done
+2024-04-19 01:28:11 - act_loss:
+2024-04-19 01:28:11 - cri_loss:

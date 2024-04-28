@@ -15,8 +15,6 @@ class Server(object):
         self.channelNoise = conf['gaussian_channel_noise']
         self.cpuCyclePerBit = conf['avg_cpu_cycle_per_bit']
         self.tasks: List[Task] = []
-        logging.info('init [Server-%d] BW:%f MHZ,maxCpuFrequency: %f GHZ' % (
-            self.id, self.bandwidth, self.maxCpuFrequency))
 
     def acceptTask(self, task: Task):
         self.tasks.append(task)
@@ -37,21 +35,21 @@ class Server(object):
                     uploadTime = 1e6 * task.upload_data_sum * 1.0 / uploadRate  # 换算成微秒us 100-200us， timeslot为100us
                     # calculate BW
                     task.expected_trans_finish_step = math.ceil(uploadTime / timeslot) + task.start_step - 1
-                    task.computing_f = task.computing_f * 1.0 / freq_sum * self.availableFreq
+                    task.computing_f = task.computing_f * 1.0 / freq_sum * (self.availableFreq + 0.03)
                     processTime = task.process_data * self.cpuCyclePerBit * 1.0 / (task.computing_f * 1e9) * 1e5
                     downloadTime = task.download_data_sum * 1.0 / downloadRate * 1e6
                     total_t = uploadTime + downloadTime + processTime
                     task.expected_sever_finish_step = math.ceil(total_t / timeslot) + task.start_step - 1
 
                     task.T_trans_i = uploadTime + downloadTime
-                    print("uploadTime:", uploadTime, "downloadTime:", downloadTime)
                     task.E_trans_i = dev.En * task.T_trans_i
                     task.T_exec_server_i = processTime
 
             not_finished_trans_tasks = [task for task in self.tasks if task.expected_trans_finish_step > time_step]
             finished_tasks = [task for task in self.tasks if task.expected_sever_finish_step <= time_step]
             for task in finished_tasks:
-                self.env.devices[task.device_id - 1].ifLocalFinish(task, time_step)
+                task.server_finished = 1
+                self.env.devices[task.device_id - 1].ifTaskFinish(task, time_step)
 
             self.tasks = [task for task in self.tasks if task not in finished_tasks]
             self.availableFreq = self.maxCpuFrequency - sum(task.computing_f for task in self.tasks)

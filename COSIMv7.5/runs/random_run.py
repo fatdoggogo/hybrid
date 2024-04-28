@@ -46,5 +46,6 @@ def run():
     total = env.episodes*env.T*env.numberOfDevice
     print("finished!!! failure rate = %f,and error rate = %f" % (env.failures/total,env.errors/(total*2)))
     analysis.draw(env.envDir,env.algorithmDir)
+
 if __name__=='__main__':
     run()
