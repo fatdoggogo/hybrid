@@ -5,6 +5,10 @@ from task import *
 import logging
 import json
 import numpy as np
+import random
+
+# 设置种子
+random.seed(42)
 
 
 class Env:
@@ -21,7 +25,6 @@ class Env:
         self.imageDir = self.algorithmDir + '/images'
         self.metricDir = self.algorithmDir + '/metrics'
         self.episodes = config['episodes']
-        self.episode = 0
         self.devices: List[Device] = []
         self.servers: List[Server] = []
         self.time_slot = 100
@@ -112,7 +115,8 @@ class Env:
             t_local, e_local = device.totalLocalProcess(device.dag.currentTask.d_i)
             device.dag.currentTask.rwd_t = (t_local - device.dag.currentTask.T_reward_i) / t_local
             device.dag.currentTask.rwd_e = (e_local - device.dag.currentTask.E_i) / e_local
-            device.dag.currentTask.rwd = current_weight[0][0] * device.dag.currentTask.rwd_t + current_weight[0][1] * device.dag.currentTask.rwd_e
+            device.dag.currentTask.rwd = current_weight[0][0] * device.dag.currentTask.rwd_t + current_weight[0][
+                1] * device.dag.currentTask.rwd_e
             total_reward = total_reward + device.dag.currentTask.rwd
             logging.info(
                 'dev[%s], T_i: %s, T_rwd_i:%.2f, t_local:%.2f, '
@@ -136,12 +140,12 @@ class Env:
     def offload(self, time_step, dis_action, con_action):
         for device in self.devices:
             if not device.dag.is_finished:
-                server_id = dis_action[0, device.id-1].item()
+                server_id = dis_action[0, device.id - 1].item()
                 if device.dag.currentTask.status == TaskStatus.NOT_SCHEDULED:
                     if server_id >= 1:
                         device.dag.currentTask.server_id = server_id
-                        device.dag.currentTask.offloading_rate = con_action[0, (device.id-1) * 2].item()
-                        device.dag.currentTask.computing_f = con_action[0, (device.id-1) * 2 + 1].item()
+                        device.dag.currentTask.offloading_rate = con_action[0, (device.id - 1) * 2].item()
+                        device.dag.currentTask.computing_f = con_action[0, (device.id - 1) * 2 + 1].item()
                     else:
                         device.dag.currentTask.server_id = 0
                         device.dag.currentTask.offloading_rate = 0
@@ -158,7 +162,6 @@ class Env:
     def reset(self):
         for d in self.devices:
             d.reset()
-            d.setUp()
         for s in self.servers:
             s.reset()
 
@@ -171,9 +174,3 @@ class Env:
         np.savetxt(self.metricDir + '/energy-cost.csv', self.totalEnergyCosts, fmt="%f", delimiter=',')
         np.savetxt(self.metricDir + '/reward.csv', self.rewards, fmt="%f", delimiter=',')
 
-
-if __name__ == "__main__":
-    import os
-    print("当前工作目录:", os.getcwd())
-    env = Env(1, "CAPQL")
-    env.setUp()

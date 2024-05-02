@@ -2,8 +2,10 @@ import math
 from typing import List
 from enum import Enum
 from graph_generator import *
+import random
 
-np.random.seed(3)
+# 设置种子
+random.seed(42)
 
 
 class TaskStatus(Enum):
@@ -103,7 +105,7 @@ class DAG:
         if self.currentTask.status == TaskStatus.FINISHED:
             self.e_dag = self.e_dag + self.currentTask.E_i
             if self.currentTask.id == len(self.tasks)-1:
-                self.t_dag = self.t_dag + self.currentTask.T_reward_i
+                self.t_dag = self.t_dag + self.currentTask.T_reward_i  # DAG最后一个元素
             else:
                 self.t_dag = self.t_dag + self.currentTask.T_i
                 self.currentTask = self.tasks[self.currentTask.id + 1]

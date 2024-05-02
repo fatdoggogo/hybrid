@@ -1,10 +1,17 @@
 import json
-import math
-import csv
+import logging
 
-import utils
+import torch
+
 from task import *
-import logging as logging
+
+import random
+
+# 设置种子
+random.seed(42)
+torch.cuda.manual_seed(42)
+np.random.seed(42)
+torch.manual_seed(42)
 
 
 class Device:
@@ -18,8 +25,6 @@ class Device:
         self.transPower = config['transmission_power']
         self.channelGain = config['channel_gain']
         self.channelNoise = config['channel_noise']
-        self.task_num = config['task_num']
-        self.fat = config['fat']
         self.density = config['density']
         self.regularity = config['regularity']
         self.cpuCyclePerBit = 750
@@ -28,17 +33,19 @@ class Device:
         self.time_slot = 100
 
     @staticmethod
-    def generateDAG(dag_index, task_num, fat_num, density, regularity):
+    def generateDAG(dag_index):
         # density决定两层之间边的数量，值越小边越少; regularity决定每层任务数的差异性
-        dag = DAG_geneator(dag_index, task_num, fat_num, density, regularity, jump=1)
-        dag.run()
-        instance_name = str(dag_index) + '-' + str(task_num) + '-' + str(fat_num) + '-' + str(density) + '-' + str(regularity)
+        task_num = random.randint(8, 12)
+        fat_num = random.choice([0.4, 0.5, 0.6])
+        dag = DAG_geneator(dag_index, task_num, fat_num, 0.5, 0.5, jump=1)
+        instance_name = str(dag_index) + '-' + str(task_num) + '-' + str(fat_num) + '-' + str(0.5) + '-' + str(0.5)
+        dag.run(instance_name)
         dagTaskNum = int(instance_name.split('-')[1]) + 2
         generate_server_task(instance_name)
         return instance_name, dagTaskNum
 
     @staticmethod
-    def get_taskSet(instance_name):  # 根据参数从6个App个选择一个，读取文件，获取任务特征
+    def get_taskSet(instance_name):  # 根据参数从6个App选择一个，读取文件，获取任务特征
         pathname = '../dag/instance/' + instance_name + '/'
         DAG_path = pathname + 'DAG.txt'
         taskInputDataSize = pd.read_csv(pathname + 'task_input_data_size.csv')
@@ -73,7 +80,7 @@ class Device:
                     for st in successor:
                         post_task = Task()
                         post_task.id = int(st)
-                        if post_task.id >= len(taskSet):
+                        if post_task.id == len(taskSet):
                             taskSet.append(post_task)
                         task.sucTaskSet.append(post_task)
                 else:
@@ -82,7 +89,7 @@ class Device:
         return taskSet, entryTask, exitTask
 
     def setUp(self):
-        instance_name, dagTaskNum = self.generateDAG(self.id, self.task_num, self.fat, self.density, self.regularity)
+        instance_name, dagTaskNum = self.generateDAG(self.id)
         taskSet, entryTask, exitTask = self.get_taskSet(instance_name)
         self.dag = DAG(instance_name, taskSet)
 
@@ -133,7 +140,8 @@ class Device:
                 self.localProcess(curr_task)
                 logging.info("episode: %d - Time: %d - Device: %d - Server: %d with action offloadingRate: %f",
                              self.env.episode, time_step, self.id, curr_task.server_id, curr_task.offloading_rate)
-                selected_server = next((server for server in self.env.servers if server.id == curr_task.server_id), None)
+                selected_server = next((server for server in self.env.servers if server.id == curr_task.server_id),
+                                       None)
                 selected_server.acceptTask(curr_task)
 
         else:
@@ -162,6 +170,7 @@ if __name__ == "__main__":
     deviceConfigs = config['device_configs']
     var = deviceConfigs[0]
     from env import *
+
     env = Env
     device = Device(deviceConfigs[0], env)
     device.setUp()

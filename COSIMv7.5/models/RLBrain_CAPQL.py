@@ -7,13 +7,21 @@ from CAPQL import QNetwork, Actor
 from utils import *
 from replay_memory import *
 
+import random
+
+# 设置种子
+random.seed(42)
+torch.cuda.manual_seed(42)
+np.random.seed(42)
+torch.manual_seed(42)
+
 
 class CAPQL:
     def __init__(self, env):
 
         self.env = env
         self.batch_size = 32
-        self.episode_number = 2000
+        self.episode_number = self.env.episodes
         self.ep_steps = 100  # 每次训练100个batch_size
         self.memory_size = 10000
         self.lr = 0.002
@@ -128,14 +136,8 @@ class CAPQL:
                 self.env.totalWeightCosts[eps_idx][device.id - 1] = device.dag.t_dag + device.dag.e_dag
             self.env.rewards[eps_idx][0] = total_reward.item()
             self.env.outputMetric()
-            self.show()
-            np.savetxt('../result/rl_capql/out_dis.txt', all_dis_act, fmt="%f", delimiter=',')
-            logging.info('Episode: %s | total_reward: %s | weight: %s', eps_idx, total_reward.item(), self.current_weight.tolist())
+            if len(self.memory) > 3 * self.batch_size:
+                if eps_idx % 10 == 0 or eps_idx == self.episode_number-1:  # 每隔10个 episode 打印一次
+                    print(f'Episode: {eps_idx}, Recent Actor Losses: {self.act_losses[-2:]}, Recent Critic Losses: {self.cri_losses[-2:]}')  # 打印最后三个actor损失
 
-    def show(self):
-        logging.info('act_loss:')
-        for act_loss in self.act_losses:
-            logging.info(act_loss)
-        logging.info('cri_loss:')
-        for cri_loss in self.cri_losses:
-            logging.info(cri_loss)
+            logging.info('Episode: %s | total_reward: %s | weight: %s', eps_idx, total_reward.item(), self.current_weight.tolist())

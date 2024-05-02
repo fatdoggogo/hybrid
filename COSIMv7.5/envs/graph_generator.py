@@ -19,15 +19,13 @@ class DAG_geneator:
         self.nb_tasks_per_level = []
         self.DAG = {}
 
-    def run(self):
+    def run(self, instance_name):
         self.generateTasks()
         self.DAG = self.generateDependencies()
         self.add_start_end_task()
-        self.save_to_file()
+        self.save_to_file(instance_name)
 
-    def save_to_file(self):
-        instance_name = str(self.index) + '-' + str(self.n) + '-' + str(self.fat) + '-' + str(self.density) + '-' + str(
-            self.regularity)
+    def save_to_file(self, instance_name):
         isExists = os.path.exists('../dag/instance/' + instance_name)
         if not isExists:
             os.makedirs('../dag/instance/' + instance_name)
@@ -135,10 +133,6 @@ def generate_server_task(instance_name):
             if temp[j] == 0:
                 temp[j] = 2  # 计算能力控制在（2,6）之间
         total_CP.append(temp)
-
-    serverComputingCapability = pd.DataFrame(total_CP)
-    serverComputingCapability.to_csv('../dag/instance/' + instance_name + '/server_computing_capability.csv',
-                                     index=False)  # index=False表示不保存行名
 
     taskCPUCycleNumber = pd.DataFrame([round(random.uniform(0.1, 0.5), 2) for _ in range(taskNumber)])
     taskCPUCycleNumber.to_csv('../dag/instance/' + instance_name + '/task_CPU_cycles_number.csv', index=False)

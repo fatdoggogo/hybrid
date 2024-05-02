@@ -8,9 +8,8 @@ def update_Q(target, source, tau):
 
 
 def to_torch_action(action_batch, device, device_num):
-
-    actions_c = action_batch[:, :device_num*2]
-    actions_d = action_batch[:, device_num*2:]
+    actions_c = action_batch[:, :device_num * 2]
+    actions_d = action_batch[:, device_num * 2:]
 
     actions_c = torch.FloatTensor(actions_c).to(device)
     actions_d = torch.FloatTensor(actions_d).to(device)
@@ -52,16 +51,16 @@ class Weight_Sampler_pos:
         self.rwd_dim = rwd_dim
 
     def sample(self, n_sample):
-        # sample from sphrical normal distribution
-        s = torch.normal(torch.zeros(n_sample, self.rwd_dim))
+        # sample from spherical normal distribution
+        s = torch.normal(torch.full((n_sample, self.rwd_dim), 0.5), 0.1)
 
-        # flip all negative weights to be non-negative
-        s = torch.abs(s)
+        # clip to ensure values are in range [0, 1]
+        s = torch.clamp(s, 0, 1)
+
+        # shift and scale to ensure values are in range [0.3, 0.7]
+        s = 0.4 * s + 0.3
 
         # normalize
         s = s / torch.norm(s, dim=1, keepdim=True, p=1)
 
         return s
-
-
-

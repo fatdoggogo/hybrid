@@ -12,7 +12,10 @@ class ReplayMemory:
 
     def detach_and_convert_to_numpy(self, item):
         if isinstance(item, torch.Tensor):
-            return item.detach().numpy()
+            # 如果张量在 CUDA 上，先将其移动到 CPU 上
+            if item.is_cuda:
+                item = item.detach().cpu()
+            return item.numpy()
         elif isinstance(item, list):
             arrays = [self.detach_and_convert_to_numpy(sub_item) for sub_item in item]
             combined_array = np.concatenate([arr.flatten() if isinstance(arr, np.ndarray) else np.array([arr]).flatten() for arr in arrays])

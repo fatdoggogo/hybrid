@@ -8,6 +8,11 @@ from torch.distributions.categorical import Categorical
 
 from replay_memory import *
 
+import random
+
+# 设置种子
+random.seed(42)
+
 
 def weights_init_(m):
     if isinstance(m, nn.Linear):
@@ -19,7 +24,7 @@ class Actor(nn.Module):
 
     def __init__(self, s_dim, out_c, out_d, wt_dim):
         super(Actor, self).__init__()
-
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.linear1 = nn.Linear(s_dim + wt_dim, 128)
         self.linear2 = nn.Linear(128, 128)
 
@@ -30,7 +35,7 @@ class Actor(nn.Module):
         self.sigmoid = nn.Sigmoid()
         self.apply(weights_init_)
 
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.to(self.device)
 
     def forward(self, state, w):
         state_comp = torch.cat((state, w), dim=1)
@@ -47,8 +52,12 @@ class Actor(nn.Module):
         return pi_d, mean, log_std
 
     def sample(self, state, w, num_device, num_server):
-        state = torch.FloatTensor(state).to(self.device) if not torch.is_tensor(state) else state
-        w = torch.FloatTensor(w).to(self.device) if not torch.is_tensor(w) else w
+        if not isinstance(state, torch.Tensor):
+            state = torch.tensor(state, dtype=torch.float32)
+        state = state.to(self.device)
+        if not isinstance(w, torch.Tensor):
+            w = torch.tensor(w, dtype=torch.float32)
+        w = w.to(self.device)
         pi_d, mean, log_std = self.forward(state, w)
         std = log_std.exp()
         normal = Normal(mean, std)
@@ -126,6 +135,7 @@ class QNetwork(nn.Module):
         self.Q2 = copy.deepcopy(self.Q1)
         self.rwd_dim = wt_dim
         self.apply(weights_init_)
+        self.to(self.device)
 
     def forward(self, state, action_c, action_d, w):  # 输入为选择后的离散动作和连续动作，离散动作=num_device，连续动作为2*num_device
         state = torch.FloatTensor(state).to(self.device) if not torch.is_tensor(state) else state
@@ -134,12 +144,13 @@ class QNetwork(nn.Module):
         w = torch.FloatTensor(w).to(self.device) if not torch.is_tensor(w) else w
 
         # 将one-hot编码后的离散动作列沿着最后一个维度拼接起来
-        one_hot_action_d_single = [F.one_hot(action_d[:, i], num_classes=self.numberOfServer + 1) for i in range(self.numberOfDevice)]
+        one_hot_action_d_single = [F.one_hot(action_d[:, i], num_classes=self.numberOfServer + 1) for i in
+                                   range(self.numberOfDevice)]
         one_hot_action_d = torch.cat(one_hot_action_d_single, dim=-1)
 
-        combined_action_vectors = torch.empty((one_hot_action_d.size(0), 0))
+        combined_action_vectors = torch.empty((one_hot_action_d.size(0), 0)).to(self.device)
         for i in range(self.numberOfDevice):  # 遍历每个设备的动作编码和连续参数
-            one_hot_i = one_hot_action_d[:, i * (self.numberOfServer+1):(i + 1) * (self.numberOfServer+1)]
+            one_hot_i = one_hot_action_d[:, i * (self.numberOfServer + 1):(i + 1) * (self.numberOfServer + 1)]
             action_c_i = action_c[:, i * 2:(i + 1) * 2]
             combined_i = torch.cat((one_hot_i, action_c_i), dim=1)
             combined_action_vectors = torch.cat((combined_action_vectors, combined_i), dim=1)

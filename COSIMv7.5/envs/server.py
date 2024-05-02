@@ -1,5 +1,9 @@
 from device import *
 import math
+import random
+
+# 设置种子
+random.seed(42)
 
 
 class Server(object):
