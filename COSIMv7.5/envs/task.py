@@ -3,7 +3,6 @@ from typing import List
 from enum import Enum
 from graph_generator import *
 import random
-
 # 设置种子
 random.seed(42)
 
