@@ -23,7 +23,7 @@ class CAPQL:
         self.batch_size = 32
         self.episode_number = self.env.episodes
         self.ep_steps = 100  # 每次训练100个batch_size
-        self.lr = 0.002
+        self.lr = 0.004
         self.tau = 0.01  # 每次两个网络间参数转移的衰减程度
         self.gamma = 0.9  # 未来的r的比例
         self.wt_dim = 2
@@ -134,9 +134,10 @@ class CAPQL:
                 self.env.totalWeightCosts[eps_idx][device.id - 1] = device.dag.t_dag + device.dag.e_dag
             self.env.rewards[eps_idx][0] = total_reward.item()
             self.env.outputMetric()
-            if len(self.memory) > 3 * self.batch_size:
-                if eps_idx % 10 == 0 or eps_idx == self.episode_number - 1:
-                    with open('../result/rl_capql/metrics/loss.txt', 'a') as file:
-                        file.write(f'Episode: {eps_idx}, Recent Actor Losses: {self.act_losses[-1:]}, Recent Critic Losses: {self.cri_losses[-1:]}\n')
+
+            if eps_idx % 10 == 0 or eps_idx == self.episode_number - 1:
+                print(f'Episode: {eps_idx}, Recent Actor Losses: {self.act_losses[-1:]}, Recent Critic Losses: {self.cri_losses[-1:]}\n')
+                with open('../result/rl_capql/metrics/loss.txt', 'a') as file:
+                    file.write(f'Episode: {eps_idx}, Recent Actor Losses: {self.act_losses[-1:]}, Recent Critic Losses: {self.cri_losses[-1:]}\n')
 
             logging.info('Episode: %s | total_reward: %s | weight: %s', eps_idx, total_reward.item(), self.current_weight.tolist())

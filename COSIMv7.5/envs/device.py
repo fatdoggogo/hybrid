@@ -91,7 +91,6 @@ class Device:
     def setUp(self):
         instance_name, dagTaskNum = self.generateDAG(self.id)
         taskSet, entryTask, exitTask = self.get_taskSet(instance_name)
-        print(self.env.episode, instance_name)
         self.dag = DAG(instance_name, taskSet)
 
     def totalLocalProcess(self, datasize):

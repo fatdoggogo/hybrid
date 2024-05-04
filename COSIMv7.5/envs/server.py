@@ -28,6 +28,8 @@ class Server(object):
         if len(self.tasks) > 0:
             new_tasks = [task for task in self.tasks if task.expected_sever_finish_step is None]
             if len(new_tasks) > 0:
+                for task in new_tasks:
+                    task.computing_f = max(task.computing_f, 0.1)
                 freq_sum = sum(task.computing_f for task in new_tasks)
                 for task in new_tasks:
                     dev = self.env.devices[task.device_id - 1]

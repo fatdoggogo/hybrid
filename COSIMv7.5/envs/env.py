@@ -42,9 +42,9 @@ class Env:
         self.numberOfDevice = len(self.devices)
         self.numberOfServer = len(self.servers)
 
-        self.totalWeightCosts = np.zeros(shape=(self.episodes, 3))
-        self.totalTimeCosts = np.zeros(shape=(self.episodes, 3))
-        self.totalEnergyCosts = np.zeros(shape=(self.episodes, 3))
+        self.totalWeightCosts = np.zeros(shape=(self.episodes, len(self.devices)))
+        self.totalTimeCosts = np.zeros(shape=(self.episodes, len(self.devices)))
+        self.totalEnergyCosts = np.zeros(shape=(self.episodes, len(self.devices)))
         self.rewards = np.zeros(shape=(self.episodes, 1))
 
     def setUp(self):
