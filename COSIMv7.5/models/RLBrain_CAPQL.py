@@ -24,7 +24,6 @@ class CAPQL:
         self.batch_size = 32
         self.episode_number = self.env.episodes
         self.ep_steps = 100  # 每次训练100个batch_size
-        self.lr = 0.004
         self.tau = 0.01  # 每次两个网络间参数转移的衰减程度
         self.gamma = 0.9  # 未来的r的比例
         self.wt_dim = 2
@@ -41,13 +40,11 @@ class CAPQL:
         # define TWO Q networks for training
         self.critic = QNetwork(self.state_dim, self.env.numberOfServer, self.env.numberOfDevice, self.wt_dim)
         self.critic_target = copy.deepcopy(self.critic)
-        self.critic_optimizer = Adam(self.critic.parameters(), lr=self.lr)
+        self.critic_optimizer = Adam(self.critic.parameters(), lr=0.002)
         self.actor = Actor(self.state_dim, self.con_act_dim, self.dis_act_dim, self.wt_dim)
-        self.actor_optimizer = Adam(self.actor.parameters(), lr=self.lr)
-        self.policy_optimizer = Adam(self.actor.parameters(), lr=self.lr)
+        self.actor_optimizer = Adam(self.actor.parameters(), lr=0.004)
 
         self.memory = ReplayMemory(100000, 123456)
-        self.critic_optim = Adam(self.critic.parameters(), lr=self.lr)
         self.weight_sampler = Weight_Sampler_pos(2)
 
         self.current_weight = None  # 当前权重
@@ -65,7 +62,7 @@ class CAPQL:
             while not self.env.isDAGsDone():
                 time_step += 1
                 current_state = self.env.getEnvState()
-                action_c_full, _, action_c, action_d, _, _, _ = self.actor.sample(current_state, self.current_weight,
+                action_c_full, _, action_c, action_d, _, _, _ = self.actor.get_action(current_state, self.current_weight,
                                                                                   self.env.numberOfDevice,
                                                                                   self.env.numberOfServer)
                 all_dis_act.append(action_d.squeeze().tolist())
@@ -81,7 +78,7 @@ class CAPQL:
                     _, state_batch, action_batch, w_batch, reward_batch, next_state_batch, mask_batch = self.memory.sample(
                         self.batch_size)
                     with torch.no_grad():
-                        _, log_prob_c_full, next_s_actions_c, next_s_actions_d, _, next_s_log_d, next_s_prob_d = self.actor.sample(
+                        _, log_prob_c_full, next_s_actions_c, next_s_actions_d, _, next_s_log_d, next_s_prob_d = self.actor.get_action(
                             next_state_batch, w_batch, self.env.numberOfDevice, self.env.numberOfServer)
                         qf1_next_target, qf2_next_target = self.critic_target(next_state_batch, next_s_actions_c,
                                                                               next_s_actions_d, w_batch)
@@ -97,14 +94,14 @@ class CAPQL:
                     qf2_loss = F.mse_loss(qf2, next_q_value)
                     qf_loss = (qf1_loss + qf2_loss)/2
 
-                    self.critic_optim.zero_grad()
+                    self.critic_optimizer.zero_grad()
                     qf_loss.backward()
                     clip_grad_norm_(self.critic.parameters(), 1.0)
-                    self.critic_optim.step()
+                    self.critic_optimizer.step()
                     self.cri_losses.append(qf_loss.detach())
 
                     # train the policy networkc
-                    _, log_prob_c_full, actions_c, actions_d, _, log_pi_d, prob_d = self.actor.sample(state_batch,
+                    _, log_prob_c_full, actions_c, actions_d, _, log_pi_d, prob_d = self.actor.get_action(state_batch,
                                                                                                       w_batch,
                                                                                                       self.env.numberOfDevice,
                                                                                                       self.env.numberOfServer)
@@ -116,10 +113,10 @@ class CAPQL:
                     policy_loss_c = ((self.alpha_c * prob_d * log_prob_c_full) - min_qf_pi_weighted).mean()
                     policy_loss = policy_loss_d + policy_loss_c
 
-                    self.policy_optimizer.zero_grad()
+                    self.actor_optimizer.zero_grad()
                     policy_loss.backward()
                     clip_grad_norm_(self.actor.parameters(), 1.0)
-                    self.policy_optimizer.step()
+                    self.actor_optimizer.step()
                     self.act_losses.append(policy_loss.detach())
 
                     # sync the Q networks

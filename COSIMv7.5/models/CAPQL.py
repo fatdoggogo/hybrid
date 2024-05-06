@@ -51,14 +51,14 @@ class Actor(nn.Module):
         log_std = torch.clamp(log_std, min=-20, max=2)
         return pi_d, mean, log_std
 
-    def sample(self, state, w, num_device, num_server):
+    def get_action(self, state, w, num_device, num_server):
         if not isinstance(state, torch.Tensor):
             state = torch.tensor(state, dtype=torch.float32)
         state = state.to(self.device)
         if not isinstance(w, torch.Tensor):
             w = torch.tensor(w, dtype=torch.float32)
         w = w.to(self.device)
-        pi_d, mean, log_std = self.forward(state, w)
+        pi_d_logits, mean, log_std = self.forward(state, w)
         std = log_std.exp()
         normal = Normal(mean, std)
         x_t = normal.rsample()  # for reparameterization trick (mean + std * N(0,1))
@@ -74,6 +74,9 @@ class Actor(nn.Module):
         selected_action_c = []
         selected_log_prob_c = []
 
+        pi_d_logits_reshaped = pi_d_logits.view(pi_d_logits.size(0), -1, num_server+1)  # 假设每个 device 有 4 个离散动作
+        pi_d = F.softmax(pi_d_logits_reshaped, dim=-1)
+        pi_d = pi_d.view(pi_d.size(0), -1)
         for i in range(num_device):
             start_idx = i * (num_server + 1)
             end_idx = start_idx + num_server + 1

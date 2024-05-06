@@ -58,7 +58,7 @@ class Weight_Sampler_pos:
         s = torch.clamp(s, 0, 1)
 
         # shift and scale to ensure values are in range [0.3, 0.7]
-        s = 0.4 * s + 0.3
+        s = 0.4 + (0.6 - 0.4) * s
 
         # normalize
         s = s / torch.norm(s, dim=1, keepdim=True, p=1)

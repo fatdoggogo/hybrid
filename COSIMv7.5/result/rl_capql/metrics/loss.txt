@@ -1,5 +1,1 @@
 Episode: 0, Recent Actor Losses: [], Recent Critic Losses: []
-Episode: 5, Recent Actor Losses: [], Recent Critic Losses: []
-Episode: 10, Recent Actor Losses: [], Recent Critic Losses: []
-Episode: 15, Recent Actor Losses: [tensor(-73.9240, device='cuda:0')], Recent Critic Losses: [tensor(7.7506, device='cuda:0')]
-Episode: 20, Recent Actor Losses: [tensor(-134.0108, device='cuda:0')], Recent Critic Losses: [tensor(12.7806, device='cuda:0')]
