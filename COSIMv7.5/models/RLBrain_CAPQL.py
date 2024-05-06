@@ -1,5 +1,6 @@
 import copy
 import torch.nn.functional as F
+from torch.nn.utils import clip_grad_norm_
 from torch.optim import Adam
 import logging
 import utils
@@ -76,7 +77,7 @@ class CAPQL:
                 if next_state is not None:
                     self.memory.push(action_c_full, current_state, [action_c, action_d], self.current_weight, reward,
                                      next_state, self.env.isDAGsDone())
-                if len(self.memory) > 3 * self.batch_size:
+                if len(self.memory) > 10 * self.batch_size:
                     _, state_batch, action_batch, w_batch, reward_batch, next_state_batch, mask_batch = self.memory.sample(
                         self.batch_size)
                     with torch.no_grad():
@@ -94,10 +95,11 @@ class CAPQL:
                     qf1, qf2 = self.critic.forward(state_batch, s_actions_c, s_actions_d, w_batch)
                     qf1_loss = F.mse_loss(qf1, next_q_value)
                     qf2_loss = F.mse_loss(qf2, next_q_value)
-                    qf_loss = qf1_loss + qf2_loss
+                    qf_loss = (qf1_loss + qf2_loss)/2
 
                     self.critic_optim.zero_grad()
                     qf_loss.backward()
+                    clip_grad_norm_(self.critic.parameters(), 1.0)
                     self.critic_optim.step()
                     self.cri_losses.append(qf_loss.detach())
 
@@ -108,14 +110,15 @@ class CAPQL:
                                                                                                       self.env.numberOfServer)
                     qf1_pi, qf2_pi = self.critic(state_batch, actions_c, actions_d, w_batch)
                     min_qf_pi = torch.min(qf1_pi, qf2_pi)
-                    min_qf_pi = (min_qf_pi * torch.FloatTensor(w_batch).to(self.device)).sum(dim=-1, keepdim=True)
+                    min_qf_pi_weighted = (min_qf_pi * torch.FloatTensor(w_batch).to(self.device)).sum(dim=-1, keepdim=True)
 
-                    policy_loss_d = ((self.alpha_d * log_pi_d) - min_qf_pi).mean()
-                    policy_loss_c = ((self.alpha_c * prob_d * log_prob_c_full) - min_qf_pi).mean()
+                    policy_loss_d = ((self.alpha_d * log_pi_d) - min_qf_pi_weighted).mean()
+                    policy_loss_c = ((self.alpha_c * prob_d * log_prob_c_full) - min_qf_pi_weighted).mean()
                     policy_loss = policy_loss_d + policy_loss_c
 
                     self.policy_optimizer.zero_grad()
                     policy_loss.backward()
+                    clip_grad_norm_(self.actor.parameters(), 1.0)
                     self.policy_optimizer.step()
                     self.act_losses.append(policy_loss.detach())
 
@@ -135,7 +138,7 @@ class CAPQL:
             self.env.rewards[eps_idx][0] = total_reward.item()
             self.env.outputMetric()
 
-            if eps_idx % 10 == 0 or eps_idx == self.episode_number - 1:
+            if eps_idx % 5 == 0 or eps_idx == self.episode_number - 1:
                 print(f'Episode: {eps_idx}, Recent Actor Losses: {self.act_losses[-1:]}, Recent Critic Losses: {self.cri_losses[-1:]}\n')
                 with open('../result/rl_capql/metrics/loss.txt', 'a') as file:
                     file.write(f'Episode: {eps_idx}, Recent Actor Losses: {self.act_losses[-1:]}, Recent Critic Losses: {self.cri_losses[-1:]}\n')

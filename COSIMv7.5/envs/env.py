@@ -117,6 +117,7 @@ class Env:
             device.dag.currentTask.rwd_e = (e_local - device.dag.currentTask.E_i) / e_local
             device.dag.currentTask.rwd = current_weight[0][0] * device.dag.currentTask.rwd_t + current_weight[0][
                 1] * device.dag.currentTask.rwd_e
+            device.dag.currentTask.rwd = torch.clamp(device.dag.currentTask.rwd, min=-1.00)
             total_reward = total_reward + device.dag.currentTask.rwd
             logging.info(
                 'dev[%s], T_i: %s, T_rwd_i:%.2f, t_local:%.2f, '

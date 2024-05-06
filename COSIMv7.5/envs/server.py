@@ -41,7 +41,7 @@ class Server(object):
                     uploadTime = 1e6 * task.upload_data_sum * 1.0 / uploadRate  # 换算成微秒us 100-200us， timeslot为100us
                     # calculate BW
                     task.expected_trans_finish_step = math.ceil(uploadTime / timeslot) + task.start_step - 1
-                    task.computing_f = task.computing_f * 1.0 / freq_sum * (self.availableFreq + 0.03)
+                    task.computing_f = max(task.computing_f * 1.0 / freq_sum * (self.availableFreq + 0.01), 0.1)
                     processTime = task.process_data * self.cpuCyclePerBit * 1.0 / (task.computing_f * 1e9) * 1e5
                     downloadTime = task.download_data_sum * 1.0 / downloadRate * 1e6
                     total_t = uploadTime + downloadTime + processTime
@@ -58,7 +58,7 @@ class Server(object):
                 self.env.devices[task.device_id - 1].ifTaskFinish(task, time_step)
 
             self.tasks = [task for task in self.tasks if task not in finished_tasks]
-            self.availableFreq = self.maxCpuFrequency - sum(task.computing_f for task in self.tasks)
+            self.availableFreq = max(self.maxCpuFrequency - sum(task.computing_f for task in self.tasks), 0.03)
             self.availableBW = self.bandwidth - sum(task.bw for task in not_finished_trans_tasks)
 
     def updateState(self, time_step):
