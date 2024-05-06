@@ -35,8 +35,10 @@ class Device:
     @staticmethod
     def generateDAG(dag_index):
         # density决定两层之间边的数量，值越小边越少; regularity决定每层任务数的差异性
-        task_num = random.randint(8, 12)
-        fat_num = random.choice([0.4, 0.5, 0.6])
+        # task_num = random.randint(8, 12)
+        # fat_num = random.choice([0.4, 0.5, 0.6])
+        task_num = 10
+        fat_num = 0.4
         dag = DAG_geneator(dag_index, task_num, fat_num, 0.5, 0.5, jump=1)
         instance_name = str(dag_index) + '-' + str(task_num) + '-' + str(fat_num) + '-' + str(0.5) + '-' + str(0.5)
         dag.run(instance_name)

@@ -103,7 +103,7 @@ class CAPQL:
                     self.critic_optim.step()
                     self.cri_losses.append(qf_loss.detach())
 
-                    # train the policy network
+                    # train the policy networkc
                     _, log_prob_c_full, actions_c, actions_d, _, log_pi_d, prob_d = self.actor.sample(state_batch,
                                                                                                       w_batch,
                                                                                                       self.env.numberOfDevice,
