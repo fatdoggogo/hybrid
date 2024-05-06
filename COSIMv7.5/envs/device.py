@@ -91,9 +91,9 @@ class Device:
         return taskSet, entryTask, exitTask
 
     def setUp(self):
-        instance_name, dagTaskNum = self.generateDAG(self.id)
-        taskSet, entryTask, exitTask = self.get_taskSet(instance_name)
-        self.dag = DAG(instance_name, taskSet)
+        # instance_name, dagTaskNum = self.generateDAG(self.id)
+        taskSet, entryTask, exitTask = self.get_taskSet(self.id +'-10-0.4-0.5-0.5')
+        self.dag = DAG(self.id +'-10-0.4-0.5-0.5', taskSet)
 
     def totalLocalProcess(self, datasize):
         energyConsumptionPerCycle = self.effectiveCapacitanceCoefficient * math.pow(self.cpuFrequency * 1e9, 2)
