@@ -71,7 +71,7 @@ class CAPQL:
                 total_reward = total_reward + reward
                 self.env.stepIntoNextState()
                 next_state = self.env.getEnvState()
-                if next_state is not None:
+                if not self.env.isDAGsDone():
                     self.memory.push(action_c_full, current_state, [action_c, action_d], self.current_weight, reward,
                                      next_state, self.env.isDAGsDone())
                 if len(self.memory) > 10 * self.batch_size:
