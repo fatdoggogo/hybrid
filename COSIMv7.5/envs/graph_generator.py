@@ -4,7 +4,7 @@ import random
 import numpy as np
 import pandas as pd
 
-random.seed(2)
+# random.seed(2)
 
 
 class DAG_geneator:
@@ -70,7 +70,7 @@ class DAG_geneator:
             crr_level_task_idx = []
             pre_level_task_idx = None
             for j in range(self.nb_tasks_per_level[i]):
-                random.seed(i + j)
+                # random.seed(i + j)
                 nb_parents = min(1 + int(random.uniform(0, self.density * self.nb_tasks_per_level[i - 1])),
                                  self.nb_tasks_per_level[i - 1])
                 self.DAG[task_idx] = {}
@@ -123,43 +123,34 @@ class DAG_geneator:
 
 
 def generate_server_task(instance_name):
-    taskNumber = 100
-    serverNumber = 10
-    fs = (2, 6)  # 服务器计算能力范围
-    total_CP = []
-    for i in range(taskNumber):
-        temp = max(fs) - 1 * np.random.poisson(1.5, serverNumber)
-        for j in range(serverNumber):
-            if temp[j] == 0:
-                temp[j] = 2  # 计算能力控制在（2,6）之间
-        total_CP.append(temp)
 
-    taskCPUCycleNumber = pd.DataFrame([round(random.uniform(0.1, 0.5), 2) for _ in range(taskNumber)])
+    taskCPUCycleNumber = pd.DataFrame([round(random.uniform(0.1, 0.5), 2) for _ in range(20)])
     taskCPUCycleNumber.to_csv('../dag/instance/' + instance_name + '/task_CPU_cycles_number.csv', index=False)
 
-    taskInputDataSize = pd.DataFrame([round(random.uniform(3000, 6000), 2) for _ in range(taskNumber)])
+    taskInputDataSize = pd.DataFrame([round(random.uniform(4000, 6000), 2) for _ in range(20)])
     taskInputDataSize.to_csv('../dag/instance/' + instance_name + '/task_input_data_size.csv', index=False)
 
-    taskOutputDataSize = pd.DataFrame([round(random.uniform(500, 1000), 2) for _ in range(taskNumber)])
+    taskOutputDataSize = pd.DataFrame([round(random.uniform(500, 1000), 2) for _ in range(20)])
     taskOutputDataSize.to_csv('../dag/instance/' + instance_name + '/task_output_data_size.csv', index=False)
 
 
+# if __name__ == "__main__":
+#     # n_list = [15, 25, 35]      # DAG任务数量
+#     n_list = [3, 5]  # DAG任务数量
+#     fat_list = [0.4, 0.6]  # 决定DAG的宽度和高度，较小的fat值可构造较瘦高的图，值越大可构造较矮胖的图
+#     density_list = [0.7]  # 决定两层之间边的数量，值越小边越少，反之
+#     regularity = 0.5  # 决定每层任务数的差异性
+#     jump = 1
+#
+#     index = 1
+#     for n in n_list:
+#         for fat in fat_list:
+#             for density in density_list:
+#                 dag = DAG_geneator(index, n, fat, density, regularity, jump)
+#                 dag.run()
+#                 index += 1
+
+
 if __name__ == "__main__":
-    # n_list = [15, 25, 35]      # DAG任务数量
-    n_list = [3, 5]  # DAG任务数量
-    fat_list = [0.4, 0.6]  # 决定DAG的宽度和高度，较小的fat值可构造较瘦高的图，值越大可构造较矮胖的图
-    density_list = [0.7]  # 决定两层之间边的数量，值越小边越少，反之
-    regularity = 0.5  # 决定每层任务数的差异性
-    jump = 1
 
-    index = 1
-    for n in n_list:
-        for fat in fat_list:
-            for density in density_list:
-                dag = DAG_geneator(index, n, fat, density, regularity, jump)
-                dag.run()
-                index += 1
-
-
-if __name__ == "__main__":
-    generate_server_task('1-3-0.4-0.7-0.5')
+    generate_server_task('5-10-0.4-0.5-0.5')

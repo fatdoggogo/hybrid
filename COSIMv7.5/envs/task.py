@@ -4,7 +4,7 @@ from enum import Enum
 from graph_generator import *
 import random
 # 设置种子
-random.seed(42)
+# random.seed(42)
 
 
 class TaskStatus(Enum):
@@ -49,7 +49,7 @@ class Task:
         self.expected_sever_finish_step = None
         self.device_id = None
         self.expected_trans_finish_step = None
-        self.time_slot = 100
+        self.time_slot = 200
         self.rwd = 0.0
         self.rwd_t = 0.0
         self.rwd_e = 0.0
@@ -81,7 +81,7 @@ class Task:
         expected_local_finish = 0 if self.expected_local_finish_step is None else self.expected_local_finish_step
         expected_server_finish = 0 if self.expected_sever_finish_step is None else self.expected_sever_finish_step
         self.finish_step = max(expected_local_finish, expected_server_finish)
-        return custom_round(self.T_reward_i/100) * self.time_slot
+        return custom_round(self.T_reward_i/self.time_slot) * self.time_slot
 
     @property
     def E_i(self):  # 任务总消耗=E_trans_i + E_exec_local_i

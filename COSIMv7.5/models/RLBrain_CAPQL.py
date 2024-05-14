@@ -10,11 +10,11 @@ from replay_memory import *
 
 import random
 
-# 设置种子
-random.seed(42)
-torch.cuda.manual_seed(42)
-np.random.seed(42)
-torch.manual_seed(42)
+# # 设置种子
+# random.seed(42)
+# torch.cuda.manual_seed(42)
+# np.random.seed(42)
+# torch.manual_seed(42)
 
 
 class CAPQL:
@@ -23,12 +23,11 @@ class CAPQL:
         self.env = env
         self.batch_size = 32
         self.episode_number = self.env.episodes
-        self.ep_steps = 100  # 每次训练100个batch_size
         self.tau = 0.01  # 每次两个网络间参数转移的衰减程度
-        self.gamma = 0.9  # 未来的r的比例
+        self.gamma = 0.80  # 未来的r的比例
         self.wt_dim = 2
-        self.alpha_c = 0.2
-        self.alpha_d = 0.2
+        self.alpha_c = 0.6
+        self.alpha_d = 0.6
 
         self.act_losses = []
         self.cri_losses = []
@@ -42,7 +41,7 @@ class CAPQL:
         self.critic_target = copy.deepcopy(self.critic)
         self.critic_optimizer = Adam(self.critic.parameters(), lr=0.002)
         self.actor = Actor(self.state_dim, self.con_act_dim, self.dis_act_dim, self.wt_dim)
-        self.actor_optimizer = Adam(self.actor.parameters(), lr=0.004)
+        self.actor_optimizer = Adam(self.actor.parameters(), lr=0.01)
 
         self.memory = ReplayMemory(100000, 123456)
         self.weight_sampler = Weight_Sampler_pos(2)
@@ -56,39 +55,34 @@ class CAPQL:
             self.env.episode = eps_idx
             self.env.reset()
             self.env.setUp()
-            all_dis_act = []
             time_step = 0
             total_reward = 0
             while not self.env.isDAGsDone():
                 time_step += 1
-                current_state = self.env.getEnvState()
-                action_c_full, _, action_c, action_d, _, _, _ = self.actor.get_action(current_state, self.current_weight,
+                current_state, old_dag_status = self.env.getEnvState()
+                _, action_c, action_d, _, _, _ = self.actor.get_action(current_state, self.current_weight,
                                                                                   self.env.numberOfDevice,
                                                                                   self.env.numberOfServer)
-                all_dis_act.append(action_d.squeeze().tolist())
                 self.env.offload(time_step, action_d, action_c)
-                reward = self.env.getEnvReward(self.current_weight)
+                reward = self.env.getEnvReward(self.current_weight, old_dag_status, action_d, action_c)
                 total_reward = total_reward + reward
                 self.env.stepIntoNextState()
-                next_state = self.env.getEnvState()
+                next_state, _ = self.env.getEnvState()
                 if not self.env.isDAGsDone():
-                    self.memory.push(action_c_full, current_state, [action_c, action_d], self.current_weight, reward,
-                                     next_state, self.env.isDAGsDone())
-                if len(self.memory) > 10 * self.batch_size:
-                    _, state_batch, action_batch, w_batch, reward_batch, next_state_batch, mask_batch = self.memory.sample(
+                    self.memory.push(current_state, action_c, action_d, self.current_weight, reward, next_state, self.env.isDAGsDone())
+                if len(self.memory) > 3 * self.batch_size:
+                    state_batch, s_actions_c, s_actions_d, w_batch, reward_batch, next_state_batch, mask_batch = self.memory.sample(
                         self.batch_size)
                     with torch.no_grad():
-                        _, log_prob_c_full, next_s_actions_c, next_s_actions_d, _, next_s_log_d, next_s_prob_d = self.actor.get_action(
+                        log_prob_c_full, next_s_actions_c, next_s_actions_d, _, next_s_log_d, next_s_prob_d = self.actor.get_action(
                             next_state_batch, w_batch, self.env.numberOfDevice, self.env.numberOfServer)
                         qf1_next_target, qf2_next_target = self.critic_target(next_state_batch, next_s_actions_c,
                                                                               next_s_actions_d, w_batch)
                         next_log_c = (next_s_prob_d * log_prob_c_full).sum(1, keepdim=True).clamp(-1e3, 1e3)
                         next_log_d = next_s_log_d.sum(1, keepdim=True).clamp(-1e3, 1e3)
-                        min_qf_next_target_wt = torch.min(qf1_next_target,
-                                                          qf2_next_target) - self.alpha_c * next_log_c - self.alpha_d * next_log_d
+                        min_qf_next_target_wt = torch.min(qf1_next_target, qf2_next_target) - self.alpha_c * next_log_c - self.alpha_d * next_log_d
                         next_q_value = torch.Tensor(reward_batch).to(self.device) + self.gamma * min_qf_next_target_wt
 
-                    s_actions_c, s_actions_d = utils.to_torch_action(action_batch, self.device, self.env.numberOfDevice)
                     qf1, qf2 = self.critic.forward(state_batch, s_actions_c, s_actions_d, w_batch)
                     qf1_loss = F.mse_loss(qf1, next_q_value)
                     qf2_loss = F.mse_loss(qf2, next_q_value)
@@ -101,7 +95,7 @@ class CAPQL:
                     self.cri_losses.append(qf_loss.detach())
 
                     # train the policy networkc
-                    _, log_prob_c_full, actions_c, actions_d, _, log_pi_d, prob_d = self.actor.get_action(state_batch,
+                    log_prob_c_full, actions_c, actions_d, _, log_pi_d, prob_d = self.actor.get_action(state_batch,
                                                                                                       w_batch,
                                                                                                       self.env.numberOfDevice,
                                                                                                       self.env.numberOfServer)
@@ -135,7 +129,7 @@ class CAPQL:
             self.env.rewards[eps_idx][0] = total_reward.item()
             self.env.outputMetric()
 
-            if eps_idx % 5 == 0 or eps_idx == self.episode_number - 1:
+            if eps_idx % 10 == 0 or eps_idx == self.episode_number - 1:
                 print(f'Episode: {eps_idx}, Recent Actor Losses: {self.act_losses[-1:]}, Recent Critic Losses: {self.cri_losses[-1:]}\n')
                 with open('../result/rl_capql/metrics/loss.txt', 'a') as file:
                     file.write(f'Episode: {eps_idx}, Recent Actor Losses: {self.act_losses[-1:]}, Recent Critic Losses: {self.cri_losses[-1:]}\n')

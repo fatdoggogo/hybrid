@@ -8,7 +8,7 @@ import numpy as np
 import random
 
 # 设置种子
-random.seed(42)
+# random.seed(42)
 
 
 class Env:
@@ -27,7 +27,7 @@ class Env:
         self.episodes = config['episodes']
         self.devices: List[Device] = []
         self.servers: List[Server] = []
-        self.time_slot = 100
+        self.time_slot = 200
         deviceConfigs = config['device_configs']
         serverConfigs = config['server_configs']
 
@@ -56,11 +56,12 @@ class Env:
         q_i_states = []
         cpu_freq_states = []
         for device in self.devices:
-            if device.dag.currentTask is not None:
+            if (device.dag.currentTask is not None and
+                    device.dag.currentTask.status not in [TaskStatus.RUNNING, TaskStatus.FINISHED]):
                 d_i_states.append(device.dag.currentTask.d_i)
                 q_i_states.append(device.dag.currentTask.q_i)
                 cpu_freq_states.append(device.availableCpuFreq)
-            else:
+            else:  #不可卸载的情况
                 d_i_states.append(-1)
                 q_i_states.append(-1)
                 cpu_freq_states.append(-1)
@@ -69,28 +70,48 @@ class Env:
         for server in self.servers:
             bw_states.append(server.availableBW)
             freq_states.append(server.availableFreq)
+
         d_i_tensor = self.normalize(torch.tensor(d_i_states, dtype=torch.float))
         q_i_tensor = self.normalize(torch.tensor(q_i_states, dtype=torch.float))
-        cpu_freq_tensor = torch.tensor(cpu_freq_states, dtype=torch.float)
+        cpu_freq_tensor = self.normalize(torch.tensor(cpu_freq_states, dtype=torch.float))
         bw_tensor = self.normalize(torch.tensor(bw_states, dtype=torch.float))
         freq_tensor = self.normalize(torch.tensor(freq_states, dtype=torch.float))
-        state = torch.cat((d_i_tensor, q_i_tensor, cpu_freq_tensor, bw_tensor, freq_tensor))[None, :]
-        return state
+
+        stacked_tensor = torch.stack((d_i_tensor, q_i_tensor, cpu_freq_tensor), dim=1)
+        flattened_tensor = stacked_tensor.flatten()
+
+        stacked_server_tensor = torch.stack((bw_tensor, freq_tensor), dim=1)
+        flattened_server_tensor = stacked_server_tensor.flatten()
+
+        state = torch.cat((flattened_tensor, flattened_server_tensor))[None, :]
+
+        old_dag_status = []
+        for device in self.devices:
+            if device.dag.currentTask is not None:
+                old_dag_status.append(device.dag.currentTask.status)
+            else:
+                old_dag_status.append(TaskStatus.FINISHED)
+        return state, old_dag_status
 
     @staticmethod
     def normalize(x: torch.Tensor, eps=1e-5, special_value=-1) -> torch.Tensor:
         mask = x != special_value
         valid_x = x[mask]
 
-        if len(valid_x) < 2:
-            if torch.any(mask):
+        if len(valid_x) < 2:  # 如果有效值少于2个，不能进行标准化
+            if torch.any(mask):  # 如果有有效值，直接设置为1
                 x[mask] = 1.0
             return x
-        mean = valid_x.mean()
-        std = valid_x.std()
-        std = std if std > eps else eps
+
+        # 计算有效值的最小值和最大值
+        min_val = valid_x.min()
+        max_val = valid_x.max()
+        range_val = max_val - min_val
+        range_val = range_val if range_val > eps else eps  # 避免除以零
+
         normalized_x = torch.clone(x)
-        normalized_x[mask] = (x[mask] - mean) / std
+        # 将有效数据缩放到0-1范围
+        normalized_x[mask] = (valid_x - min_val) / range_val
 
         return normalized_x
 
@@ -107,35 +128,38 @@ class Env:
 
         return normalized_data
 
-    def getEnvReward(self, current_weight):
+    def getEnvReward(self, current_weight, old_dag_status,  dis_action, con_action):
         total_reward = 0
         for device in self.devices:
             if device.dag.currentTask is None:
                 continue
-            t_local, e_local = device.totalLocalProcess(device.dag.currentTask.d_i)
-            device.dag.currentTask.rwd_t = (t_local - device.dag.currentTask.T_reward_i) / t_local
-            device.dag.currentTask.rwd_e = (e_local - device.dag.currentTask.E_i) / e_local
-            device.dag.currentTask.rwd = current_weight[0][0] * device.dag.currentTask.rwd_t + current_weight[0][
-                1] * device.dag.currentTask.rwd_e
-            device.dag.currentTask.rwd = torch.clamp(device.dag.currentTask.rwd, min=-1.00)
+            if old_dag_status[device.id-1] == TaskStatus.NOT_SCHEDULED:
+                t_local, e_local = device.totalLocalProcess(device.dag.currentTask.d_i)
+                device.dag.currentTask.rwd_t = (t_local - device.dag.currentTask.T_reward_i) / t_local
+                device.dag.currentTask.rwd_e = (e_local - device.dag.currentTask.E_i) / e_local
+                device.dag.currentTask.rwd = current_weight[0][0] * device.dag.currentTask.rwd_t + current_weight[0][
+                    1] * device.dag.currentTask.rwd_e
+                device.dag.currentTask.rwd = torch.clamp(device.dag.currentTask.rwd, min=-1.00)
+            if old_dag_status[device.id-1] == TaskStatus.RUNNING or old_dag_status[device.id-1] == TaskStatus.FINISHED:
+                if dis_action[0, device.id - 1].item() == 0:
+                    device.dag.currentTask.rwd = torch.tensor(1)
+                else:
+                    device.dag.currentTask.rwd = torch.tensor(-1)
             total_reward = total_reward + device.dag.currentTask.rwd
             logging.info(
-                'dev[%s], T_i: %s, T_rwd_i:%.2f, t_local:%.2f, '
-                'E_i:%.2f, e_local:%.2f, '
+                'dev[%s], T_i: %s, '
                 't_rwd: %.2f, e_rwd: %.2f,'
-                'rwd:%.2f, '
+                'rwd:%.2f,'
                 'w: %.2f %.2f,'
                 'status:%s, curr_task_id:%s,'
                 'l_finish:%s, server_finish:%s',
-                device.id, device.dag.currentTask.T_i,
-                round(device.dag.currentTask.T_reward_i, 2), round(t_local, 2),
-                round(device.dag.currentTask.E_i, 2), round(e_local, 2),
-                round(device.dag.currentTask.rwd_t, 2), round(device.dag.currentTask.rwd_e, 2),
-                round(device.dag.currentTask.rwd.item(), 2),
+                device.id, device.dag.currentTask.T_i, round(device.dag.currentTask.rwd_t, 2),
+                round(device.dag.currentTask.rwd_e, 2),round(device.dag.currentTask.rwd.item(), 2),
                 round(current_weight[0][0].item(), 2), round(current_weight[0][1].item(), 2),
                 device.dag.currentTask.status, device.dag.currentTask.id,
                 device.dag.currentTask.local_finished, device.dag.currentTask.server_finished
             )
+        logging.info('每次卸载的total_reward: %.2f',round(total_reward.item(), 2))
         return total_reward
 
     def offload(self, time_step, dis_action, con_action):
@@ -174,4 +198,3 @@ class Env:
         np.savetxt(self.metricDir + '/time-cost.csv', self.totalTimeCosts, fmt="%f", delimiter=',')
         np.savetxt(self.metricDir + '/energy-cost.csv', self.totalEnergyCosts, fmt="%f", delimiter=',')
         np.savetxt(self.metricDir + '/reward.csv', self.rewards, fmt="%f", delimiter=',')
-

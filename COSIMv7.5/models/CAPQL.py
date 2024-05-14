@@ -11,7 +11,7 @@ from replay_memory import *
 import random
 
 # 设置种子
-random.seed(42)
+# random.seed(42)
 
 
 def weights_init_(m):
@@ -29,10 +29,9 @@ class Actor(nn.Module):
         self.linear2 = nn.Linear(128, 128)
 
         self.pi_d = nn.Linear(128, out_d)
-        self.mean_linear = nn.Linear(128, out_c)
-        self.log_std_linear = nn.Linear(128, out_c)
+        self.mean = nn.Linear(128, out_c)
+        self.logstd = nn.Linear(128, out_c)
 
-        self.sigmoid = nn.Sigmoid()
         self.apply(weights_init_)
 
         self.to(self.device)
@@ -45,8 +44,8 @@ class Actor(nn.Module):
         x = F.relu(self.linear2(x))
 
         pi_d = self.pi_d(x)
-        mean = self.mean_linear(x)
-        log_std = self.log_std_linear(x)
+        mean = self.mean(x)
+        log_std = self.logstd(x)
 
         log_std = torch.clamp(log_std, min=-20, max=2)
         return pi_d, mean, log_std
@@ -74,17 +73,26 @@ class Actor(nn.Module):
         selected_action_c = []
         selected_log_prob_c = []
 
-        pi_d_logits_reshaped = pi_d_logits.view(pi_d_logits.size(0), -1, num_server+1)  # 假设每个 device 有 4 个离散动作
+        pi_d_logits_reshaped = pi_d_logits.view(pi_d_logits.size(0), -1, num_server+1)
         pi_d = F.softmax(pi_d_logits_reshaped, dim=-1)
         pi_d = pi_d.view(pi_d.size(0), -1)
         for i in range(num_device):
             start_idx = i * (num_server + 1)
             end_idx = start_idx + num_server + 1
 
-            dist = Categorical(logits=pi_d[:, start_idx:end_idx])
-            action_dis = dist.sample()
-            prob_d = dist.probs
-            log_prob_d = torch.log(prob_d + 1e-8)
+            logits = pi_d[:, start_idx:end_idx]
+            prob_d = torch.softmax(logits, dim=-1)
+            dist = torch.distributions.Categorical(prob_d)
+            if np.random.random() < 0.5:
+                action_dis = dist.sample()
+            else:
+                action_dis = torch.argmax(logits, dim=-1)
+            log_prob_d = dist.log_prob(action_dis)
+
+            # dist = Categorical(logits=pi_d[:, start_idx:end_idx])
+            # action_dis = dist.sample()
+            # prob_d = dist.probs
+            # log_prob_d = torch.log(prob_d + 1e-8)
 
             actions_d.append(action_dis)
             probs_d.append(prob_d)
@@ -113,7 +121,7 @@ class Actor(nn.Module):
             [log_prob_c_full[:, i:i + 2].sum(1, keepdim=True) for i in range(0, 2 * num_device * (num_server + 1), 2)],
             dim=1)
 
-        return action_c_full, log_prob_c_full, action_c, action_d, log_prob_c, log_prob_d, prob_d
+        return log_prob_c_full, action_c, action_d, log_prob_c, log_prob_d, prob_d
 
     def to(self, device):
         return super(Actor, self).to(device)
@@ -143,12 +151,11 @@ class QNetwork(nn.Module):
     def forward(self, state, action_c, action_d, w):  # 输入为选择后的离散动作和连续动作，离散动作=num_device，连续动作为2*num_device
         state = torch.FloatTensor(state).to(self.device) if not torch.is_tensor(state) else state
         action_c = torch.FloatTensor(action_c).to(self.device) if not torch.is_tensor(action_c) else action_c
-        action_d = torch.Tensor(action_d).to(self.device) if not torch.is_tensor(action_d) else action_d.to(torch.int64)
+        action_d = torch.LongTensor(action_d).to(self.device) if not torch.is_tensor(action_d) else action_d.to(torch.int64)
         w = torch.FloatTensor(w).to(self.device) if not torch.is_tensor(w) else w
 
         # 将one-hot编码后的离散动作列沿着最后一个维度拼接起来
-        one_hot_action_d_single = [F.one_hot(action_d[:, i], num_classes=self.numberOfServer + 1) for i in
-                                   range(self.numberOfDevice)]
+        one_hot_action_d_single = [F.one_hot(action_d[:, i], num_classes=self.numberOfServer + 1) for i in range(self.numberOfDevice)]
         one_hot_action_d = torch.cat(one_hot_action_d_single, dim=-1)
 
         combined_action_vectors = torch.empty((one_hot_action_d.size(0), 0)).to(self.device)

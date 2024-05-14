@@ -1,6 +1,6 @@
 {
-    "episodes":1000,
-    "time_slots":100,
+    "episodes":2000,
+    "time_slots":200,
     "time_weight":5,
     "energy_weight":1,
     "device_configs":[
@@ -19,7 +19,7 @@
             "BW":5,
             "channel_noise":1,
             "cnt":1,
-            "instance_name":"1-8-0.6-0.5-0.5"
+            "instance_name":"1-10-0.4-0.5-0.5"
         },
         {
             "task_num": 7,
@@ -38,57 +38,6 @@
             "channel_noise":1,
             "cnt":2,
             "instance_name":"2-7-0.6-0.5-0.5"
-        },
-        {   "task_num": 8,
-            "fat": 0.4,
-            "density": 0.5,
-            "regularity": 0.5,
-            "priority":1,
-            "max_process_delay":0.7,
-            "max_process_load_per_time_slot" :1000,
-            "energy_consume_per_time_slot":0.65,
-            "cpu_frequency":2.5,
-            "max_load_capacity":6000,
-            "transmission_power":8,
-            "channel_gain":1,
-            "BW":5,
-            "channel_noise":1,
-            "cnt":3,
-            "instance_name":"3-8-0.4-0.5-0.5"
-        },
-        {   "task_num": 8,
-            "fat": 0.4,
-            "density": 0.5,
-            "regularity": 0.5,
-            "priority":4,
-            "max_process_delay":0.7,
-            "max_process_load_per_time_slot" :1000,
-            "energy_consume_per_time_slot":0.5,
-            "cpu_frequency":3,
-            "max_load_capacity":6000,
-            "transmission_power":8,
-            "channel_gain":1,
-            "BW":4,
-            "channel_noise":1,
-            "cnt":4,
-            "instance_name":"3-8-0.4-0.5-0.5"
-        },
-        {   "task_num": 8,
-            "fat": 0.4,
-            "density": 0.5,
-            "regularity": 0.5,
-            "priority":5,
-            "max_process_delay":0.7,
-            "max_process_load_per_time_slot" :1000,
-            "energy_consume_per_time_slot":0.65,
-            "cpu_frequency":3,
-            "max_load_capacity":6000,
-            "transmission_power":8,
-            "channel_gain":1,
-            "BW":3,
-            "channel_noise":1,
-            "cnt":5,
-            "instance_name":"3-8-0.4-0.5-0.5"
         }
     ],
     "server_configs":[
@@ -109,17 +58,7 @@
             "cnt" :2,
             "gaussian_channel_noise":1,
             "avg_cpu_cycle_per_bit":600
-        },
-        {
-            "bandwidth":37,
-            "channel_gain":2,
-            "transmission_power":27,
-            "max_cpu_frequency":10,
-            "cnt" :3,
-            "gaussian_channel_noise":1,
-            "avg_cpu_cycle_per_bit":625
         }
-
     ],
     "algorithm_configs":[
         {

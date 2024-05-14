@@ -8,10 +8,10 @@ from task import *
 import random
 
 # 设置种子
-random.seed(42)
-torch.cuda.manual_seed(42)
-np.random.seed(42)
-torch.manual_seed(42)
+# random.seed(42)
+# torch.cuda.manual_seed(42)
+# np.random.seed(42)
+# torch.manual_seed(42)
 
 
 class Device:
@@ -30,7 +30,7 @@ class Device:
         self.cpuCyclePerBit = 750
         self.effectiveCapacitanceCoefficient = 1e-23
         self.dag = None
-        self.time_slot = 100
+        self.time_slot = 200
 
     @staticmethod
     def generateDAG(dag_index):
@@ -41,9 +41,21 @@ class Device:
         fat_num = 0.4
         dag = DAG_geneator(dag_index, task_num, fat_num, 0.5, 0.5, jump=1)
         instance_name = str(dag_index) + '-' + str(task_num) + '-' + str(fat_num) + '-' + str(0.5) + '-' + str(0.5)
+
         dag.run(instance_name)
         dagTaskNum = int(instance_name.split('-')[1]) + 2
-        generate_server_task(instance_name)
+
+        taskCPUCycleNumber = pd.DataFrame([round(random.uniform(0.1, 0.5), 2) for _ in range(50)])
+        taskCPUCycleNumber.to_csv('../dag/instance/' + instance_name + '/task_CPU_cycles_number.csv', index=False)
+
+        taskInputDataSize = pd.DataFrame([round(random.uniform(4000, 6000), 2) for _ in range(50)])
+        taskInputDataSize.to_csv('../dag/instance/' + instance_name + '/task_input_data_size.csv', index=False)
+
+        taskOutputDataSize = pd.DataFrame([round(random.uniform(500, 1000), 2) for _ in range(50)])
+        taskOutputDataSize.to_csv('../dag/instance/' + instance_name + '/task_output_data_size.csv', index=False)
+
+
+
         return instance_name, dagTaskNum
 
     @staticmethod
@@ -91,9 +103,9 @@ class Device:
         return taskSet, entryTask, exitTask
 
     def setUp(self):
-        # instance_name, dagTaskNum = self.generateDAG(self.id)
-        taskSet, entryTask, exitTask = self.get_taskSet(str(self.id)  +'-10-0.4-0.5-0.5')
-        self.dag = DAG(str(self.id) +'-10-0.4-0.5-0.5', taskSet)
+        instance_name, dagTaskNum = self.generateDAG(self.id)
+        taskSet, entryTask, exitTask = self.get_taskSet(instance_name)
+        self.dag = DAG(instance_name, taskSet)
 
     def totalLocalProcess(self, datasize):
         energyConsumptionPerCycle = self.effectiveCapacitanceCoefficient * math.pow(self.cpuFrequency * 1e9, 2)
@@ -139,6 +151,7 @@ class Device:
                              self.env.episode, time_step, self.id)
 
             elif 0 < curr_task.offloading_rate <= 1 and curr_task.server_id > 0 and curr_task.computing_f > 0:
+                curr_task.offloading_rate=max(curr_task.offloading_rate, 0.01)
                 self.localProcess(curr_task)
                 logging.info("episode: %d - Time: %d - Device: %d - Server: %d with action offloadingRate: %f",
                              self.env.episode, time_step, self.id, curr_task.server_id, curr_task.offloading_rate)
@@ -170,9 +183,9 @@ if __name__ == "__main__":
         configStr = f.read()
         config = json.loads(configStr)
     deviceConfigs = config['device_configs']
-    var = deviceConfigs[0]
+    var = deviceConfigs[3]
     from env import *
 
     env = Env
-    device = Device(deviceConfigs[0], env)
+    device = Device(deviceConfigs[4], env)
     device.setUp()

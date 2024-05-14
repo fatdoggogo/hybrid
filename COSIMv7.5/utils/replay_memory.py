@@ -31,12 +31,13 @@ class ReplayMemory:
 
         return np.vstack(arrays_to_stack)
 
-    def push(self, action_c_full, state, action, weights, reward, next_state, done):  # action是一个包含两个张量的列表：[action_c, action_d]
+    def push(self, state, action_c, action_d, weights, reward, next_state, done):  # action是一个包含两个张量的列表：[action_c, action_d]
         if len(self.buffer) < self.capacity:
             self.buffer.append(None)
-        self.buffer[self.position] = (self.detach_and_convert_to_numpy(action_c_full),
+        self.buffer[self.position] = (
                                       self.detach_and_convert_to_numpy(state),
-                                      self.detach_and_convert_to_numpy(action),
+                                      self.detach_and_convert_to_numpy(action_c),
+                                      self.detach_and_convert_to_numpy(action_d),
                                       self.detach_and_convert_to_numpy(weights).flatten(),
                                       self.detach_and_convert_to_numpy(reward),
                                       self.detach_and_convert_to_numpy(next_state),
@@ -45,16 +46,16 @@ class ReplayMemory:
 
     def sample(self, batch_size):
         batch = random.sample(self.buffer, batch_size)
-        action_c_full, states, actions, ws, rewards, next_states, dones = zip(*batch)
-        action_c_full = self.stack_arrays(action_c_full)
+        states, action_c, action_d, ws, rewards, next_states, dones = zip(*batch)
         state = self.stack_arrays(states)
-        action = self.stack_arrays(actions)
+        action_c = self.stack_arrays(action_c)
+        action_d = self.stack_arrays(action_d)
         w = self.stack_arrays(ws)
         reward = self.stack_arrays(rewards)
         next_state = self.stack_arrays(next_states)
-        done = np.array(dones).reshape(1, -1)
+        done = np.array(dones).reshape(-1, 1)
 
-        return action_c_full, state, action, w, reward, next_state, done
+        return state, action_c, action_d, w, reward, next_state, done
 
     def __len__(self):
         return len(self.buffer)
