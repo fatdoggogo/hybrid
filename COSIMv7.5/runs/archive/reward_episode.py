@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # 读取CSV文件
-df = pd.read_csv('../result/rl_capql/metrics/reward.csv', header=None)  # 假设CSV文件没有列名
+df = pd.read_csv('../../result/rl_capql/metrics/reward.csv', header=None)  # 假设CSV文件没有列名
 
 # 假设每行只有一个reward值，我们将其作为一个列的数据读取
 rewards = df.iloc[:, 0]  # 选择第一列的所有行数据

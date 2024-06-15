@@ -131,7 +131,7 @@ class CAPQL:
 
             if eps_idx % 10 == 0 or eps_idx == self.episode_number - 1:
                 print(f'Episode: {eps_idx}, Recent Actor Losses: {self.act_losses[-1:]}, Recent Critic Losses: {self.cri_losses[-1:]}\n')
-                with open('../result/rl_capql/metrics/loss.txt', 'a') as file:
+                with open('../../result/rl_capql/metrics/loss.txt', 'a') as file:
                     file.write(f'Episode: {eps_idx}, Recent Actor Losses: {self.act_losses[-1:]}, Recent Critic Losses: {self.cri_losses[-1:]}\n')
 
             logging.info('Episode: %s | total_reward: %s | weight: %s', eps_idx, total_reward.item(), self.current_weight.tolist())

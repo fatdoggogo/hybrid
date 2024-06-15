@@ -1,7 +1,7 @@
 from env import Env
 import numpy as np
-import analysis
-import random
+from archive import analysis
+
 
 # 由算法自己决定如何调用device的计算卸载方法
 # 如本随机算法 根据随机数是否大于0.5决定是否进行计算卸载
@@ -45,7 +45,7 @@ def run():
     # error rate过大,且reward基本全为负数，也需要进行调参
     total = env.episodes*env.T*env.numberOfDevice
     print("finished!!! failure rate = %f,and error rate = %f" % (env.failures/total,env.errors/(total*2)))
-    analysis.draw(env.envDir,env.algorithmDir)
+    analysis.draw(env.envDir, env.algorithmDir)
 
 if __name__=='__main__':
     run()

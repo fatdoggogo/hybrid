@@ -169,8 +169,8 @@ class HSAC:
         self.qf2_target.load_state_dict(self.qf2.state_dict())
         self.actor = Actor(self.state_dim, self.con_act_dim, self.dis_act_dim, self.wt_dim)
 
-        self.critic_optimizer = optim.Adam(list(self.qf1.parameters()) + list(self.qf2.parameters()), lr=1e-4)
-        self.actor_optimizer = optim.Adam(list(self.actor.parameters()), lr=3e-4)
+        self.critic_optimizer = optim.Adam(list(self.qf1.parameters()) + list(self.qf2.parameters()), lr=2e-4)
+        self.actor_optimizer = optim.Adam(list(self.actor.parameters()), lr=0.0006)
 
         self.memory = ReplayMemory(1000000000, 123456)
         self.weight_sampler = Weight_Sampler_pos(2)
@@ -260,9 +260,8 @@ class HSAC:
             self.env.outputMetric()
 
             if eps_idx % 10 == 0 or eps_idx == self.episode_number - 1:
-                print("当前存储的样本数量：", len(self.memory))
                 print(f'Episode: {eps_idx}, Recent Actor Losses: {self.act_losses[-1:]}, Recent Critic Losses: {self.cri_losses[-1:]}\n')
-                with open('../result/rl_capql/metrics/loss.txt', 'a') as file:
+                with open('../result/rl_hsac/metrics/loss.txt', 'a') as file:
                     file.write(f'Episode: {eps_idx}, Recent Actor Losses: {self.act_losses[-1:]}, Recent Critic Losses: {self.cri_losses[-1:]}\n')
 
             logging.info('Episode: %s | total_reward: %s | weight: %s', eps_idx, total_reward.item(), self.current_weight.tolist())

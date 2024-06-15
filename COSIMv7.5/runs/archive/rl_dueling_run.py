@@ -1,14 +1,8 @@
 from env import Env
-import analysis
-from RLBrain_DQN import DeepQNetwork as DQN
+from archive import analysis
+from archive.RLBrain_Dueling import DuelingDQN as DQN
 
 def randombin(numberOfDevice, action):
-    """
-
-    :param numberOfDevice: 设备数量
-    :param action: 动作
-    :return: 1001这样的字符串
-    """
     userlist = list(bin(action).replace('0b', ''))
     zeros = numberOfDevice - len(userlist)
     ll = [0 for i in range(zeros)]
@@ -17,12 +11,6 @@ def randombin(numberOfDevice, action):
     return ll
 
 def makeOffloadDecision(env,actions):
-    """
-    当前用于进行device中offload的特殊函数，传入env中进行操作
-    :param env: 环境
-    :param actions: 动作
-    :return:
-    """
     userlist = randombin(env.numberOfDevice,actions)
     for device in env.devices:
         if userlist[device.id - 1] == 1:
@@ -30,7 +18,7 @@ def makeOffloadDecision(env,actions):
         else:
             device.offload(0,0)
 def run():
-    env = Env(1,"rl_dqn")
+    env = Env(1,"rl_dueling")
     n_actions = 2 ** env.numberOfDevice
     n_features = env.numberOfDevice * 4 + env.numberOfServer * 2
     RL = DQN(n_actions, n_features,
@@ -72,6 +60,6 @@ def run():
     env.outputMetric()
     total = env.episodes*env.T*env.numberOfDevice
     print("finished!!! failure rate = %f,and error rate = %f" % (env.failures/total,env.errors/(total*2)))
-    analysis.draw(env.envDir,env.algorithmDir)
+    analysis.draw(env.envDir, env.algorithmDir)
 if __name__=='__main__':
     run()

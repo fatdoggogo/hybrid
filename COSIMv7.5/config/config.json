@@ -38,6 +38,42 @@
             "channel_noise":1,
             "cnt":2,
             "instance_name":"2-7-0.6-0.5-0.5"
+        },
+        {
+            "task_num": 7,
+            "fat": 0.6,
+            "density": 0.5,
+            "regularity": 0.5,
+            "priority":2,
+            "max_process_delay":0.7,
+            "max_process_load_per_time_slot" :1000,
+            "energy_consume_per_time_slot":0.6,
+            "cpu_frequency":3,
+            "max_load_capacity":6000,
+            "transmission_power":7,
+            "channel_gain":1,
+            "BW":4,
+            "channel_noise":1,
+            "cnt":3,
+            "instance_name":"2-7-0.6-0.5-0.5"
+        },
+        {
+            "task_num": 7,
+            "fat": 0.6,
+            "density": 0.5,
+            "regularity": 0.5,
+            "priority":2,
+            "max_process_delay":0.7,
+            "max_process_load_per_time_slot" :1000,
+            "energy_consume_per_time_slot":0.6,
+            "cpu_frequency":3,
+            "max_load_capacity":6000,
+            "transmission_power":7,
+            "channel_gain":1,
+            "BW":4,
+            "channel_noise":1,
+            "cnt":4,
+            "instance_name":"2-7-0.6-0.5-0.5"
         }
     ],
     "server_configs":[
@@ -56,6 +92,15 @@
             "transmission_power":30,
             "max_cpu_frequency":10,
             "cnt" :2,
+            "gaussian_channel_noise":1,
+            "avg_cpu_cycle_per_bit":600
+        },
+                {
+            "bandwidth":37,
+            "channel_gain":2,
+            "transmission_power":35,
+            "max_cpu_frequency":10,
+            "cnt" :3,
             "gaussian_channel_noise":1,
             "avg_cpu_cycle_per_bit":600
         }

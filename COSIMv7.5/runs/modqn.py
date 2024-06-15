@@ -2,8 +2,8 @@ import logging
 import os
 import shutil
 
-import RLBrain_HSAC
 from env import Env
+import RLBrain_MODQN
 
 
 def setup_logging(log_dir):
@@ -28,14 +28,14 @@ def setup_logging(log_dir):
 
 
 if __name__ == '__main__':
-    algorithmDir = '../result/rl_hsac'
+    algorithmDir = '../result/rl_modqn'
     if os.path.exists(algorithmDir):
         shutil.rmtree(path=algorithmDir)
     imageDir = algorithmDir + '/images'
     metricDir = algorithmDir + '/metrics'
     os.makedirs(imageDir, exist_ok=True)
     os.makedirs(metricDir, exist_ok=True)
-    setup_logging(log_dir='../result/rl_hsac/log')
-    env = Env(1, "rl_hsac")
-    hsac = RLBrain_HSAC.HSAC(env=env)
-    hsac.run()
+    setup_logging(log_dir='../result/rl_modqn/log')
+    env = Env(1, "rl_modqn")
+    modqn = RLBrain_MODQN.MODQNAgent(env=env)
+    modqn.run()

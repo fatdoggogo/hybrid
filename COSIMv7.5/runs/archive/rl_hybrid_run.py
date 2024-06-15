@@ -1,6 +1,5 @@
 from env import Env
-import RLBrain_Hybrid
-
+from archive import RLBrain_Hybrid
 
 
 def run():

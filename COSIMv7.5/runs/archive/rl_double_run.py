@@ -1,6 +1,6 @@
 from env import Env
-import analysis
-from RLBrain_Dueling import DuelingDQN as DQN
+from archive import analysis
+from archive.RLBrain_Double import DoubleDQN as DQN
 
 def randombin(numberOfDevice, action):
     userlist = list(bin(action).replace('0b', ''))
@@ -18,7 +18,7 @@ def makeOffloadDecision(env,actions):
         else:
             device.offload(0,0)
 def run():
-    env = Env(1,"rl_dueling")
+    env = Env(1,"rl_double")
     n_actions = 2 ** env.numberOfDevice
     n_features = env.numberOfDevice * 4 + env.numberOfServer * 2
     RL = DQN(n_actions, n_features,
@@ -56,10 +56,10 @@ def run():
                 RL.learn()
             state = state_
         step += 1
-    # collect metrics
+        # collect metrics
     env.outputMetric()
     total = env.episodes*env.T*env.numberOfDevice
     print("finished!!! failure rate = %f,and error rate = %f" % (env.failures/total,env.errors/(total*2)))
-    analysis.draw(env.envDir,env.algorithmDir)
+    analysis.draw(env.envDir, env.algorithmDir)
 if __name__=='__main__':
     run()
